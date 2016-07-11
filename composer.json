@@ -16,6 +16,9 @@
     "require": {
         "php": "^5.6 || ^7.0"
     },
+    "require-dev": {
+        "sllh/php-cs-fixer-styleci-bridge": "^2.1"
+    },
     "autoload": {
         "psr-4": { "Sonata\\ArticleBundle\\": "" },
         "exclude-from-classmap": [
