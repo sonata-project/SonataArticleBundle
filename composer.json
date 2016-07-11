@@ -1,0 +1,36 @@
+{
+    "name": "sonata-project/article-bundle",
+    "description": "Advanced article management",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Benoit Maziere",
+            "email": "benoit.maziere@gmail.com"
+        },
+        {
+            "name": "Sonata Community",
+            "homepage": "https://github.com/sonata-project/SonataArticleBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0"
+    },
+    "autoload": {
+        "psr-4": { "Sonata\\ArticleBundle\\": "" },
+        "exclude-from-classmap": [
+            "Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": { "Sonata\\ArticleBundle\\Tests\\": "Tests/" }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
+}
