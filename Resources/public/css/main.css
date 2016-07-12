@@ -1,0 +1,18 @@
+/** media list **/
+.category-tree-navigation-title {
+    font-size: 24px;
+    margin: 0 0 10px;
+    display: block;
+}
+
+.service-container .service-list-header {
+    background: #ededed;
+    margin: 0 0 10px 0;
+    padding-top: 15px;
+}
+.service-container .service-list-header .btn.btn-danger:hover, .btn.btn-danger:active, .btn.btn-danger.hover {
+    background-color: #f4543c;
+}
+.service-container .service-list-header .form-row.clearfix {
+    margin-bottom: 30px;
+}

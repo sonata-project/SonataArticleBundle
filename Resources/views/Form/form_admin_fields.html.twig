@@ -1,0 +1,45 @@
+{% extends 'SonataAdminBundle:Form:filter_admin_fields.html.twig' %}
+
+{% block sonata_admin_collection_fragment %}
+    {% include 'SonataArticleBundle:FragmentAdmin:edit_collection_fragment.html.twig' %}
+{% endblock %}
+
+{% block sonata_type_collection_widget %}
+    {% if sonata_admin.field_description.mappingtype == 4 %}
+        {% if 'fragments' == sonata_admin.name or 'fragments' == name %}
+            {{ block('sonata_admin_collection_fragment') }}
+        {% else %}
+            {{ block('sonata_admin_collection') }}
+        {% endif %}
+    {% else %}
+        INVALID MODE : {{ id }} - type : sonata_type_collection - mapping : {{ sonata_admin.field_description.mappingtype }}
+    {% endif %}
+{% endblock %}
+
+{% block sonata_type_model_autocomplete_dropdown_item_format -%}
+    '<div class="sonata-autocomplete-dropdown-item">[' + item.id + '] ' + item.label + '</div>'
+{%- endblock sonata_type_model_autocomplete_dropdown_item_format %}
+
+{% block sonata_type_model_autocomplete_selection_format -%}
+    '[' + item.id + '] ' + item.label
+{%- endblock sonata_type_model_autocomplete_selection_format %}
+
+{% block sonata_article_admin_article_fragments_sonata_type_admin_widget %}
+    {% include "SonataArticleBundle:FragmentAdmin:form.html.twig" with {'admin': sonata_admin.field_description.associationadmin} %}
+{% endblock %}
+
+{% block sonata_page_admin_block_collection_settings_settings_service_widget %}
+    <script>
+        $(SonataPageComposer).on('blockeditformloaded', function () {
+            $("form").listServiceBlock();
+        });
+        $(SonataPageComposer).on('blockcreateformloaded', function () {
+            $("form").listServiceBlock();
+        });
+        (function($) {
+            $("form").listServiceBlock();
+
+        })(jQuery)
+    </script>
+    {{ block('collection_widget') }}
+{% endblock %}

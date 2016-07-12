@@ -14,10 +14,30 @@
         }
     ],
     "require": {
-        "php": "^5.6 || ^7.0"
+        "php": "^5.6 || ^7.0",
+        "sonata-project/admin-bundle": "^3.1",
+        "sonata-project/classification-bundle": "^3.0",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.0",
+        "sonata-project/media-bundle": "^3.0",
+        "symfony/class-loader": "^2.8 || ^3.0",
+        "symfony/config": "^2.8 || ^3.0",
+        "symfony/dependency-injection": "^2.8 || ^3.0",
+        "symfony/form": "^2.8 || ^3.0",
+        "symfony/http-foundation": "^2.8 || ^3.0",
+        "symfony/property-access": "^2.8 || ^3.0",
+        "symfony/routing": "^2.8 || ^3.0",
+        "symfony/security-acl": "^2.8 || ^3.0",
+        "symfony/security-bundle": "^2.8 || ^3.0",
+        "symfony/templating": "^2.8 || ^3.0",
+        "symfony/translation": "^2.8 || ^3.0",
+        "symfony/twig-bridge": "^2.8 || ^3.0",
+        "symfony/validator": "^2.8 || ^3.0",
+        "twig/extensions": "^1.0",
+        "twig/twig": "^1.23"
     },
     "require-dev": {
-        "sllh/php-cs-fixer-styleci-bridge": "^2.1"
+        "sllh/php-cs-fixer-styleci-bridge": "^2.1",
+        "symfony/phpunit-bridge": "^2.8 || ^3.0"
     },
     "autoload": {
         "psr-4": { "Sonata\\ArticleBundle\\": "" },

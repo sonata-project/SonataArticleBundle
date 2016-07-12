@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sonataarticle/css/edit_one.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/sonataarticle/js/fragmentList.jquery.js') }}"></script>
+{% endblock %}
