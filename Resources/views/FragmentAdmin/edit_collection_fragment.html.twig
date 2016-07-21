@@ -1,0 +1,52 @@
+{% if sonata_admin.field_description.hasassociationadmin %}
+    <div class="field-container row">
+        <div class="col-md-4">
+            <ul class="fragmentList" id="sortable_list_{{ id }}"></ul>
+            {% if sonata_admin.field_description.associationadmin.hasroute('create') and sonata_admin.field_description.associationadmin.isGranted('CREATE') and btn_add %}
+                <label class="control-label">{{ 'new.fragment'|trans({}, 'SonataArticleBundle') }}</label>
+                <div class="fragmentCreator">
+                    <select id="field_actions_select_{{ id }}" class="fragmentCreator__select"
+                            data-href="{{ sonata_admin.field_description.associationadmin.generateUrl('create') }}"
+                            data-id="{{ id }}"
+                            data-add-fragment-url="{{ sonata_admin.admin.getConfigurationPool().getAdminByAdminCode('sonata.article.admin.fragment').generateUrl('form', {
+                                'code':      sonata_admin.admin.root.code,
+                                'elementId': id,
+                                'subclass':  sonata_admin.admin.getActiveSubclassCode(),
+                                'objectId':  sonata_admin.admin.root.subject ? sonata_admin.admin.root.id(sonata_admin.admin.root.subject) : false,
+                                'uniqid':    sonata_admin.admin.root.uniqid
+                            } + sonata_admin.field_description.getOption('link_parameters', {})) }}">
+                        {% for fragServId, fragServ in sonata_admin.field_description.associationadmin.fragmentServices %}
+                        <option value="{{ fragServId }}">{{ fragServ.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="button" id="field_actions_{{ id }}" class="fragmentCreator__button fa fa-plus-square-o"></button>
+                </div>
+                <script type="text/javascript" src="{{ asset('bundles/sonataarticle/js/editOneAssociationFragment.js') }}"></script>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div id="field_widget_{{ id }}">
+                    {% if form.children|length > 0 %}
+                        {% for child in form.children %}
+                            {{ form_widget(child) }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <li class="fragment hide" data-fragment id="fragmentTpl">
+        <div class="fragment__info">
+            <span class="fa fa-pencil fragment__status"></span>
+            <span class="fa fa-check fragment__status"></span>
+            <span class="fa fa-exclamation-circle fragment__status"></span>
+            <div class="fragment__cell">
+                <strong data-name class="fragment__title"></strong>
+                <span data-type class="fragment__desc"></span>
+            </div>
+        </div>
+        <button type="button" data-frag-remove class="fragment__close fa fa-times"></button>
+        <span class="fragment__handle fa fa-arrows"></span>
+    </li>
+{% endif %}

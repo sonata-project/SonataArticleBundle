@@ -1,0 +1,27 @@
+{% block form %}
+    {% set fragmentName = admin.fragmentServices[form.vars.data.type].name %}
+    <div data-fragment-form="{{ form.vars.id }}" data-form-tmp="true" data-formdata='{ "name": "Fragment {{ fragmentName }}", "type": "{{ fragmentName }}" }' data-errors="{{ form.vars.errors|length }}">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h4 class="box-title">
+                        {{ 'fragment'|trans({}, 'SonataArticleBundle') }} {{ fragmentName }}
+                    </h4>
+                </div>
+                <div class="box-body">
+                    {% if form.vars.errors|length > 0 %}
+                        <div class="sonata-ba-form-error">
+                            {{ form_errors(form) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="sonata-ba-collapsed-fields">
+                        {% for child in form.children %}
+                            {{ form_row(child) }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock form %}

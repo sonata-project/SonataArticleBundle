@@ -1,0 +1,6 @@
+/**
+ * Columns custom contents
+ */
+.col-narrow .field-short-description {
+    min-width: initial;
+}

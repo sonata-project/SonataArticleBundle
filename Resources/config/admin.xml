@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sonata.article.admin.article" class="%sonata.article.admin.article.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_article" label_catalogue="%sonata.article.admin.article.translation_domain%" label="Article" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
+            <argument>%sonata.article.admin.article.entity%</argument>
+            <argument>%sonata.article.admin.article.controller%</argument>
+            <argument>%sonata.article.fragment.class%</argument>
+            <argument>%sonata.article.admin.article.max_length_title_for_display%</argument>
+            <call method="setTranslationDomain">
+                <argument>%sonata.article.admin.article.translation_domain%</argument>
+            </call>
+        </service>
+        <service id="sonata.article.admin.fragment" class="Sonata\ArticleBundle\Admin\FragmentAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_article" label_catalogue="%sonata.article.admin.article.translation_domain%" label="Fragment" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
+            <argument>%sonata.article.admin.fragment.entity%</argument>
+            <argument>%sonata.article.admin.fragment.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%sonata.article.admin.article.translation_domain%</argument>
+            </call>
+        </service>
+    </services>
+</container>
