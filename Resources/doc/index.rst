@@ -1,6 +1,7 @@
 Article Bundle
 ==============
 
+
 Reference Guide
 ---------------
 
@@ -9,3 +10,6 @@ Reference Guide
    :numbered:
 
    reference/introduction
+   reference/installation
+   reference/getting_started
+   reference/configuration
