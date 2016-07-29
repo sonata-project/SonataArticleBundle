@@ -30,6 +30,46 @@
                 <source>new.fragment</source>
                 <target>New fragment</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_article_list">
+                <source>breadcrumb.link_article_list</source>
+                <target>Articles</target>
+            </trans-unit>
+            <trans-unit id="list.label_title">
+                <source>list.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="list.label_updated_at">
+                <source>list.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+            <trans-unit id="list.label_status">
+                <source>list.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="form.label_subtitle">
+                <source>form.label_subtitle</source>
+                <target>Subtitle</target>
+            </trans-unit>
+            <trans-unit id="form.label_abstract">
+                <source>form.label_abstract</source>
+                <target>Abstract text</target>
+            </trans-unit>
+            <trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="form.label_publication_starts_at">
+                <source>form.label_publication_starts_at</source>
+                <target>Publication start date</target>
+            </trans-unit>
+            <trans-unit id="form.label_publication_ends_at">
+                <source>form.label_publication_ends_at</source>
+                <target>Publication end date</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
