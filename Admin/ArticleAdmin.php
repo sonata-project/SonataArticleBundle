@@ -246,6 +246,10 @@ class ArticleAdmin extends AbstractAdmin
             ->add('updatedAt', 'datetime', array(
                 'sortable' => true,
             ))
+            ->add('status', 'choice', array(
+                'sortable' => true,
+                'choices' => AbstractArticle::getStatuses(),
+            ))
         ;
     }
 
