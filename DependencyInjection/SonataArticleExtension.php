@@ -99,65 +99,74 @@ final class SonataArticleExtension extends Extension
                 'position' => 'ASC',
             ),
         ));
-        $collector->addAssociation($config['class']['article'], 'mapManyToMany', array(
-            'fieldName' => 'categories',
-            'targetEntity' => $config['class']['category'],
-            'cascade' => array(),
-            'joinTable' => array(
-                'name' => 'article__article_categories',
+
+        if (class_exists($config['class']['category'])) {
+            $collector->addAssociation($config['class']['article'], 'mapManyToMany', array(
+                'fieldName' => 'categories',
+                'targetEntity' => $config['class']['category'],
+                'cascade' => array(),
+                'joinTable' => array(
+                    'name' => 'article__article_categories',
+                    'joinColumns' => array(
+                        array(
+                            'name' => 'article_id',
+                            'referencedColumnName' => 'id',
+                            'onDelete' => 'CASCADE',
+                        ),
+                    ),
+                    'inverseJoinColumns' => array(
+                        array(
+                            'name' => 'category_id',
+                            'referencedColumnName' => 'id',
+                            'onDelete' => 'CASCADE',
+                        ),
+                    ),
+                ),
+            ));
+        }
+
+        if (class_exists($config['class']['tag'])) {
+            $collector->addAssociation($config['class']['article'], 'mapManyToMany', array(
+                'fieldName' => 'tags',
+                'targetEntity' => $config['class']['tag'],
+                'cascade' => array(),
+                'joinTable' => array(
+                    'name' => 'article__article_tags',
+                    'joinColumns' => array(
+                        array(
+                            'name' => 'article_id',
+                            'referencedColumnName' => 'id',
+                            'onDelete' => 'CASCADE',
+                        ),
+                    ),
+                    'inverseJoinColumns' => array(
+                        array(
+                            'name' => 'tag_id',
+                            'referencedColumnName' => 'id',
+                            'onDelete' => 'CASCADE',
+                        ),
+                    ),
+                ),
+            ));
+        }
+
+        if (class_exists($config['class']['media'])) {
+            $collector->addAssociation($config['class']['article'], 'mapManyToOne', array(
+                'fieldName' => 'mainImage',
+                'targetEntity' => $config['class']['media'],
+                'cascade' => array(
+                    'persist',
+                ),
+                'mappedBy' => null,
                 'joinColumns' => array(
                     array(
-                        'name' => 'article_id',
+                        'name' => 'main_image_id',
                         'referencedColumnName' => 'id',
-                        'onDelete' => 'CASCADE',
                     ),
                 ),
-                'inverseJoinColumns' => array(
-                    array(
-                        'name' => 'category_id',
-                        'referencedColumnName' => 'id',
-                        'onDelete' => 'CASCADE',
-                    ),
-                ),
-            ),
-        ));
-        $collector->addAssociation($config['class']['article'], 'mapManyToMany', array(
-            'fieldName' => 'tags',
-            'targetEntity' => $config['class']['tag'],
-            'cascade' => array(),
-            'joinTable' => array(
-                'name' => 'article__article_tags',
-                'joinColumns' => array(
-                    array(
-                        'name' => 'article_id',
-                        'referencedColumnName' => 'id',
-                        'onDelete' => 'CASCADE',
-                    ),
-                ),
-                'inverseJoinColumns' => array(
-                    array(
-                        'name' => 'tag_id',
-                        'referencedColumnName' => 'id',
-                        'onDelete' => 'CASCADE',
-                    ),
-                ),
-            ),
-        ));
-        $collector->addAssociation($config['class']['article'], 'mapManyToOne', array(
-            'fieldName' => 'mainImage',
-            'targetEntity' => $config['class']['media'],
-            'cascade' => array(
-                'persist',
-            ),
-            'mappedBy' => null,
-            'joinColumns' => array(
-                array(
-                    'name' => 'main_image_id',
-                    'referencedColumnName' => 'id',
-                ),
-            ),
-            'orphanRemoval' => false,
-        ));
+                'orphanRemoval' => false,
+            ));
+        }
 
         $collector->addAssociation($config['class']['fragment'], 'mapManyToOne', array(
             'fieldName' => 'article',
