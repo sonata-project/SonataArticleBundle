@@ -262,7 +262,6 @@ class ArticleAdmin extends AbstractAdmin
             ->add('title', 'text')
             ->add('subtitle', 'text')
             ->add('abstract', 'textarea')
-            ->add('type', 'text')
         ;
     }
 
