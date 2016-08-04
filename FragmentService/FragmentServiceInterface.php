@@ -65,4 +65,11 @@ interface FragmentServiceInterface
      * @return string
      */
     public function getEditTemplate();
+
+    /**
+     * Gets template to render fragment.
+     *
+     * @return string
+     */
+    public function getTemplate();
 }

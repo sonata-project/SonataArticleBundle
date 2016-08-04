@@ -38,6 +38,8 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
 
     /**
      * @var array
+     *
+     * @todo rename settings property into fields
      */
     protected $settings;
 

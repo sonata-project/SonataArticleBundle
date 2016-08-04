@@ -99,11 +99,53 @@ Render article fragments
 ------------------------
 
 **This part is currently in development.**
-The goal is to provide a simple twig helper which will render each fragments associated to an article.
-Each fragment has its own template, this twig function is going to need to fetch in ``FragmentService`` the template,
-then render it.
+SonataArticleBundle now comes with a twig helper which allows you to render article fragments
+if they are enabled.
 
 
 .. code-block:: jinja
 
-    {{ sonata_article_render_fragments(article) }}
+    {{ sonata_article_render_article_fragments(article) }}
+
+
+Or a specific fragment whether it is enabled or not.
+
+
+.. code-block:: jinja
+
+    {{ sonata_article_render_fragment(article.fragments[0]) }}
+
+
+This extension is based on the FragmentHelper class so you can also render fragments directly
+in the controller.
+
+
+.. code-block:: php
+
+    /**
+     * Article index action
+     *
+     * @param Request $request
+     * @param string  $id
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function indexAction(Request $request, $id)
+    {
+        $article = $this->entityManager->find(Article::class, $id);
+
+        // ...
+
+        $fragmentsRender = '';
+        $fragmentsHelper = $this->get('sonata.article.helper.fragment');
+
+        foreach ($article->getFragments() as $fragment) {
+            if ($fragment->getEnabled()) {
+                $fragmentsRender .= $this->renderFragment($fragment);
+            }
+        }
+
+        // ...
+    }

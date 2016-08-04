@@ -120,4 +120,9 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
     {
         return 'SonataArticleBundle:FragmentAdmin:form.html.twig';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function getTemplate();
 }
