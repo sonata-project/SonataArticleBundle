@@ -41,6 +41,11 @@ final class FragmentsCompilerPass implements CompilerPassInterface
             $fragmentAdminDef->addMethodCall('setFragmentServices', array($fragmentServices));
         }
 
+        if ($container->hasDefinition('sonata.article.helper.fragment')) {
+            $fragmentAdminDef = $container->getDefinition('sonata.article.helper.fragment');
+            $fragmentAdminDef->addMethodCall('setFragmentServices', array($fragmentServices));
+        }
+
         if ($container->hasDefinition('sonata.article.fragment.validator')) {
             $fragmentValidDef = $container->getDefinition('sonata.article.fragment.validator');
             $fragmentValidDef->replaceArgument(0, $fragmentServices);

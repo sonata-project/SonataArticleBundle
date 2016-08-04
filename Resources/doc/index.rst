@@ -13,3 +13,4 @@ Reference Guide
    reference/installation
    reference/getting_started
    reference/configuration
+   reference/custom_fragment

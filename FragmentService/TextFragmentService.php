@@ -52,4 +52,12 @@ class TextFragmentService extends AbstractFragmentService
             ;
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplate()
+    {
+        return 'SonataArticleBundle:Fragment:fragment_text.html.twig';
+    }
 }

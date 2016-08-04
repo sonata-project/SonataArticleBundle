@@ -35,6 +35,8 @@ final class SonataArticleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('admin.xml');
         $loader->load('fragments.xml');
+        $loader->load('helper.xml');
+        $loader->load('twig.xml');
 
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);

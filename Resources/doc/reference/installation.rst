@@ -55,7 +55,7 @@ You will need to configure SonataArticleBundle's entities, if you plan to use th
                 article:  Application\Sonata\ArticleBundle\Entity\Article
                 fragment: Application\Sonata\ArticleBundle\Entity\Fragment
 
-            fragments: # this is currently in development, hope will getting this soon :)
+            fragments: # this is currently in development, hope we'll get this soon :)
                 sonata.article.fragment.title:
                 sonata.article.fragment.text:
 
