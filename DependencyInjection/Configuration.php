@@ -58,6 +58,14 @@ final class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
 
+            ->arrayNode('fragment_whitelist_provider')
+                ->children()
+                    ->arrayNode('simple_array_provider')
+                        ->prototype('scalar')->end()
+                    ->end()
+                ->end()
+            ->end()
+
             ->arrayNode('admin_controller')
                 ->addDefaultsIfNotSet()
                 ->children()
