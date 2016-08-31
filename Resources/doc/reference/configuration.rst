@@ -20,6 +20,11 @@ Full configuration options:
                 tag:      Application\Sonata\ArticleBundle\Entity\Tag
                 media:    Application\Sonata\ArticleBundle\Entity\Media
 
+            fragment_whitelist_provider:
+                simple_array_provider:
+                    - sonata.article.fragment.title
+                    - sonata.article.fragment.text
+
     .. code-block:: yaml
 
         # app/config/config.yml

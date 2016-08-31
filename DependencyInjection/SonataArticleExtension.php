@@ -65,6 +65,8 @@ final class SonataArticleExtension extends Extension
                 $config['class'][$modelName]);
         }
 
+        $container->setParameter('sonata.article.admin.fragments.services', $config['fragment_whitelist_provider']);
+
         $container->setParameter('sonata.article.admin.article.class', $config['admin']['article']);
 
         $container->setParameter('sonata.article.admin.article.controller', $config['admin_controller']['article']);

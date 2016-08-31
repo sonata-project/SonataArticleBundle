@@ -43,6 +43,7 @@ Configuring SonataArticleBundle dependencies
 --------------------------------------------
 
 You will need to configure SonataArticleBundle's entities, if you plan to use them.
+You can also configure the list of available fragments for your articles.
 
 .. configuration-block::
 
@@ -55,9 +56,15 @@ You will need to configure SonataArticleBundle's entities, if you plan to use th
                 article:  Application\Sonata\ArticleBundle\Entity\Article
                 fragment: Application\Sonata\ArticleBundle\Entity\Fragment
 
-            fragments: # this is currently in development, hope we'll get this soon :)
-                sonata.article.fragment.title:
-                sonata.article.fragment.text:
+            fragment_whitelist_provider:
+                simple_array_provider:
+                    - sonata.article.fragment.title
+                    - sonata.article.fragment.text
+
+.. note::
+
+    We plan to improve the fragments available to allow a configuration for each article type.
+    For example, you will want the fragment 'Comments' only on articles of type 'Blog'.
 
 Cleaning up
 -----------

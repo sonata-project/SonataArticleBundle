@@ -27,13 +27,16 @@ final class FragmentsCompilerPass implements CompilerPassInterface
     {
         $fragmentServiceIds = $container->findTaggedServiceIds('sonata.article.fragment');
         $fragmentServices = array();
+        $requiredFragmentsServices = $container->getParameter('sonata.article.admin.fragments.services');
 
         foreach ($fragmentServiceIds as $id => $attributes) {
             if (!isset($attributes[0]) || !isset($attributes[0]['key'])) {
                 throw new \RuntimeException('You need to specify the `key` argument to your tag.');
             }
 
-            $fragmentServices[$attributes[0]['key']] = new Reference($id);
+            if (in_array($id, $requiredFragmentsServices['simple_array_provider'])) {
+                $fragmentServices[$attributes[0]['key']] = new Reference($id);
+            }
         }
 
         if ($container->hasDefinition('sonata.article.admin.fragment')) {
