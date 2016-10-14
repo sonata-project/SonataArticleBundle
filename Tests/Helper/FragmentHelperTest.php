@@ -11,9 +11,7 @@
 
 namespace Sonata\ArticleBundle\Tests\Helper;
 
-use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Sonata\ArticleBundle\Helper\FragmentHelper;
-use Sonata\ArticleBundle\Model\FragmentInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -33,7 +31,7 @@ class FragmentHelperTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->templating = $this->getMockBuilder(EngineInterface::class)
+        $this->templating = $this->getMockBuilder('Symfony\Component\Templating\EngineInterface')
             ->disableOriginalConstructor()
             ->setMethods(array('render', 'exists', 'supports'))
             ->getMock();
@@ -43,7 +41,7 @@ class FragmentHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderWithoutService()
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException('\RuntimeException');
         $this->expectExceptionMessage('Cannot render Fragment of type `foo.bar`. Service not found.');
 
         // templating render should not be called
@@ -60,7 +58,7 @@ class FragmentHelperTest extends \PHPUnit_Framework_TestCase
         // templating render must be called once
         $this->templating->expects($this->once())->method('render')->will($this->returnValue('foo'));
 
-        $fragmentService = $this->createMock(FragmentServiceInterface::class);
+        $fragmentService = $this->createMock('Sonata\ArticleBundle\FragmentService\FragmentServiceInterface');
         $fragmentService->expects($this->once())->method('getTemplate')->will($this->returnValue('template.html.twig'));
 
         $this->fragmentHelper->setFragmentServices(array('foo.bar' => $fragmentService));
@@ -72,7 +70,7 @@ class FragmentHelperTest extends \PHPUnit_Framework_TestCase
      */
     private function getFragmentMock()
     {
-        $fragment = $this->createMock(FragmentInterface::class);
+        $fragment = $this->createMock('Sonata\ArticleBundle\Model\FragmentInterface');
         $fragment->expects($this->once())->method('getType')->will($this->returnValue('foo.bar'));
         $fragment->expects($this->any())->method('getSettings')->will($this->returnValue(array()));
 
