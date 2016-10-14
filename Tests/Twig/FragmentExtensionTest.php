@@ -12,7 +12,6 @@
 namespace Sonata\ArticleBundle\Tests\Twig;
 
 use Sonata\ArticleBundle\Helper\FragmentHelper;
-use Sonata\ArticleBundle\Model\ArticleInterface;
 use Sonata\ArticleBundle\Model\FragmentInterface;
 use Sonata\ArticleBundle\Twig\FragmentExtension;
 
@@ -33,7 +32,7 @@ class FragmentExtensionTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->fragmentHelper = $this->getMockBuilder(FragmentHelper::class)
+        $this->fragmentHelper = $this->getMockBuilder('Sonata\ArticleBundle\Helper\FragmentHelper')
             ->disableOriginalConstructor()
             ->setMethods(array('render'))
             ->getMock();
@@ -76,7 +75,7 @@ class FragmentExtensionTest extends \PHPUnit_Framework_TestCase
             );
         }
 
-        $article = $this->createMock(ArticleInterface::class);
+        $article = $this->createMock('Sonata\ArticleBundle\Model\ArticleInterface');
         $article->expects($this->any())
             ->method('getFragments')
             ->will($this->returnValue($fragments));
@@ -110,7 +109,7 @@ class FragmentExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getFragmentMock(array $settings, $enabled = true)
     {
-        $fragment = $this->createMock(FragmentInterface::class);
+        $fragment = $this->createMock('Sonata\ArticleBundle\Model\FragmentInterface');
         $fragment->expects($this->any())
             ->method('getSettings')
             ->will($this->returnValue($settings));

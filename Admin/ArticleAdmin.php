@@ -20,11 +20,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\ArticleBundle\Model\AbstractArticle;
 use Sonata\ArticleBundle\Model\ArticleInterface;
 use Sonata\ArticleBundle\Model\FragmentInterface;
-use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * @author Florent Denis <florent.denis@ekino.com>
@@ -134,33 +130,33 @@ class ArticleAdmin extends AbstractAdmin
 
         $formMapper
             ->with('General', array('class' => 'col-md-8'))
-                ->add('title', TextType::class, array(
+                ->add('title', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
                     'attr' => array('maxlength' => 255),
                 ))
-                ->add('subtitle', TextType::class, array(
+                ->add('subtitle', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
                     'required' => false,
                     'attr' => array('maxlength' => 255),
                 ))
-                ->add('abstract', TextareaType::class, array(
+                ->add('abstract', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
                     'required' => false,
                 ))
             ->end()
 
             ->with('Publication', array('class' => 'col-md-4'))
-                ->add('status', ChoiceType::class, array(
+                ->add('status', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
                     'choices' => $this->isGranted('ROLE_ARTICLE_PUBLISH') ?
                         AbstractArticle::getStatuses() : AbstractArticle::getContributorStatus(),
                     'attr' => array('class' => 'full-width'),
                     'choices_as_values' => false,
                 ))
-                ->add('publicationStartsAt', DateTimePickerType::class, array(
+                ->add('publicationStartsAt', 'Sonata\CoreBundle\Form\Type\DateTimePickerType', array(
                     'format' => 'dd/MM/yyyy HH:mm',
                     'datepicker_use_button' => false,
                     'dp_side_by_side' => true,
                     'dp_language' => 'fr',
                     'required' => false,
                 ))
-                ->add('publicationEndsAt', DateTimePickerType::class, array(
+                ->add('publicationEndsAt', 'Sonata\CoreBundle\Form\Type\DateTimePickerType', array(
                     'format' => 'dd/MM/yyyy HH:mm',
                     'datepicker_use_button' => false,
                     'dp_side_by_side' => true,
