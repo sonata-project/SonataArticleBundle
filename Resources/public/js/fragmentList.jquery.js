@@ -1,4 +1,4 @@
-(function ($, window, document, undefined) {
+(function($) {
     // Create the defaults once
     var pluginName = 'fragmentList',
         defaults = {
@@ -14,6 +14,7 @@
             pageScrollOffset: 50,
             pageScrollDuration: 1000,
             getAddUrl: null,
+            translations: {},
             addedCallback: function(html) {}
         };
 
@@ -23,6 +24,7 @@
         this.options = $.extend({}, defaults, options) ;
         this._defaults = defaults;
         this._name = pluginName;
+        this._elementsIndex = 0;
         this.init();
     }
 
@@ -35,6 +37,20 @@
             this.build();
             this.setEvents();
             this.setDraggableElements();
+        },
+
+        /**
+         * Translates given label.
+         *
+         * @param {String} label
+         * @return {String}
+         */
+        translate: function (label) {
+            if (this.options.translations[label]) {
+                return this.options.translations[label];
+            }
+
+            return label;
         },
 
         /**
@@ -90,10 +106,29 @@
             // Before adding, be sure the current fragment is valid
             if(!this.checkValidity()) return;
 
+            if (this._elementsIndex === 0) {
+                var maxIndex = 0;
+
+                this.$list.children().each(function(i, child) {
+                    var fragId = $(child).data('frag-id');
+                    fragId = fragId.split('_');
+                    var fragmentId = fragId.length > 0 ? fragId[fragId.length - 1] : null;
+
+                    if (!isNaN(fragmentId) && fragmentId > maxIndex) {
+                        maxIndex = parseInt(fragmentId);
+                    }
+                });
+
+                this._elementsIndex = maxIndex;
+            }
+
+            this._elementsIndex++;
+            Admin.log('[fragments|add] current index is ' + this._elementsIndex);
+
             // Submit the new fragment
             var self = this;
             jQuery(this.$form).ajaxSubmit({
-                url: this.options.getAddUrl(this.$list.children().length),
+                url: this.options.getAddUrl(this._elementsIndex),
                 type: 'POST',
                 dataType: 'html',
                 data: { _xml_http_request: true },
@@ -134,6 +169,10 @@
             e.preventDefault();
             e.stopPropagation();
 
+            if (!confirm(this.translate('remove_confirm'))) {
+                return;
+            }
+
             var $target = $(e.currentTarget),
                 $frag = $target.closest('[data-fragment]'),
                 id = $frag.data('fragId'),
@@ -141,14 +180,13 @@
                 $cb = $form.find(this.options.formRemoveName);
 
             // Remove a persisted fragment (just check delete checkbox)
-            if($form.data('formTmp')) {
+            if (!$frag.hasClass('is-tmp')) {
                 // Check the delete checkbox
                 $cb.prop('checked', true).attr('checked', true);
-                console.log($form.find(this.options.formRemoveName));
 
                 // Hide form block
                 $form.hide();
-            // Remove a new fragment (not already saved)
+                // Remove a new fragment (not already saved)
             } else {
                 $form.remove();
                 this.setFormListElement();
@@ -160,7 +198,7 @@
             // Removed the last element ?
             if(!this.$list.children().length) {
                 this.$activeFragment = null;
-            // Removed the current visible item ?
+                // Removed the current visible item ?
             } else if(id === this.$activeFragment.data('fragId')) {
                 this.setActive(this.$list.children(':first-child'));
             }
@@ -325,13 +363,17 @@
         }
     };
 
-    // A really lightweight plugin wrapper around the constructor,
-    // preventing against multiple instantiations
-    $.fn[pluginName] = function ( options ) {
-        return this.each(function () {
-            if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
-            }
-        });
-    };
-})(jQuery, window, document);
+    $(document).ready(function() {
+
+        // A really lightweight plugin wrapper around the constructor,
+        // preventing against multiple instantiations
+        $.fn[pluginName] = function ( options ) {
+            return this.each(function () {
+                if (!$.data(this, 'plugin_' + pluginName)) {
+                    $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+                }
+            });
+        };
+
+    });
+})(jQuery);

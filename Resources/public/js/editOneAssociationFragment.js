@@ -5,6 +5,7 @@ jQuery(document).ready(function() {
 
     var id = $selector.data('id');
     var fragmentAddUrl = $selector.data('add-fragment-url');
+    var translations = $selector.data('translations');
 
     /**
      * Get URL value to POST a new fragment
@@ -34,6 +35,7 @@ jQuery(document).ready(function() {
         formSource: '#field_widget_'+id,
         addButtonSource: '#field_actions_'+id,
         getAddUrl: getFragmentAddUrl,
-        addedCallback: addFragmentCallback
+        addedCallback: addFragmentCallback,
+        translations: translations
     });
 });

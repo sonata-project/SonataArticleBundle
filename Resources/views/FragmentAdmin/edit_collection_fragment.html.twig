@@ -14,7 +14,10 @@
                                 'subclass':  sonata_admin.admin.getActiveSubclassCode(),
                                 'objectId':  sonata_admin.admin.root.subject ? sonata_admin.admin.root.id(sonata_admin.admin.root.subject) : false,
                                 'uniqid':    sonata_admin.admin.root.uniqid
-                            } + sonata_admin.field_description.getOption('link_parameters', {})) }}">
+                            } + sonata_admin.field_description.getOption('link_parameters', {})) }}"
+                            data-translations="{{ {
+                                remove_confirm: 'remove_confirm'|trans({}, 'SonataArticleBundle')
+                            }|json_encode }}">
                         {% for fragServId, fragServ in sonata_admin.field_description.associationadmin.fragmentServices %}
                         <option value="{{ fragServId }}">{{ fragServ.name }}</option>
                         {% endfor %}

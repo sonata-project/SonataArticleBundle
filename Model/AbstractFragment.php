@@ -49,18 +49,23 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
     protected $position;
 
     /**
-     * @var int
+     * @var string
+     */
+    protected $backofficeTitle;
+
+    /**
+     * @var ArticleInterface
      */
     protected $article;
 
     /**
-     * Returns type of fragment.
+     * Returns Backoffice title of fragment.
      *
      * @return string
      */
     public function __toString()
     {
-        return (string) $this->getType();
+        return $this->getBackofficeTitle();
     }
 
     /**
@@ -217,5 +222,25 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackofficeTitle()
+    {
+        return $this->backofficeTitle;
+    }
+
+    /**
+     * @param string $backofficeTitle
+     *
+     * @return $this
+     */
+    public function setBackofficeTitle($backofficeTitle)
+    {
+        $this->backofficeTitle = $backofficeTitle;
+
+        return $this;
     }
 }
