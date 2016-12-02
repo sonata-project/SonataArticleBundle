@@ -24,7 +24,7 @@ class TextFragmentService extends AbstractFragmentService
     /**
      * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $form, FragmentInterface $fragment)
+    public function buildForm(FormMapper $form, FragmentInterface $fragment)
     {
         $form->add('settings', 'sonata_type_immutable_array', array(
             'keys' => array(

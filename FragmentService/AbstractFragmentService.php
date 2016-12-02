@@ -55,6 +55,16 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
      */
     public function buildEditForm(FormMapper $form, FragmentInterface $fragment)
     {
+        // Add BO title
+        $form->add('backofficeTitle');
+        $this->buildForm($form, $fragment);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormMapper $form, FragmentInterface $fragment)
+    {
     }
 
     /**

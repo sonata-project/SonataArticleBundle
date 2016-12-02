@@ -38,10 +38,13 @@ interface FragmentServiceInterface
     public function buildCreateForm(FormMapper $form, FragmentInterface $fragment);
 
     /**
-     * Validates the fragment (you'll need to add your violations through context).
+     * Builds the common part of creation|edition form for the fragment.
      *
-     * @param FragmentInterface         $fragment
-     * @param ExecutionContextInterface $context
+     * @param FormMapper        $form
+     * @param FragmentInterface $fragment
+     */
+    public function buildForm(FormMapper $form, FragmentInterface $fragment);
+
     /**
      * Validates the fragment (you'll need to add your violations through $errorElement).
      *

@@ -70,6 +70,10 @@
                 <source>form.label_publication_ends_at</source>
                 <target>Publication end date</target>
             </trans-unit>
+            <trans-unit id="form.label_backoffice_title">
+                <source>form.label_backoffice_title</source>
+                <target>Backoffice title</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
