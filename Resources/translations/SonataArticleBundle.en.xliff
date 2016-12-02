@@ -74,6 +74,10 @@
                 <source>form.label_backoffice_title</source>
                 <target>Backoffice title</target>
             </trans-unit>
+            <trans-unit id="remove_confirm">
+                <source>remove_confirm</source>
+                <target>The fragment will be deleted after update. Are you sure ?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
