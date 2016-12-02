@@ -13,8 +13,8 @@ namespace Sonata\ArticleBundle\FragmentService;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\ArticleBundle\Model\FragmentInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -42,13 +42,11 @@ class TextFragmentService extends AbstractFragmentService
     /**
      * {@inheritdoc}
      */
-    public function validate(FragmentInterface $fragment, ExecutionContextInterface $context)
+    public function validate(ErrorElement $errorElement, $object)
     {
-        if (empty($fragment->getSettings()['text'])) {
-            $context
-                ->buildViolation('`Text` must not be empty')
-                ->atPath('settings.text')
-                ->addViolation()
+        if (empty($object->getSetting('text'))) {
+            $errorElement
+                ->addViolation('Fragment Text - `Text` must not be empty')
             ;
         }
     }

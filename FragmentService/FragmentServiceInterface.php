@@ -13,8 +13,8 @@ namespace Sonata\ArticleBundle\FragmentService;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\ArticleBundle\Model\FragmentInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -42,8 +42,13 @@ interface FragmentServiceInterface
      *
      * @param FragmentInterface         $fragment
      * @param ExecutionContextInterface $context
+    /**
+     * Validates the fragment (you'll need to add your violations through $errorElement).
+     *
+     * @param ErrorElement $errorElement
+     * @param object       $object
      */
-    public function validate(FragmentInterface $fragment, ExecutionContextInterface $context);
+    public function validate(ErrorElement $errorElement, $object);
 
     /**
      * Returns the Fragment service readable name.

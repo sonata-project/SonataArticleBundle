@@ -108,6 +108,11 @@ class ArticleAdmin extends AbstractAdmin
                     AbstractArticle::getStatuses() : AbstractArticle::getContributorStatus()))
             ->end()
         ;
+
+        $fragmentAdmin = $this->getChild('sonata.article.admin.fragment');
+        foreach ($object->getFragments() as $fragment) {
+            $fragmentAdmin->validate($errorElement, $fragment);
+        }
     }
 
     /**

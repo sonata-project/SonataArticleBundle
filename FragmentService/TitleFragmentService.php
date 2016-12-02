@@ -13,9 +13,9 @@ namespace Sonata\ArticleBundle\FragmentService;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\ArticleBundle\Model\FragmentInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -44,20 +44,17 @@ class TitleFragmentService extends AbstractFragmentService
     /**
      * {@inheritdoc}
      */
-    public function validate(FragmentInterface $fragment, ExecutionContextInterface $context)
+    public function validate(ErrorElement $errorElement, $object)
     {
-        if (empty($fragment->getSettings()['text'])) {
-            $context
-                ->buildViolation('`Title` must not be empty')
-                ->atPath('settings.text')
-                ->addViolation()
+        if (empty($object->getSetting('text'))) {
+            $errorElement
+                ->addViolation('Fragment Title - `Text` must not be empty')
             ;
         }
-        if (strlen($fragment->getSetting('text')) > 255) {
-            $context
-                ->buildViolation('`Title` must not be longer than 255 characters.')
-                ->atPath('settings.text')
-                ->addViolation()
+
+        if (strlen($object->getSetting('text')) > 255) {
+            $errorElement
+                ->addViolation('Fragment Text - `Text` must not be longer than 255 characters.')
             ;
         }
     }

@@ -13,8 +13,8 @@ namespace Sonata\ArticleBundle\FragmentService;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\ArticleBundle\Model\FragmentInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -109,8 +109,13 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(FragmentInterface $fragment, ExecutionContextInterface $context)
+    public function validate(ErrorElement $errorElement, $object)
     {
+        if (empty($object->getBackofficeTitle())) {
+            $errorElement
+                ->addViolation(sprintf('Fragment %s - `Backoffice Title` must not be empty', $this->getName()))
+            ;
+        }
     }
 
     /**
