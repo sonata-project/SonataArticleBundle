@@ -123,6 +123,11 @@ class ArticleAdmin extends AbstractAdmin
     public function prePersist($object)
     {
         $this->sort($object);
+
+        $fragmentAdmin = $this->getChild('sonata.article.admin.fragment');
+        foreach ($object->getFragments() as $fragment) {
+            $fragmentAdmin->prePersist($fragment);
+        }
     }
 
     /**
