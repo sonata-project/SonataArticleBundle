@@ -140,7 +140,7 @@ final class FragmentAdmin extends AbstractAdmin
      */
     public function preUpdate($object)
     {
-        $this->getService($object)->preUpdate($object);
+        $this->getService($object->getType())->preUpdate($object);
     }
 
     /**
@@ -148,7 +148,7 @@ final class FragmentAdmin extends AbstractAdmin
      */
     public function postUpdate($object)
     {
-        $this->getService($object)->postUpdate($object);
+        $this->getService($object->getType())->postUpdate($object);
     }
 
     /**
@@ -156,7 +156,7 @@ final class FragmentAdmin extends AbstractAdmin
      */
     public function prePersist($object)
     {
-        $this->getService($object)->prePersist($object);
+        $this->getService($object->getType())->prePersist($object);
     }
 
     /**
@@ -164,7 +164,7 @@ final class FragmentAdmin extends AbstractAdmin
      */
     public function postPersist($object)
     {
-        $this->getService($object)->postPersist($object);
+        $this->getService($object->getType())->postPersist($object);
     }
 
     /**
@@ -172,7 +172,7 @@ final class FragmentAdmin extends AbstractAdmin
      */
     public function preRemove($object)
     {
-        $this->getService($object)->preRemove($object);
+        $this->getService($object->getType())->preRemove($object);
     }
 
     /**
@@ -180,7 +180,7 @@ final class FragmentAdmin extends AbstractAdmin
      */
     public function postRemove($object)
     {
-        $this->getService($object)->postRemove($object);
+        $this->getService($object->getType())->postRemove($object);
     }
 
     /**
