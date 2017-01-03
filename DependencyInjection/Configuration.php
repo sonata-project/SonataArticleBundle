@@ -82,6 +82,11 @@ final class Configuration implements ConfigurationInterface
                 ->defaultValue('SonataArticleBundle')
             ->end()
 
+            ->scalarNode('enable_fragments_rendering')
+                ->info('Enable/disable Twig Extension used for fragment rendering')
+                ->defaultValue(true)
+            ->end()
+
             ->scalarNode('max_length_title_for_display')
                 ->defaultValue(80)
             ->end()
