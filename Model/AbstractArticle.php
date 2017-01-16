@@ -93,9 +93,6 @@ abstract class AbstractArticle implements ArticleInterface
      */
     protected $mainImage;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
