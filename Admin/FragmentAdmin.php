@@ -20,7 +20,7 @@ use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Hugo Briand <briand@ekino.com>
  */
 final class FragmentAdmin extends AbstractAdmin
 {
