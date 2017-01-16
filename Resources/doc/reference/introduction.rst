@@ -4,10 +4,11 @@ Introduction
 The first goal of SonataArticle Bundle is to provide a starter kit to manage content.
 
 An ``Article`` is like a skeleton for a piece of content : it contains the main logic of what you want to build,
- but not the content itself.. For example, this is where you can configure content types, or
- publication status, titles, categories...
+but not the content itself.. For example, this is where you can configure content types, or
+publication status, titles, categories...
+
 A ``Fragment`` will handle a part of a the content. It can be very simple like only a title.
-  Or more complex, with an associated media, a rich text editor, or something else.
+Or more complex, with an associated media, a rich text editor, or something else.
 
 When we built this bundle we kept in mind the PageBundle logic, which we thought was really interesting.
 If you understand the logic between ``Pages`` and ``Blocks``, you will understand a lot of similarity
