@@ -84,7 +84,7 @@ abstract class AbstractArticle implements ArticleInterface
     protected $categories;
 
     /**
-     * @var Collection
+     * @var ArrayCollection
      */
     protected $tags;
 
@@ -353,7 +353,7 @@ abstract class AbstractArticle implements ArticleInterface
     /**
      * {@inheritdoc}
      */
-    public function setTags(Collection $tags = null)
+    public function setTags(array $tags = null)
     {
         $this->tags = $tags;
 

@@ -11,9 +11,9 @@
 
 namespace Sonata\ArticleBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sonata\ClassificationBundle\Model\Category;
-use Sonata\ClassificationBundle\Model\Tag;
 use Sonata\MediaBundle\Model\Media;
 
 /**
@@ -156,14 +156,14 @@ interface ArticleInterface
     public function getSubtitle();
 
     /**
-     * @param Tag[]|Collection $tags
+     * @param array $tags
      *
      * @return $this
      */
-    public function setTags(Collection $tags = null);
+    public function setTags(array $tags = null);
 
     /**
-     * @return Tag[]|Collection $tags
+     * @return ArrayCollection $tags
      */
     public function getTags();
 
