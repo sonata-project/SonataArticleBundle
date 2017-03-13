@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-final class FragmentAdmin extends AbstractAdmin
+class FragmentAdmin extends AbstractAdmin
 {
     /**
      * @var FragmentServiceInterface[]
