@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -195,6 +196,14 @@ final class FragmentAdmin extends AbstractAdmin
         return array(
             'type' => $this->getRequest()->get('type'),
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $this->fragmentServices[$object->getType()]->validate($errorElement, $object);
     }
 
     /**
