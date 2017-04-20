@@ -11,7 +11,6 @@
 
 namespace Sonata\ArticleBundle\Tests\Twig;
 
-use Sonata\ArticleBundle\Helper\FragmentHelper;
 use Sonata\ArticleBundle\Model\FragmentInterface;
 use Sonata\ArticleBundle\Twig\FragmentExtension;
 
