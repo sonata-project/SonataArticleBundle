@@ -74,7 +74,7 @@ class FragmentExtensionTest extends \PHPUnit_Framework_TestCase
             );
         }
 
-        $article = $this->createMock('Sonata\ArticleBundle\Model\ArticleInterface');
+        $article = $this->getMockBuilder('Sonata\ArticleBundle\Model\ArticleInterface')->getMock();
         $article->expects($this->any())
             ->method('getFragments')
             ->will($this->returnValue($fragments));
@@ -108,7 +108,7 @@ class FragmentExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getFragmentMock(array $settings, $enabled = true)
     {
-        $fragment = $this->createMock('Sonata\ArticleBundle\Model\FragmentInterface');
+        $fragment = $this->getMockBuilder('Sonata\ArticleBundle\Model\FragmentInterface')->getMock();
         $fragment->expects($this->any())
             ->method('getSettings')
             ->will($this->returnValue($settings));

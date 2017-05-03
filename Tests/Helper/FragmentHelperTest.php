@@ -41,8 +41,7 @@ class FragmentHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderWithoutService()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage('Cannot render Fragment of type `foo.bar`. Service not found.');
+        $this->setExpectedException('RuntimeException', 'Cannot render Fragment of type `foo.bar`. Service not found.');
 
         // templating render should not be called
         $this->templating->expects($this->never())->method('render');
@@ -58,7 +57,7 @@ class FragmentHelperTest extends \PHPUnit_Framework_TestCase
         // templating render must be called once
         $this->templating->expects($this->once())->method('render')->will($this->returnValue('foo'));
 
-        $fragmentService = $this->createMock('Sonata\ArticleBundle\FragmentService\FragmentServiceInterface');
+        $fragmentService = $this->getMockBuilder('Sonata\ArticleBundle\FragmentService\FragmentServiceInterface')->getMock();
         $fragmentService->expects($this->once())->method('getTemplate')->will($this->returnValue('template.html.twig'));
 
         $this->fragmentHelper->setFragmentServices(array('foo.bar' => $fragmentService));
@@ -70,7 +69,7 @@ class FragmentHelperTest extends \PHPUnit_Framework_TestCase
      */
     private function getFragmentMock()
     {
-        $fragment = $this->createMock('Sonata\ArticleBundle\Model\FragmentInterface');
+        $fragment = $this->getMockBuilder('Sonata\ArticleBundle\Model\FragmentInterface')->getMock();
         $fragment->expects($this->once())->method('getType')->will($this->returnValue('foo.bar'));
         $fragment->expects($this->any())->method('getSettings')->will($this->returnValue(array()));
 
