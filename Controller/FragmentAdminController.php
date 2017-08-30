@@ -47,7 +47,7 @@ class FragmentAdminController extends CRUDController
         $this->get('twig')->getExtension('form')->renderer->setTheme($view, $this->admin->getFormTheme());
 
         $request = $this->getRequest();
-        // We need to replace name attributes to have a s20003903[fragments][n][...] format as this form doesn't
+        // We need to replace name attributes to have a s20003903[fragments][n][...] format as this form doesn't.
         // Know of its parent: s/s20003903_fragments_n/s20003903[fragments][n]
         $search = sprintf('name="%s_%d', $request->get('elementId'), $request->get('fragCount', 0));
         $replace = sprintf('name="%s[fragments][%d]', $request->get('uniqid'), $request->get('fragCount', 0));
