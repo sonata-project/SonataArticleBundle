@@ -58,11 +58,19 @@ class FragmentHelperTest extends \PHPUnit_Framework_TestCase
         // templating render must be called once
         $this->templating->expects($this->once())->method('render')->will($this->returnValue('foo'));
 
-        $fragmentService = $this->createMock('Sonata\ArticleBundle\FragmentService\FragmentServiceInterface');
+        $fragmentService = $this->createMock(array(
+            'Sonata\ArticleBundle\FragmentService\FragmentServiceInterface',
+            'Sonata\ArticleBundle\FragmentService\ExtraContentProviderInterface',
+        ));
         $fragmentService->expects($this->once())->method('getTemplate')->will($this->returnValue('template.html.twig'));
+        $fragmentService->expects($this->once())->method('getExtraContent')->will($this->returnValue(array('foo' => 'bar')));
 
         $this->fragmentHelper->setFragmentServices(array('foo.bar' => $fragmentService));
         $this->fragmentHelper->render($fragment);
+
+        $this->assertArrayHasKey('foo.bar', $this->fragmentHelper->getFragmentServices());
+        $this->assertInstanceOf('Sonata\ArticleBundle\FragmentService\FragmentServiceInterface',
+            $this->fragmentHelper->getFragmentServices()['foo.bar']);
     }
 
     /**

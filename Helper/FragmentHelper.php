@@ -11,6 +11,7 @@
 
 namespace Sonata\ArticleBundle\Helper;
 
+use Sonata\ArticleBundle\FragmentService\ExtraContentProviderInterface;
 use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Sonata\ArticleBundle\Model\FragmentInterface;
 use Symfony\Component\Templating\EngineInterface;
@@ -69,12 +70,15 @@ class FragmentHelper
             throw new \RuntimeException(sprintf('Cannot render Fragment of type `%s`. Service not found.', $type));
         }
 
-        return $this->templating->render(
-            $this->fragmentServices[$type]->getTemplate(),
-            array(
-                'fragment' => $fragment,
-                'fields' => $fragment->getSettings(),
-            )
+        $content = array(
+            'fragment' => $fragment,
+            'fields' => $fragment->getSettings(),
         );
+
+        if ($this->fragmentServices[$type] instanceof ExtraContentProviderInterface) {
+            $content = array_merge($this->fragmentServices[$type]->getExtraContent($fragment), $content);
+        }
+
+        return $this->templating->render($this->fragmentServices[$type]->getTemplate(), $content);
     }
 }
