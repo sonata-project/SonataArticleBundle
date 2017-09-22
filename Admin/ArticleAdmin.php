@@ -217,6 +217,7 @@ class ArticleAdmin extends AbstractAdmin
                         foreach ($subject->getFragments() as $existingFragment) {
                             if (!is_null($existingFragment->getId()) && $existingFragment->getId() == $value['id']) {
                                 $fragment = $existingFragment;
+
                                 break;
                             }
                         }
