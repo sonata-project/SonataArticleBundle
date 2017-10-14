@@ -16,11 +16,17 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\ArticleBundle\Model\AbstractArticle;
 use Sonata\ArticleBundle\Model\ArticleInterface;
 use Sonata\ArticleBundle\Model\FragmentInterface;
+use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 
 /**
  * @author Florent Denis <florent.denis@ekino.com>
@@ -140,33 +146,33 @@ class ArticleAdmin extends AbstractAdmin
 
         $formMapper
             ->with('General', array('class' => 'col-md-8'))
-                ->add('title', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
+                ->add('title', TextType::class, array(
                     'attr' => array('maxlength' => 255),
                 ))
-                ->add('subtitle', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
+                ->add('subtitle', TextType::class, array(
                     'required' => false,
                     'attr' => array('maxlength' => 255),
                 ))
-                ->add('abstract', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
+                ->add('abstract', TextareaType::class, array(
                     'required' => false,
                 ))
             ->end()
 
             ->with('Publication', array('class' => 'col-md-4'))
-                ->add('status', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
+                ->add('status', ChoiceType::class, array(
                     'choices' => $this->isGranted('ROLE_ARTICLE_PUBLISH') ?
                         AbstractArticle::getStatuses() : AbstractArticle::getContributorStatus(),
                     'attr' => array('class' => 'full-width'),
                     'choices_as_values' => false,
                 ))
-                ->add('publicationStartsAt', 'Sonata\CoreBundle\Form\Type\DateTimePickerType', array(
+                ->add('publicationStartsAt', DateTimePickerType::class, array(
                     'format' => 'dd/MM/yyyy HH:mm',
                     'datepicker_use_button' => false,
                     'dp_side_by_side' => true,
                     'dp_language' => 'fr',
                     'required' => false,
                 ))
-                ->add('publicationEndsAt', 'Sonata\CoreBundle\Form\Type\DateTimePickerType', array(
+                ->add('publicationEndsAt', DateTimePickerType::class, array(
                     'format' => 'dd/MM/yyyy HH:mm',
                     'datepicker_use_button' => false,
                     'dp_side_by_side' => true,
@@ -176,7 +182,7 @@ class ArticleAdmin extends AbstractAdmin
             ->end()
 
             ->with('Tags', array('class' => 'col-md-6'))
-                ->add('tags', 'sonata_type_model_autocomplete', array(
+                ->add('tags', ModelAutocompleteType::class, array(
                     'required' => false,
                     'property' => 'name',
                     'multiple' => true,
@@ -191,7 +197,7 @@ class ArticleAdmin extends AbstractAdmin
             ->end()
 
             ->with('Categories', array('class' => 'col-md-6'))
-                ->add('categories', 'sonata_type_model_autocomplete', array(
+                ->add('categories', ModelAutocompleteType::class, array(
                     'required' => false,
                     'property' => 'name',
                     'multiple' => true,
@@ -206,7 +212,7 @@ class ArticleAdmin extends AbstractAdmin
             ->end()
 
             ->with('Fragments', array('class' => 'col-md-12'))
-                ->add('fragments', 'sonata_type_collection', array(
+                ->add('fragments', CollectionType::class, array(
                     'cascade_validation' => true,
                     'by_reference' => false,
                     'label' => false,
