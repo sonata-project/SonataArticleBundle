@@ -22,11 +22,11 @@ use Sonata\ArticleBundle\Model\AbstractArticle;
 use Sonata\ArticleBundle\Model\ArticleInterface;
 use Sonata\ArticleBundle\Model\FragmentInterface;
 use Sonata\CoreBundle\Form\Type\CollectionType;
-use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Sonata\CoreBundle\Validator\ErrorElement;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * @author Florent Denis <florent.denis@ekino.com>
@@ -36,7 +36,7 @@ class ArticleAdmin extends AbstractAdmin
     /**
      * @var array
      */
-    protected $datagridValues = array('_sort_by' => 'updatedAt', '_sort_order' => 'DESC');
+    protected $datagridValues = ['_sort_by' => 'updatedAt', '_sort_order' => 'DESC'];
 
     /**
      * @var string
@@ -145,74 +145,74 @@ class ArticleAdmin extends AbstractAdmin
         $subject = $this->getSubject();
 
         $formMapper
-            ->with('General', array('class' => 'col-md-8'))
-                ->add('title', TextType::class, array(
-                    'attr' => array('maxlength' => 255),
-                ))
-                ->add('subtitle', TextType::class, array(
+            ->with('General', ['class' => 'col-md-8'])
+                ->add('title', TextType::class, [
+                    'attr' => ['maxlength' => 255],
+                ])
+                ->add('subtitle', TextType::class, [
                     'required' => false,
-                    'attr' => array('maxlength' => 255),
-                ))
-                ->add('abstract', TextareaType::class, array(
+                    'attr' => ['maxlength' => 255],
+                ])
+                ->add('abstract', TextareaType::class, [
                     'required' => false,
-                ))
+                ])
             ->end()
 
-            ->with('Publication', array('class' => 'col-md-4'))
-                ->add('status', ChoiceType::class, array(
+            ->with('Publication', ['class' => 'col-md-4'])
+                ->add('status', ChoiceType::class, [
                     'choices' => $this->isGranted('ROLE_ARTICLE_PUBLISH') ?
                         AbstractArticle::getStatuses() : AbstractArticle::getContributorStatus(),
-                    'attr' => array('class' => 'full-width'),
+                    'attr' => ['class' => 'full-width'],
                     'choices_as_values' => false,
-                ))
-                ->add('publicationStartsAt', DateTimePickerType::class, array(
+                ])
+                ->add('publicationStartsAt', DateTimePickerType::class, [
                     'format' => 'dd/MM/yyyy HH:mm',
                     'datepicker_use_button' => false,
                     'dp_side_by_side' => true,
                     'dp_language' => 'fr',
                     'required' => false,
-                ))
-                ->add('publicationEndsAt', DateTimePickerType::class, array(
+                ])
+                ->add('publicationEndsAt', DateTimePickerType::class, [
                     'format' => 'dd/MM/yyyy HH:mm',
                     'datepicker_use_button' => false,
                     'dp_side_by_side' => true,
                     'dp_language' => 'fr',
                     'required' => false,
-                ))
+                ])
             ->end()
 
-            ->with('Tags', array('class' => 'col-md-6'))
-                ->add('tags', ModelAutocompleteType::class, array(
+            ->with('Tags', ['class' => 'col-md-6'])
+                ->add('tags', ModelAutocompleteType::class, [
                     'required' => false,
                     'property' => 'name',
                     'multiple' => true,
                     'label' => false,
-                    'attr' => array('class' => 'show'),
+                    'attr' => ['class' => 'show'],
                     'callback' => function (AdminInterface $admin, $property, $searchText) {
                         $datagrid = $admin->getDatagrid();
                         $datagrid->setValue($property, null, $searchText);
                         $datagrid->setValue('enabled', null, true);
                     },
-                ))
+                ])
             ->end()
 
-            ->with('Categories', array('class' => 'col-md-6'))
-                ->add('categories', ModelAutocompleteType::class, array(
+            ->with('Categories', ['class' => 'col-md-6'])
+                ->add('categories', ModelAutocompleteType::class, [
                     'required' => false,
                     'property' => 'name',
                     'multiple' => true,
                     'label' => false,
-                    'attr' => array('class' => 'show'),
+                    'attr' => ['class' => 'show'],
                     'callback' => function (AdminInterface $admin, $property, $searchText) {
                         $datagrid = $admin->getDatagrid();
                         $datagrid->setValue($property, null, $searchText);
                         $datagrid->setValue('enabled', null, true);
                     },
-                ))
+                ])
             ->end()
 
-            ->with('Fragments', array('class' => 'col-md-12'))
-                ->add('fragments', CollectionType::class, array(
+            ->with('Fragments', ['class' => 'col-md-12'])
+                ->add('fragments', CollectionType::class, [
                     'cascade_validation' => true,
                     'by_reference' => false,
                     'label' => false,
@@ -233,16 +233,16 @@ class ArticleAdmin extends AbstractAdmin
                                 ->setType($value['type'])
                                 ->setEnabled(isset($value['enabled']) ? (bool) $value['enabled'] : false)
                                 ->setPosition($value['position'] ?: 1)
-                                ->setSettings((isset($value['settings']) && is_array($value['settings'])) ? $value['settings'] : array());
+                                ->setSettings((isset($value['settings']) && is_array($value['settings'])) ? $value['settings'] : []);
 
                             $subject->addFragment($fragment);
                         }
 
                         return $fragment;
                     },
-                ), array(
+                ], [
                     'sortable' => 'position',
-                ))
+                ])
             ->end()
         ;
     }
@@ -253,16 +253,16 @@ class ArticleAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title', 'text', array(
+            ->addIdentifier('title', 'text', [
                 'sortable' => true,
-            ))
-            ->add('updatedAt', 'datetime', array(
+            ])
+            ->add('updatedAt', 'datetime', [
                 'sortable' => true,
-            ))
-            ->add('status', 'choice', array(
+            ])
+            ->add('status', 'choice', [
                 'sortable' => true,
                 'choices' => AbstractArticle::getStatuses(),
-            ))
+            ])
         ;
     }
 

@@ -28,17 +28,17 @@ class TextFragmentService extends AbstractFragmentService
      */
     public function buildForm(FormMapper $form, FragmentInterface $fragment)
     {
-        $form->add('settings', ImmutableArrayType::class, array(
-            'keys' => array(
-                array('text', TextareaType::class, array(
+        $form->add('settings', ImmutableArrayType::class, [
+            'keys' => [
+                ['text', TextareaType::class, [
                     'label' => 'Text',
-                    'constraints' => array(
+                    'constraints' => [
                         new NotBlank(),
-                    ),
-                )),
-            ),
+                    ],
+                ]],
+            ],
             'label' => false,
-        ));
+        ]);
     }
 
     /**

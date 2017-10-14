@@ -29,18 +29,18 @@ class TitleFragmentService extends AbstractFragmentService
      */
     public function buildForm(FormMapper $form, FragmentInterface $fragment)
     {
-        $form->add('settings', ImmutableArrayType::class, array(
-            'keys' => array(
-                array('text', TextType::class, array(
+        $form->add('settings', ImmutableArrayType::class, [
+            'keys' => [
+                ['text', TextType::class, [
                     'label' => 'Title',
-                    'constraints' => array(
+                    'constraints' => [
                         new NotBlank(),
-                        new Length(array('max' => 255)),
-                    ),
-                )),
-            ),
+                        new Length(['max' => 255]),
+                    ],
+                ]],
+            ],
             'label' => false,
-        ));
+        ]);
     }
 
     /**
