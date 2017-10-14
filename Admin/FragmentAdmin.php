@@ -18,8 +18,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -29,12 +29,12 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * @var FragmentServiceInterface[]
      */
-    private $fragmentServices = array();
+    private $fragmentServices = [];
 
     /**
      * @var array
      */
-    private $settings = array();
+    private $settings = [];
 
     /**
      * @param array $fragmentServices
@@ -191,12 +191,12 @@ final class FragmentAdmin extends AbstractAdmin
     public function getPersistentParameters()
     {
         if (!$this->hasRequest()) {
-            return array();
+            return [];
         }
 
-        return array(
+        return [
             'type' => $this->getRequest()->get('type'),
-        );
+        ];
     }
 
     /**
@@ -249,7 +249,7 @@ final class FragmentAdmin extends AbstractAdmin
         $formMapper->add('id', HiddenType::class);
         $formMapper->add('enabled', HiddenType::class);
         $formMapper->add('position', HiddenType::class);
-        $formMapper->add('type', HiddenType::class, array('read_only' => true));
+        $formMapper->add('type', HiddenType::class, ['read_only' => true]);
 
         if (!is_object($this->getSubject())) {
             return;
