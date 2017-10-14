@@ -13,7 +13,9 @@ namespace Sonata\ArticleBundle\FragmentService;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\ArticleBundle\Model\FragmentInterface;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -27,9 +29,9 @@ class TitleFragmentService extends AbstractFragmentService
      */
     public function buildForm(FormMapper $form, FragmentInterface $fragment)
     {
-        $form->add('settings', 'sonata_type_immutable_array', array(
+        $form->add('settings', ImmutableArrayType::class, array(
             'keys' => array(
-                array('text', 'text', array(
+                array('text', TextType::class, array(
                     'label' => 'Title',
                     'constraints' => array(
                         new NotBlank(),

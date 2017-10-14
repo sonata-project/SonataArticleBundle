@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -245,10 +246,10 @@ final class FragmentAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('id', 'Symfony\Component\Form\Extension\Core\Type\HiddenType');
-        $formMapper->add('enabled', 'Symfony\Component\Form\Extension\Core\Type\HiddenType');
-        $formMapper->add('position', 'Symfony\Component\Form\Extension\Core\Type\HiddenType');
-        $formMapper->add('type', 'Symfony\Component\Form\Extension\Core\Type\HiddenType', array('read_only' => true));
+        $formMapper->add('id', HiddenType::class);
+        $formMapper->add('enabled', HiddenType::class);
+        $formMapper->add('position', HiddenType::class);
+        $formMapper->add('type', HiddenType::class, array('read_only' => true));
 
         if (!is_object($this->getSubject())) {
             return;
