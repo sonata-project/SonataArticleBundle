@@ -34,7 +34,7 @@ class FragmentExtensionTest extends TestCase
     {
         $this->fragmentHelper = $this->getMockBuilder('Sonata\ArticleBundle\Helper\FragmentHelper')
             ->disableOriginalConstructor()
-            ->setMethods(array('render'))
+            ->setMethods(['render'])
             ->getMock();
 
         $this->fragmentExtension = new FragmentExtension($this->fragmentHelper);
@@ -43,16 +43,14 @@ class FragmentExtensionTest extends TestCase
     public function testRenderFragment()
     {
         // We render one fragment
-        $fragment = $this->getFragmentMock(
-            array(
-                'title' => 'foo',
-                'body' => 'bar',
-            )
-        );
+        $fragment = $this->getFragmentMock([
+            'title' => 'foo',
+            'body' => 'bar',
+        ]);
 
         $this->fragmentHelper->expects($this->once())
             ->method('render')
-            ->willReturnCallback(array($this, 'renderFragment'));
+            ->willReturnCallback([$this, 'renderFragment']);
 
         $this->assertEquals(
             '<h1>foo</h1><p>bar</p>',
@@ -62,15 +60,15 @@ class FragmentExtensionTest extends TestCase
 
     public function testRenderArticleFragment()
     {
-        $fragments = array();
+        $fragments = [];
 
         // We render 3 fragments with one disabled
         for ($i = 0; $i < 3; ++$i) {
             $fragments[] = $this->getFragmentMock(
-                array(
+                [
                     'title' => 'foo'.$i,
                     'body' => 'bar'.$i,
-                ),
+                ],
                 !($i % 2)
             );
         }
@@ -83,10 +81,10 @@ class FragmentExtensionTest extends TestCase
         // we expect only two calls
         $this->fragmentHelper->expects($this->at(0))
             ->method('render')
-            ->willReturnCallback(array($this, 'renderFragment'));
+            ->willReturnCallback([$this, 'renderFragment']);
         $this->fragmentHelper->expects($this->at(1))
             ->method('render')
-            ->willReturnCallback(array($this, 'renderFragment'));
+            ->willReturnCallback([$this, 'renderFragment']);
 
         $this->assertEquals(
             '<h1>foo0</h1><p>bar0</p><h1>foo2</h1><p>bar2</p>',

@@ -34,7 +34,7 @@ class FragmentHelperTest extends TestCase
     {
         $this->templating = $this->getMockBuilder('Symfony\Component\Templating\EngineInterface')
             ->disableOriginalConstructor()
-            ->setMethods(array('render', 'exists', 'supports'))
+            ->setMethods(['render', 'exists', 'supports'])
             ->getMock();
 
         $this->fragmentHelper = new FragmentHelper($this->templating);
@@ -59,14 +59,14 @@ class FragmentHelperTest extends TestCase
         // templating render must be called once
         $this->templating->expects($this->once())->method('render')->will($this->returnValue('foo'));
 
-        $fragmentService = $this->createMock(array(
+        $fragmentService = $this->createMock([
             'Sonata\ArticleBundle\FragmentService\FragmentServiceInterface',
             'Sonata\ArticleBundle\FragmentService\ExtraContentProviderInterface',
-        ));
+        ]);
         $fragmentService->expects($this->once())->method('getTemplate')->will($this->returnValue('template.html.twig'));
-        $fragmentService->expects($this->once())->method('getExtraContent')->will($this->returnValue(array('foo' => 'bar')));
+        $fragmentService->expects($this->once())->method('getExtraContent')->will($this->returnValue(['foo' => 'bar']));
 
-        $this->fragmentHelper->setFragmentServices(array('foo.bar' => $fragmentService));
+        $this->fragmentHelper->setFragmentServices(['foo.bar' => $fragmentService]);
         $this->fragmentHelper->render($fragment);
 
         $this->assertArrayHasKey('foo.bar', $this->fragmentHelper->getFragmentServices());
@@ -81,7 +81,7 @@ class FragmentHelperTest extends TestCase
     {
         $fragment = $this->createMock('Sonata\ArticleBundle\Model\FragmentInterface');
         $fragment->expects($this->once())->method('getType')->will($this->returnValue('foo.bar'));
-        $fragment->expects($this->any())->method('getSettings')->will($this->returnValue(array()));
+        $fragment->expects($this->any())->method('getSettings')->will($this->returnValue([]));
 
         return $fragment;
     }
