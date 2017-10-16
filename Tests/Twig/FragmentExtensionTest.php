@@ -11,13 +11,14 @@
 
 namespace Sonata\ArticleBundle\Tests\Twig;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ArticleBundle\Model\FragmentInterface;
 use Sonata\ArticleBundle\Twig\FragmentExtension;
 
 /**
  * @author Sylvain Rascar <rascar.sylvain@gmail.com>
  */
-class FragmentExtensionTest extends \PHPUnit_Framework_TestCase
+class FragmentExtensionTest extends TestCase
 {
     /**
      * @var \Sonata\ArticleBundle\Helper\FragmentHelper
