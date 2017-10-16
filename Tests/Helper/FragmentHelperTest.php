@@ -11,13 +11,14 @@
 
 namespace Sonata\ArticleBundle\Tests\Helper;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ArticleBundle\Helper\FragmentHelper;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
  * @author Sylvain Rascar <rascar.sylvain@gmail.com>
  */
-class FragmentHelperTest extends \PHPUnit_Framework_TestCase
+class FragmentHelperTest extends TestCase
 {
     /**
      * @var \Sonata\ArticleBundle\Helper\FragmentHelper
