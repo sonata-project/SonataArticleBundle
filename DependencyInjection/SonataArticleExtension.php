@@ -54,13 +54,13 @@ final class SonataArticleExtension extends Extension
      */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
-        $modelNames = array(
+        $modelNames = [
             'article',
             'fragment',
             'category',
             'tag',
             'media',
-        );
+        ];
 
         foreach ($modelNames as $modelName) {
             $container->setParameter(sprintf('sonata.article.%s.class', $modelName), $config['class'][$modelName]);
@@ -93,105 +93,105 @@ final class SonataArticleExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        $collector->addAssociation($config['class']['article'], 'mapOneToMany', array(
+        $collector->addAssociation($config['class']['article'], 'mapOneToMany', [
             'fieldName' => 'fragments',
             'targetEntity' => $config['class']['fragment'],
-            'cascade' => array(
+            'cascade' => [
                 'remove',
                 'persist',
-            ),
+            ],
             'mappedBy' => 'article',
             'orphanRemoval' => true,
-            'orderBy' => array(
+            'orderBy' => [
                 'position' => 'ASC',
-            ),
-        ));
+            ],
+        ]);
 
         if (class_exists($config['class']['category'])) {
-            $collector->addAssociation($config['class']['article'], 'mapManyToMany', array(
+            $collector->addAssociation($config['class']['article'], 'mapManyToMany', [
                 'fieldName' => 'categories',
                 'targetEntity' => $config['class']['category'],
-                'cascade' => array(),
-                'joinTable' => array(
+                'cascade' => [],
+                'joinTable' => [
                     'name' => 'article__article_categories',
-                    'joinColumns' => array(
-                        array(
+                    'joinColumns' => [
+                        [
                             'name' => 'article_id',
                             'referencedColumnName' => 'id',
                             'onDelete' => 'CASCADE',
-                        ),
-                    ),
-                    'inverseJoinColumns' => array(
-                        array(
+                        ],
+                    ],
+                    'inverseJoinColumns' => [
+                        [
                             'name' => 'category_id',
                             'referencedColumnName' => 'id',
                             'onDelete' => 'CASCADE',
-                        ),
-                    ),
-                ),
-            ));
+                        ],
+                    ],
+                ],
+            ]);
         }
 
         if (class_exists($config['class']['tag'])) {
-            $collector->addAssociation($config['class']['article'], 'mapManyToMany', array(
+            $collector->addAssociation($config['class']['article'], 'mapManyToMany', [
                 'fieldName' => 'tags',
                 'targetEntity' => $config['class']['tag'],
-                'cascade' => array(),
-                'joinTable' => array(
+                'cascade' => [],
+                'joinTable' => [
                     'name' => 'article__article_tags',
-                    'joinColumns' => array(
-                        array(
+                    'joinColumns' => [
+                        [
                             'name' => 'article_id',
                             'referencedColumnName' => 'id',
                             'onDelete' => 'CASCADE',
-                        ),
-                    ),
-                    'inverseJoinColumns' => array(
-                        array(
+                        ],
+                    ],
+                    'inverseJoinColumns' => [
+                        [
                             'name' => 'tag_id',
                             'referencedColumnName' => 'id',
                             'onDelete' => 'CASCADE',
-                        ),
-                    ),
-                ),
-            ));
+                        ],
+                    ],
+                ],
+            ]);
         }
 
         if (class_exists($config['class']['media'])) {
-            $collector->addAssociation($config['class']['article'], 'mapManyToOne', array(
+            $collector->addAssociation($config['class']['article'], 'mapManyToOne', [
                 'fieldName' => 'mainImage',
                 'targetEntity' => $config['class']['media'],
-                'cascade' => array(
+                'cascade' => [
                     'persist',
-                ),
+                ],
                 'mappedBy' => null,
-                'joinColumns' => array(
-                    array(
+                'joinColumns' => [
+                    [
                         'name' => 'main_image_id',
                         'referencedColumnName' => 'id',
-                    ),
-                ),
+                    ],
+                ],
                 'orphanRemoval' => false,
-            ));
+            ]);
         }
 
-        $collector->addAssociation($config['class']['fragment'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['fragment'], 'mapManyToOne', [
             'fieldName' => 'article',
             'targetEntity' => $config['class']['article'],
-            'cascade' => array(
+            'cascade' => [
                 'persist',
-            ),
+            ],
             'mappedBy' => null,
             'inversedBy' => 'fragments',
-            'joinColumns' => array(
-                array(
+            'joinColumns' => [
+                [
                     'name' => 'article_id',
                     'referencedColumnName' => 'id',
                     'onDelete' => 'CASCADE',
-                ),
-            ),
+                ],
+            ],
             'orphanRemoval' => false,
-        ));
+        ]);
     }
 
     /**
@@ -199,7 +199,7 @@ final class SonataArticleExtension extends Extension
      */
     public function configureClassesToCompile()
     {
-        $this->addClassesToCompile(array(
+        $this->addClassesToCompile([
             'Sonata\\ArticleBundle\\Entity\\AbstractArticle',
             'Sonata\\ArticleBundle\\Entity\\AbstractFragment',
             'Sonata\\ArticleBundle\\Model\\AbstractArticle',
@@ -213,6 +213,6 @@ final class SonataArticleExtension extends Extension
             'Sonata\\ArticleBundle\\FragmentService\\TextFragmentService',
             'Sonata\\ArticleBundle\\FragmentService\\Validator\\FragmentConstraint',
             'Sonata\\ArticleBundle\\FragmentService\\Validator\\FragmentValidator',
-        ));
+        ]);
     }
 }

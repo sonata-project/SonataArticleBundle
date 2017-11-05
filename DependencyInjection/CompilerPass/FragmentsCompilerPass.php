@@ -26,7 +26,7 @@ final class FragmentsCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $fragmentServiceIds = $container->findTaggedServiceIds('sonata.article.fragment');
-        $fragmentServices = array();
+        $fragmentServices = [];
         $requiredFragmentsServices = $container->getParameter('sonata.article.admin.fragments.services');
 
         foreach ($fragmentServiceIds as $id => $attributes) {
@@ -41,12 +41,12 @@ final class FragmentsCompilerPass implements CompilerPassInterface
 
         if ($container->hasDefinition('sonata.article.admin.fragment')) {
             $fragmentAdminDef = $container->getDefinition('sonata.article.admin.fragment');
-            $fragmentAdminDef->addMethodCall('setFragmentServices', array($fragmentServices));
+            $fragmentAdminDef->addMethodCall('setFragmentServices', [$fragmentServices]);
         }
 
         if ($container->hasDefinition('sonata.article.helper.fragment')) {
             $fragmentAdminDef = $container->getDefinition('sonata.article.helper.fragment');
-            $fragmentAdminDef->addMethodCall('setFragmentServices', array($fragmentServices));
+            $fragmentAdminDef->addMethodCall('setFragmentServices', [$fragmentServices]);
         }
 
         if ($container->hasDefinition('sonata.article.fragment.validator')) {

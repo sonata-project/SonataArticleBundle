@@ -117,12 +117,12 @@ abstract class AbstractArticle implements ArticleInterface
      */
     public static function getStatuses()
     {
-        return array(
+        return [
             self::STATUS_DRAFT => 'Draft',
             self::STATUS_TO_PUBLISH => 'To publish',
             self::STATUS_PUBLISHED => 'Published',
             self::STATUS_ARCHIVED => 'Archived',
-        );
+        ];
     }
 
     /**
@@ -132,11 +132,11 @@ abstract class AbstractArticle implements ArticleInterface
      */
     public static function getContributorStatus()
     {
-        return array(
+        return [
             self::STATUS_DRAFT => 'Draft',
             self::STATUS_TO_PUBLISH => 'To publish',
             self::STATUS_ARCHIVED => 'Archived',
-        );
+        ];
     }
 
     /**
@@ -426,7 +426,7 @@ abstract class AbstractArticle implements ArticleInterface
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        $metadata->addConstraint(new Assert\Callback(array(__NAMESPACE__.'\\AbstractArticle', 'validatorPublicationEnds')));
+        $metadata->addConstraint(new Assert\Callback([__NAMESPACE__.'\\AbstractArticle', 'validatorPublicationEnds']));
     }
 
     /**

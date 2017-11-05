@@ -38,18 +38,18 @@ class FragmentExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction(
                 'sonata_article_render_fragment',
-                array($this, 'renderFragment'),
-                array('is_safe' => array('html'))
+                [$this, 'renderFragment'],
+                ['is_safe' => ['html']]
             ),
             new \Twig_SimpleFunction(
                 'sonata_article_render_article_fragments',
-                array($this, 'renderArticleFragments'),
-                array('is_safe' => array('html'))
+                [$this, 'renderArticleFragments'],
+                ['is_safe' => ['html']]
             ),
-        );
+        ];
     }
 
     /**
