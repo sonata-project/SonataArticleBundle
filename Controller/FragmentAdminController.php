@@ -52,11 +52,11 @@ class FragmentAdminController extends CRUDController
         $search = sprintf('name="%s_%d', $request->get('elementId'), $request->get('fragCount', 0));
         $replace = sprintf('name="%s[fragments][%d]', $request->get('uniqid'), $request->get('fragCount', 0));
 
-        $response = $this->render($this->admin->getTemplate('edit'), array(
+        $response = $this->render($this->admin->getTemplate('edit'), [
             'form' => $view,
             'object' => $object,
             'settings' => $this->admin->getSettings(),
-        ));
+        ]);
 
         $newContent = str_replace($search, $replace, $response->getContent());
 

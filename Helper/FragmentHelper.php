@@ -29,7 +29,7 @@ class FragmentHelper
     /**
      * @var FragmentServiceInterface[]
      */
-    protected $fragmentServices = array();
+    protected $fragmentServices = [];
 
     /**
      * FragmentHelper constructor.
@@ -70,10 +70,10 @@ class FragmentHelper
             throw new \RuntimeException(sprintf('Cannot render Fragment of type `%s`. Service not found.', $type));
         }
 
-        $content = array(
+        $content = [
             'fragment' => $fragment,
             'fields' => $fragment->getSettings(),
-        );
+        ];
 
         if ($this->fragmentServices[$type] instanceof ExtraContentProviderInterface) {
             $content = array_merge($this->fragmentServices[$type]->getExtraContent($fragment), $content);
