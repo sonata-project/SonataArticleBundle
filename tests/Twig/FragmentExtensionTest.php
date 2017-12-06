@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -30,7 +32,7 @@ class FragmentExtensionTest extends TestCase
      */
     protected $fragmentExtension;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fragmentHelper = $this->getMockBuilder('Sonata\ArticleBundle\Helper\FragmentHelper')
             ->disableOriginalConstructor()
@@ -40,7 +42,7 @@ class FragmentExtensionTest extends TestCase
         $this->fragmentExtension = new FragmentExtension($this->fragmentHelper);
     }
 
-    public function testRenderFragment()
+    public function testRenderFragment(): void
     {
         // We render one fragment
         $fragment = $this->getFragmentMock([
@@ -58,7 +60,7 @@ class FragmentExtensionTest extends TestCase
         );
     }
 
-    public function testRenderArticleFragment()
+    public function testRenderArticleFragment(): void
     {
         $fragments = [];
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -39,7 +41,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * @param array $fragmentServices
      */
-    final public function setFragmentServices(array $fragmentServices)
+    public function setFragmentServices(array $fragmentServices): void
     {
         $this->fragmentServices = $fragmentServices;
     }
@@ -55,7 +57,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * @param array $settings
      */
-    final public function setSettings(array $settings)
+    public function setSettings(array $settings): void
     {
         $this->settings = $settings;
     }
@@ -140,7 +142,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function preUpdate($object)
+    public function preUpdate($object): void
     {
         $this->getService($object->getType())->preUpdate($object);
     }
@@ -148,7 +150,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function postUpdate($object)
+    public function postUpdate($object): void
     {
         $this->getService($object->getType())->postUpdate($object);
     }
@@ -156,7 +158,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function prePersist($object)
+    public function prePersist($object): void
     {
         $this->getService($object->getType())->prePersist($object);
     }
@@ -164,7 +166,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function postPersist($object)
+    public function postPersist($object): void
     {
         $this->getService($object->getType())->postPersist($object);
     }
@@ -172,7 +174,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function preRemove($object)
+    public function preRemove($object): void
     {
         $this->getService($object->getType())->preRemove($object);
     }
@@ -180,7 +182,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function postRemove($object)
+    public function postRemove($object): void
     {
         $this->getService($object->getType())->postRemove($object);
     }
@@ -202,7 +204,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function validate(ErrorElement $errorElement, $object)
+    public function validate(ErrorElement $errorElement, $object): void
     {
         $this->fragmentServices[$object->getType()]->validate($errorElement, $object);
     }
@@ -210,7 +212,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollection $collection): void
     {
         $collection->add('view', $this->getRouterIdParameter().'/view');
         $collection->add('form', 'form');
@@ -219,7 +221,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
             ->addIdentifier('type')
@@ -232,7 +234,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
             ->add('enabled')
@@ -244,7 +246,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper->add('id', HiddenType::class);
         $formMapper->add('enabled', HiddenType::class);
@@ -268,9 +270,9 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * @param string $type
      *
-     * @return FragmentServiceInterface
-     *
      * @throws \RuntimeException
+     *
+     * @return FragmentServiceInterface
      */
     protected function getService($type)
     {

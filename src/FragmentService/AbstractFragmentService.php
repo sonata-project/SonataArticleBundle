@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -45,7 +47,7 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
     /**
      * {@inheritdoc}
      */
-    final public function buildCreateForm(FormMapper $form, FragmentInterface $fragment)
+    final public function buildCreateForm(FormMapper $form, FragmentInterface $fragment): void
     {
         $this->buildEditForm($form, $fragment);
     }
@@ -53,7 +55,7 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $form, FragmentInterface $fragment)
+    public function buildEditForm(FormMapper $form, FragmentInterface $fragment): void
     {
         // Add BO title
         $form->add('backofficeTitle');
@@ -63,63 +65,63 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormMapper $form, FragmentInterface $fragment)
+    public function buildForm(FormMapper $form, FragmentInterface $fragment): void
     {
     }
 
     /**
      * @param FragmentInterface $fragment
      */
-    public function prePersist(FragmentInterface $fragment)
+    public function prePersist(FragmentInterface $fragment): void
     {
     }
 
     /**
      * @param FragmentInterface $fragment
      */
-    public function postPersist(FragmentInterface $fragment)
+    public function postPersist(FragmentInterface $fragment): void
     {
     }
 
     /**
      * @param FragmentInterface $fragment
      */
-    public function preUpdate(FragmentInterface $fragment)
+    public function preUpdate(FragmentInterface $fragment): void
     {
     }
 
     /**
      * @param FragmentInterface $fragment
      */
-    public function postUpdate(FragmentInterface $fragment)
+    public function postUpdate(FragmentInterface $fragment): void
     {
     }
 
     /**
      * @param FragmentInterface $fragment
      */
-    public function preRemove(FragmentInterface $fragment)
+    public function preRemove(FragmentInterface $fragment): void
     {
     }
 
     /**
      * @param FragmentInterface $fragment
      */
-    public function postRemove(FragmentInterface $fragment)
+    public function postRemove(FragmentInterface $fragment): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function validate(ErrorElement $errorElement, $object)
+    public function validate(ErrorElement $errorElement, $object): void
     {
         if (empty($object->getBackofficeTitle())) {
             $errorElement

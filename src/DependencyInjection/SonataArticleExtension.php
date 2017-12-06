@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -26,7 +28,7 @@ final class SonataArticleExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -52,7 +54,7 @@ final class SonataArticleExtension extends Extension
      * @param ContainerBuilder $container Container builder
      * @param array            $config    Array of configuration
      */
-    public function registerParameters(ContainerBuilder $container, array $config)
+    public function registerParameters(ContainerBuilder $container, array $config): void
     {
         $modelNames = [
             'article',
@@ -85,7 +87,7 @@ final class SonataArticleExtension extends Extension
      *
      * @param array $config
      */
-    public function registerDoctrineMapping(array $config)
+    public function registerDoctrineMapping(array $config): void
     {
         if (!class_exists($config['class']['article']) || !class_exists($config['class']['fragment'])) {
             return;
@@ -197,7 +199,7 @@ final class SonataArticleExtension extends Extension
     /**
      * Add class to compile.
      */
-    public function configureClassesToCompile()
+    public function configureClassesToCompile(): void
     {
         $this->addClassesToCompile([
             'Sonata\\ArticleBundle\\Entity\\AbstractArticle',

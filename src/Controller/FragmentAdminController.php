@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,10 +24,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class FragmentAdminController extends CRUDController
 {
     /**
-     * @return Response
-     *
      * @throws \RuntimeException
      * @throws AccessDeniedException
+     *
+     * @return Response
      */
     public function formAction()
     {

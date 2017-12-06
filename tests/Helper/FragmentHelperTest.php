@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -30,7 +32,7 @@ class FragmentHelperTest extends TestCase
      */
     protected $templating;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->templating = $this->getMockBuilder('Symfony\Component\Templating\EngineInterface')
             ->disableOriginalConstructor()
@@ -40,7 +42,7 @@ class FragmentHelperTest extends TestCase
         $this->fragmentHelper = new FragmentHelper($this->templating);
     }
 
-    public function testRenderWithoutService()
+    public function testRenderWithoutService(): void
     {
         $this->expectException('\RuntimeException');
         $this->expectExceptionMessage('Cannot render Fragment of type `foo.bar`. Service not found.');
@@ -52,7 +54,7 @@ class FragmentHelperTest extends TestCase
         $this->fragmentHelper->render($fragment);
     }
 
-    public function testRender()
+    public function testRender(): void
     {
         $fragment = $this->getFragmentMock();
 
