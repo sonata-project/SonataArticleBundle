@@ -39,7 +39,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * @param array $fragmentServices
      */
-    final public function setFragmentServices(array $fragmentServices)
+    public function setFragmentServices(array $fragmentServices)
     {
         $this->fragmentServices = $fragmentServices;
     }
@@ -55,7 +55,7 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * @param array $settings
      */
-    final public function setSettings(array $settings)
+    public function setSettings(array $settings)
     {
         $this->settings = $settings;
     }
@@ -268,9 +268,9 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * @param string $type
      *
-     * @return FragmentServiceInterface
-     *
      * @throws \RuntimeException
+     *
+     * @return FragmentServiceInterface
      */
     protected function getService($type)
     {

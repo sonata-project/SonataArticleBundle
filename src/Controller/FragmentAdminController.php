@@ -22,10 +22,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class FragmentAdminController extends CRUDController
 {
     /**
-     * @return Response
-     *
      * @throws \RuntimeException
      * @throws AccessDeniedException
+     *
+     * @return Response
      */
     public function formAction()
     {
