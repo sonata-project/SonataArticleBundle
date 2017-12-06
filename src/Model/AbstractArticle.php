@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,10 +25,10 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
  */
 abstract class AbstractArticle implements ArticleInterface
 {
-    const STATUS_DRAFT = 0;
-    const STATUS_TO_PUBLISH = 1;
-    const STATUS_PUBLISHED = 2;
-    const STATUS_ARCHIVED = 3;
+    public const STATUS_DRAFT = 0;
+    public const STATUS_TO_PUBLISH = 1;
+    public const STATUS_PUBLISHED = 2;
+    public const STATUS_ARCHIVED = 3;
 
     /**
      * @var \DateTime
@@ -152,7 +154,7 @@ abstract class AbstractArticle implements ArticleInterface
     /**
      * {@inheritdoc}
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -424,7 +426,7 @@ abstract class AbstractArticle implements ArticleInterface
      *
      * @param ClassMetadata $metadata
      */
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    public static function loadValidatorMetadata(ClassMetadata $metadata): void
     {
         $metadata->addConstraint(new Assert\Callback([__NAMESPACE__.'\\AbstractArticle', 'validatorPublicationEnds']));
     }
@@ -435,7 +437,7 @@ abstract class AbstractArticle implements ArticleInterface
      * @param ArticleInterface          $article
      * @param ExecutionContextInterface $context
      */
-    public static function validatorPublicationEnds(ArticleInterface $article, ExecutionContextInterface $context)
+    public static function validatorPublicationEnds(ArticleInterface $article, ExecutionContextInterface $context): void
     {
         if (is_object($article->getPublicationStartsAt())
             && is_object($article->getPublicationEndsAt())

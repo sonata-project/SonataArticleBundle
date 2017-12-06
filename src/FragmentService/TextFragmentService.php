@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -26,7 +28,7 @@ class TextFragmentService extends AbstractFragmentService
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormMapper $form, FragmentInterface $fragment)
+    public function buildForm(FormMapper $form, FragmentInterface $fragment): void
     {
         $form->add('settings', ImmutableArrayType::class, [
             'keys' => [
@@ -44,7 +46,7 @@ class TextFragmentService extends AbstractFragmentService
     /**
      * {@inheritdoc}
      */
-    public function validate(ErrorElement $errorElement, $object)
+    public function validate(ErrorElement $errorElement, $object): void
     {
         if (empty($object->getSetting('text'))) {
             $errorElement

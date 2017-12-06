@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -103,7 +105,7 @@ class ArticleAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function validate(ErrorElement $errorElement, $object)
+    public function validate(ErrorElement $errorElement, $object): void
     {
         $errorElement
             ->with('title')
@@ -126,7 +128,7 @@ class ArticleAdmin extends AbstractAdmin
      *
      * @param ArticleInterface $object
      */
-    public function prePersist($object)
+    public function prePersist($object): void
     {
         $this->sort($object);
 
@@ -139,7 +141,7 @@ class ArticleAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $formMapper): void
     {
         $fragmentClass = $this->fragmentClass;
         $subject = $this->getSubject();
@@ -188,7 +190,7 @@ class ArticleAdmin extends AbstractAdmin
                     'multiple' => true,
                     'label' => false,
                     'attr' => ['class' => 'show'],
-                    'callback' => function (AdminInterface $admin, $property, $searchText) {
+                    'callback' => function (AdminInterface $admin, $property, $searchText): void {
                         $datagrid = $admin->getDatagrid();
                         $datagrid->setValue($property, null, $searchText);
                         $datagrid->setValue('enabled', null, true);
@@ -203,7 +205,7 @@ class ArticleAdmin extends AbstractAdmin
                     'multiple' => true,
                     'label' => false,
                     'attr' => ['class' => 'show'],
-                    'callback' => function (AdminInterface $admin, $property, $searchText) {
+                    'callback' => function (AdminInterface $admin, $property, $searchText): void {
                         $datagrid = $admin->getDatagrid();
                         $datagrid->setValue($property, null, $searchText);
                         $datagrid->setValue('enabled', null, true);
@@ -250,7 +252,7 @@ class ArticleAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
             ->addIdentifier('title', 'text', [
@@ -269,7 +271,7 @@ class ArticleAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
             ->add('title', 'text')
@@ -283,7 +285,7 @@ class ArticleAdmin extends AbstractAdmin
      *
      * @param ArticleInterface $article
      */
-    private function sort(ArticleInterface $article)
+    private function sort(ArticleInterface $article): void
     {
         $fragments = $article->getFragments()->toArray();
 
