@@ -80,7 +80,7 @@ final class FragmentAdmin extends AbstractAdmin
                 return $this->getService($this->getRequest()->get('type'))->getEditTemplate();
             }
 
-            return 'SonataArticleBundle:FragmentAdmin:form.html.twig';
+            return '@SonataArticle/FragmentAdmin/form.html.twig';
         }
 
         return parent::getTemplate($name);

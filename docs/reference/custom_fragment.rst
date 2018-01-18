@@ -35,7 +35,7 @@ First you need to create a class that extends ``Sonata\ArticleBundle\FragmentSer
 
         public function getTemplate()
         {
-            return 'AcmeDummyBundle:Fragment:fragment_my_awesome.html.twig';
+            return '@AcmeDummy/Fragment/fragment_my_awesome.html.twig';
         }
 
         public function getExtraContent()
@@ -91,6 +91,6 @@ Using the twig helper, you will be able to access the following variables inside
 
 .. code-block:: jinja
 
-    {# AcmeDummyBundle:Fragment:fragment_my_awesome.html.twig #}
+    {# @AcmeDummy/Fragment/fragment_my_awesome.html.twig #}
     <h2>{{ fields.text }}</h2>
     <p>{{ fields.text2 }}</p>

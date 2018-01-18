@@ -96,7 +96,7 @@ class ArticleAdmin extends AbstractAdmin
     public function getTemplate($name)
     {
         if ('edit' === $name) {
-            return 'SonataArticleBundle:FragmentAdmin:edit_article.html.twig';
+            return '@SonataArticle/FragmentAdmin/edit_article.html.twig';
         }
 
         return parent::getTemplate($name);

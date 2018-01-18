@@ -68,6 +68,6 @@ class TitleFragmentService extends AbstractFragmentService
      */
     public function getTemplate()
     {
-        return 'SonataArticleBundle:Fragment:fragment_title.html.twig';
+        return '@SonataArticle/Fragment/fragment_title.html.twig';
     }
 }
