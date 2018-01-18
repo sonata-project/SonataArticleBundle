@@ -1,7 +1,7 @@
-{% extends 'SonataAdminBundle:Form:form_admin_fields.html.twig' %}
+{% extends '@SonataAdmin/Form/form_admin_fields.html.twig' %}
 
 {% block sonata_admin_collection_fragment %}
-    {% include 'SonataArticleBundle:FragmentAdmin:edit_collection_fragment.html.twig' %}
+    {% include '@SonataArticle/FragmentAdmin/edit_collection_fragment.html.twig' %}
 {% endblock %}
 
 {% block sonata_type_collection_widget %}
@@ -25,7 +25,7 @@
 {%- endblock sonata_type_model_autocomplete_selection_format %}
 
 {% block sonata_article_admin_article_fragments_sonata_type_admin_widget %}
-    {% include "SonataArticleBundle:FragmentAdmin:form.html.twig" with {'admin': sonata_admin.field_description.associationadmin} %}
+    {% include "@SonataArticle/FragmentAdmin/form.html.twig" with {'admin': sonata_admin.field_description.associationadmin} %}
 {% endblock %}
 
 {% block sonata_page_admin_block_collection_settings_settings_service_widget %}
