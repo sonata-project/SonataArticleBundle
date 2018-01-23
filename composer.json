@@ -34,7 +34,11 @@
         "twig/extensions": "^1.0",
         "twig/twig": "^1.23 || ^2.0"
     },
+    "conflict": {
+        "sonata-project/block-bundle": "<3.11"
+    },
     "require-dev": {
+        "sonata-project/block-bundle": "^3.11",
         "symfony/phpunit-bridge": "^4.0"
     },
     "config": {
