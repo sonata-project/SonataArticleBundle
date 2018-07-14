@@ -156,6 +156,9 @@
 
             // Update form list
             this.setFormListElement();
+            // Trigger admin shared setup on new form
+            var addedForm = this.getFormByFragmentId(id);
+            Admin.shared_setup(addedForm);
             // Append the new fragment
             this.appendFragment(id, data, true);
             // Reorder
