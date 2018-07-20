@@ -260,7 +260,7 @@ abstract class AbstractArticle implements ArticleInterface
      */
     public function setFragments($fragments = null)
     {
-        $this->fragments = new ArrayCollection();
+        $this->fragments->clear();
 
         foreach ($fragments as $fragment) {
             $this->addFragment($fragment);
