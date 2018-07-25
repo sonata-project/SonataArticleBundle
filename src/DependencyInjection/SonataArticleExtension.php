@@ -45,7 +45,6 @@ final class SonataArticleExtension extends Extension
 
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
-        $this->configureClassesToCompile();
     }
 
     /**
@@ -193,28 +192,6 @@ final class SonataArticleExtension extends Extension
                 ],
             ],
             'orphanRemoval' => false,
-        ]);
-    }
-
-    /**
-     * Add class to compile.
-     */
-    public function configureClassesToCompile(): void
-    {
-        $this->addClassesToCompile([
-            'Sonata\\ArticleBundle\\Entity\\AbstractArticle',
-            'Sonata\\ArticleBundle\\Entity\\AbstractFragment',
-            'Sonata\\ArticleBundle\\Model\\AbstractArticle',
-            'Sonata\\ArticleBundle\\Model\\ArticleFragmentInterface',
-            'Sonata\\ArticleBundle\\Model\\ArticleInterface',
-            'Sonata\\ArticleBundle\\Model\\AbstractFragment',
-            'Sonata\\ArticleBundle\\Model\\FragmentInterface',
-            'Sonata\\ArticleBundle\\FragmentService\\FragmentServiceInterface',
-            'Sonata\\ArticleBundle\\FragmentService\\AbstractFragmentService',
-            'Sonata\\ArticleBundle\\FragmentService\\TitleFragmentService',
-            'Sonata\\ArticleBundle\\FragmentService\\TextFragmentService',
-            'Sonata\\ArticleBundle\\FragmentService\\Validator\\FragmentConstraint',
-            'Sonata\\ArticleBundle\\FragmentService\\Validator\\FragmentValidator',
         ]);
     }
 }
