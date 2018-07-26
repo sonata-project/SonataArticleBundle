@@ -24,7 +24,6 @@ final class SonataArticleExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasService('sonata.article.admin.article', 'Sonata\ArticleBundle\Admin\ArticleAdmin');
         $this->assertContainerBuilderHasService('sonata.article.admin.fragment', 'Sonata\ArticleBundle\Admin\FragmentAdmin');
-        $this->assertContainerBuilderHasService('sonata.article.fragment.validator', 'Sonata\ArticleBundle\FragmentService\Validator\FragmentValidator');
         $this->assertContainerBuilderHasService('sonata.article.fragment.title', 'Sonata\ArticleBundle\FragmentService\TitleFragmentService');
         $this->assertContainerBuilderHasService('sonata.article.fragment.text', 'Sonata\ArticleBundle\FragmentService\TextFragmentService');
 

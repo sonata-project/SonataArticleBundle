@@ -45,15 +45,14 @@ final class FragmentsCompilerPassTest extends TestCase
             ->method('findTaggedServiceIds')
             ->with('sonata.article.fragment')
             ->willReturn(['foo' => [['key' => 'bar']]]);
-        $container->expects($this->exactly(3))->method('hasDefinition')
+        $container->expects($this->exactly(2))->method('hasDefinition')
             ->withConsecutive(
-                ['sonata.article.admin.fragment'], ['sonata.article.helper.fragment'], ['sonata.article.fragment.validator']
+                ['sonata.article.admin.fragment'], ['sonata.article.helper.fragment']
             )
             ->willReturn(true);
 
         $definition = $this->createMock(Definition::class);
         $definition->expects($this->exactly(2))->method('addMethodCall')->with('setFragmentServices', [[]]);
-        $definition->expects($this->once())->method('replaceArgument')->with(0, []);
         $container->expects($this->any())->method('getDefinition')->willReturn($definition);
 
         $compilerPass = new FragmentsCompilerPass();
