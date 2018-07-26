@@ -66,6 +66,7 @@ final class Configuration implements ConfigurationInterface
                         ->prototype('scalar')->end()
                     ->end()
                 ->end()
+                ->addDefaultsIfNotSet()
             ->end()
 
             ->arrayNode('admin_controller')
