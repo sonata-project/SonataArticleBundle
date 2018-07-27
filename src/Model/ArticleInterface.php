@@ -16,7 +16,7 @@ namespace Sonata\ArticleBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sonata\ClassificationBundle\Model\Category;
-use Sonata\MediaBundle\Model\Media;
+use Sonata\MediaBundle\Model\MediaInterface;
 
 /**
  * @author Benoit Mazière <bmaziere@ekino.com>
@@ -72,14 +72,14 @@ interface ArticleInterface
     public function getCreatedAt();
 
     /**
-     * @param Media $mainImage
+     * @param MediaInterface $mainImage
      *
      * @return $this
      */
-    public function setMainImage(Media $mainImage = null);
+    public function setMainImage(MediaInterface $mainImage = null);
 
     /**
-     * @return Media $image
+     * @return MediaInterface $image
      */
     public function getMainImage();
 
