@@ -15,7 +15,7 @@ namespace Sonata\ArticleBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sonata\MediaBundle\Model\Media;
+use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -91,7 +91,7 @@ abstract class AbstractArticle implements ArticleInterface
     protected $tags;
 
     /**
-     * @var Media
+     * @var MediaInterface
      */
     protected $mainImage;
 
@@ -154,9 +154,11 @@ abstract class AbstractArticle implements ArticleInterface
     /**
      * {@inheritdoc}
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -216,7 +218,7 @@ abstract class AbstractArticle implements ArticleInterface
     /**
      * {@inheritdoc}
      */
-    public function setMainImage(Media $mainImage = null)
+    public function setMainImage(MediaInterface $mainImage = null)
     {
         $this->mainImage = $mainImage;
 
@@ -237,7 +239,7 @@ abstract class AbstractArticle implements ArticleInterface
     public function addFragment(FragmentInterface $fragment)
     {
         $fragment->setArticle($this);
-        $this->fragments[] = $fragment;
+        $this->fragments->add($fragment);
 
         return $this;
     }
