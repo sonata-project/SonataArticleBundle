@@ -77,8 +77,6 @@ final class SonataArticleExtension extends Extension
         $container->setParameter('sonata.article.admin.fragment.controller', $config['admin_controller']['fragment']);
 
         $container->setParameter('sonata.article.admin.article.translation_domain', $config['translation_domain']);
-
-        $container->setParameter('sonata.article.admin.article.max_length_title_for_display', $config['max_length_title_for_display']);
     }
 
     /**

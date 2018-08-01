@@ -43,7 +43,6 @@ final class SonataArticleExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sonata.article.admin.article.controller', 'SonataAdminBundle:CRUD');
         $this->assertContainerBuilderHasParameter('sonata.article.admin.fragment.controller', 'SonataArticleBundle:FragmentAdmin');
         $this->assertContainerBuilderHasParameter('sonata.article.admin.article.translation_domain', 'SonataArticleBundle');
-        $this->assertContainerBuilderHasParameter('sonata.article.admin.article.max_length_title_for_display', 80);
     }
 
     /**

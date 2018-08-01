@@ -7,7 +7,6 @@
             <argument>%sonata.article.admin.article.entity%</argument>
             <argument>%sonata.article.admin.article.controller%</argument>
             <argument>%sonata.article.fragment.class%</argument>
-            <argument>%sonata.article.admin.article.max_length_title_for_display%</argument>
             <call method="setTranslationDomain">
                 <argument>%sonata.article.admin.article.translation_domain%</argument>
             </call>

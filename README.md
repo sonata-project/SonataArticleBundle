@@ -39,3 +39,6 @@ This package is available under the [MIT license](LICENSE).
 [coveralls_stable_link]: https://coveralls.io/github/sonata-project/SonataArticleBundle?branch=master
 [coveralls_unstable_badge]: https://coveralls.io/repos/github/sonata-project/SonataArticleBundle/badge.svg?branch=master
 [coveralls_unstable_link]: https://coveralls.io/github/sonata-project/SonataArticleBundle?branch=master
+
+## Note
+In this repository, the makefile is mainly used for CI purposes.

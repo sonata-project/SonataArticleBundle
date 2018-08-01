@@ -89,10 +89,6 @@ final class Configuration implements ConfigurationInterface
                 ->info('Enable/disable Twig Extension used for fragment rendering')
                 ->defaultValue(true)
             ->end()
-
-            ->scalarNode('max_length_title_for_display')
-                ->defaultValue(80)
-            ->end()
         ;
 
         return $treeBuilder;

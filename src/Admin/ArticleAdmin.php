@@ -35,6 +35,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class ArticleAdmin extends AbstractAdmin
 {
+    public const TITLE_MAX_LENGTH = 80;
+
     /**
      * @var array
      */
@@ -46,23 +48,16 @@ class ArticleAdmin extends AbstractAdmin
     protected $fragmentClass;
 
     /**
-     * @var int
-     */
-    protected $maxLengthTitleForDisplay;
-
-    /**
      * @param string $code
      * @param string $class
      * @param string $baseControllerName
      * @param string $fragmentClass
-     * @param int    $maxLengthTitleForDisplay
      */
-    public function __construct($code, $class, $baseControllerName, $fragmentClass, $maxLengthTitleForDisplay)
+    public function __construct($code, $class, $baseControllerName, $fragmentClass)
     {
         parent::__construct($code, $class, $baseControllerName);
 
         $this->fragmentClass = $fragmentClass;
-        $this->maxLengthTitleForDisplay = $maxLengthTitleForDisplay;
     }
 
     /**
@@ -73,7 +68,7 @@ class ArticleAdmin extends AbstractAdmin
     public function toString($object)
     {
         $value = $object->getTitle();
-        $length = $this->maxLengthTitleForDisplay;
+        $length = self::TITLE_MAX_LENGTH;
         $separator = '...';
 
         if (mb_strlen($value) > $length) {
@@ -91,6 +86,8 @@ class ArticleAdmin extends AbstractAdmin
     }
 
     /**
+     * @deprecated since 3.34, will be dropped in 4.0. Use TemplateRegistry services instead
+     *
      * {@inheritdoc}
      */
     public function getTemplate($name)

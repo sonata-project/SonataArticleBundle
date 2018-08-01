@@ -47,7 +47,6 @@ final class ConfigurationTest extends TestCase
             ],
              'translation_domain' => 'SonataArticleBundle',
              'enable_fragments_rendering' => true,
-             'max_length_title_for_display' => 80,
              'fragment_whitelist_provider' => ['simple_array_provider' => []],
         ]);
     }
