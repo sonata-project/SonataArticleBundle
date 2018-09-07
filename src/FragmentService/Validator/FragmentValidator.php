@@ -45,7 +45,7 @@ class FragmentValidator extends ConstraintValidator
         if (!$value instanceof FragmentInterface) {
             throw new ValidatorException(
                 sprintf('FragmentValidator can only be used on Fragment objects, instance of `%s` given',
-                    is_object($value) ? get_class($value) : 'not an object'
+                    \is_object($value) ? \get_class($value) : 'not an object'
                 )
             );
         }
