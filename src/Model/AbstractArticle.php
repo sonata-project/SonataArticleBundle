@@ -441,8 +441,8 @@ abstract class AbstractArticle implements ArticleInterface
      */
     public static function validatorPublicationEnds(ArticleInterface $article, ExecutionContextInterface $context): void
     {
-        if (is_object($article->getPublicationStartsAt())
-            && is_object($article->getPublicationEndsAt())
+        if (\is_object($article->getPublicationStartsAt())
+            && \is_object($article->getPublicationEndsAt())
             && $article->getPublicationStartsAt()->format('U') >= $article->getPublicationEndsAt()->format('U')
         ) {
             $context->buildViolation('article.publication_start_date_before_end_date')->addViolation();

@@ -253,7 +253,7 @@ final class FragmentAdmin extends AbstractAdmin
         $formMapper->add('position', HiddenType::class);
         $formMapper->add('type', HiddenType::class, ['attr' => ['readonly' => true]]);
 
-        if (!is_object($this->getSubject())) {
+        if (!\is_object($this->getSubject())) {
             return;
         }
 

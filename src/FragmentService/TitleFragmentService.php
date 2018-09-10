@@ -56,7 +56,7 @@ class TitleFragmentService extends AbstractFragmentService
             ;
         }
 
-        if (strlen($object->getSetting('text')) > 255) {
+        if (\strlen($object->getSetting('text')) > 255) {
             $errorElement
                 ->addViolation('Fragment Text - `Text` must not be longer than 255 characters.')
             ;

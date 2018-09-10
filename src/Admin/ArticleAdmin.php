@@ -235,7 +235,7 @@ class ArticleAdmin extends AbstractAdmin
                                 ->setType($value['type'])
                                 ->setEnabled(isset($value['enabled']) ? (bool) $value['enabled'] : false)
                                 ->setPosition($value['position'] ?: 1)
-                                ->setSettings((isset($value['settings']) && is_array($value['settings'])) ? $value['settings'] : []);
+                                ->setSettings((isset($value['settings']) && \is_array($value['settings'])) ? $value['settings'] : []);
 
                             $subject->addFragment($fragment);
                         }
