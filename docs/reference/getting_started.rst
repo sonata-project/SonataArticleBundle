@@ -20,14 +20,11 @@ display it for the user.
     /**
      * Article index action
      *
-     * @param Request $request
-     * @param string  $id
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function indexAction(Request $request, $id)
+    public function indexAction(Request $request, int $id)
     {
         /** @var Page $page */
         $page    = $this->getPage($request);
@@ -56,9 +53,6 @@ display it for the user.
     }
 
     /**
-     * @param PageInterface $page
-     * @param array         $settings
-     *
      * @return Response
      */
     public function renderResponse(PageInterface $page, array $settings = [])
@@ -74,8 +68,6 @@ display it for the user.
 
     /**
      * Retrieves page associated with $request
-     *
-     * @param Request $request
      *
      * @return \Sonata\PageBundle\Model\PageInterface
      */
@@ -125,14 +117,11 @@ in the controller.
     /**
      * Article index action
      *
-     * @param Request $request
-     * @param string  $id
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function indexAction(Request $request, $id)
+    public function indexAction(Request $request, int $id)
     {
         $article = $this->entityManager->find(Article::class, $id);
 
