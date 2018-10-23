@@ -20,17 +20,17 @@ First you need to create a class that extends ``Sonata\ArticleBundle\FragmentSer
     {
         public function buildEditForm(FormMapper $form, FragmentInterface $fragment)
         {
-            $form->add('settings', 'sonata_type_immutable_array', array(
-                'keys' => array(
-                    array('text', 'text', array(
+            $form->add('settings', 'sonata_type_immutable_array', [
+                'keys' => [
+                    ['text', 'text', [
                         'label' => 'Text',
-                    )),
-                    array('text2', 'textarea', array(
+                    ]],
+                    ['text2', 'textarea', [
                         'label' => 'Text 2',
-                    )),
-                ),
+                    ]],
+                ],
                 'label' => false,
-            ));
+            ]);
         }
 
         public function getTemplate()
@@ -40,9 +40,9 @@ First you need to create a class that extends ``Sonata\ArticleBundle\FragmentSer
 
         public function getExtraContent()
         {
-            return array(
+            return [
                 'foo' => 'bar',
-            );
+            ];
         }
     }
 
