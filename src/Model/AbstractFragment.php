@@ -44,7 +44,7 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
     protected $fields = [];
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $position;
 
@@ -93,12 +93,12 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
         return $this->enabled;
     }
 
-    public function setPosition(int $position): void
+    public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
 
-    public function getPosition(): int
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -145,7 +145,7 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
 
     public function getBackofficeTitle(): string
     {
-        return $this->backofficeTitle;
+        return $this->backofficeTitle ?: '';
     }
 
     public function setBackofficeTitle(string $backofficeTitle): void

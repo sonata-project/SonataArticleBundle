@@ -29,6 +29,8 @@ use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Florent Denis <florent.denis@ekino.com>
@@ -132,6 +134,8 @@ class ArticleAdmin extends AbstractAdmin
             ->with('General', ['class' => 'col-md-8'])
                 ->add('title', TextType::class, [
                     'attr' => ['maxlength' => 255],
+                    'constraints' => [new NotBlank()],
+                    'empty_data' => '',
                 ])
                 ->add('subtitle', TextType::class, [
                     'required' => false,
@@ -144,10 +148,9 @@ class ArticleAdmin extends AbstractAdmin
 
             ->with('Publication', ['class' => 'col-md-4'])
                 ->add('status', ChoiceType::class, [
-                    'choices' => $this->isGranted('ROLE_ARTICLE_PUBLISH') ?
-                        AbstractArticle::getStatuses() : AbstractArticle::getContributorStatus(),
+                    'choices' => array_flip($this->isGranted('ROLE_ARTICLE_PUBLISH') ?
+                        AbstractArticle::getStatuses() : AbstractArticle::getContributorStatus()),
                     'attr' => ['class' => 'full-width'],
-                    'choices_as_values' => false,
                 ])
                 ->add('publicationStartsAt', DateTimePickerType::class, [
                     'format' => 'dd/MM/yyyy HH:mm',
@@ -197,7 +200,7 @@ class ArticleAdmin extends AbstractAdmin
 
             ->with('Fragments', ['class' => 'col-md-12'])
                 ->add('fragments', CollectionType::class, [
-                    'cascade_validation' => true,
+                    'constraints' => [new Valid()],
                     'by_reference' => false,
                     'label' => false,
                     // callback of mapping fragment with the one selected on the list
@@ -213,11 +216,12 @@ class ArticleAdmin extends AbstractAdmin
                         }
                         // new fragment case
                         if (!$fragment) {
-                            $fragment = (new $fragmentClass())
-                                ->setType($value['type'])
-                                ->setEnabled(isset($value['enabled']) ? (bool) $value['enabled'] : false)
-                                ->setPosition($value['position'] ?: 1)
-                                ->setSettings((isset($value['settings']) && \is_array($value['settings'])) ? $value['settings'] : []);
+                            /** @var FragmentInterface $fragment */
+                            $fragment = new $fragmentClass();
+                            $fragment->setType($value['type']);
+                            $fragment->setEnabled(isset($value['enabled']) ? (bool) $value['enabled'] : false);
+                            $fragment->setPosition($value['position'] ?: 1);
+                            $fragment->setFields((isset($value['fields']) && \is_array($value['fields'])) ? $value['fields'] : []);
 
                             $subject->addFragment($fragment);
                         }

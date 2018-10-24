@@ -61,12 +61,12 @@ abstract class AbstractArticle implements ArticleInterface
     protected $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $subtitle;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $abstract;
 
@@ -137,12 +137,12 @@ abstract class AbstractArticle implements ArticleInterface
         return array_keys(self::getStatuses());
     }
 
-    public function setAbstract(string $abstract): void
+    public function setAbstract(?string $abstract): void
     {
         $this->abstract = $abstract;
     }
 
-    public function getAbstract(): string
+    public function getAbstract(): ?string
     {
         return $this->abstract;
     }
@@ -240,12 +240,12 @@ abstract class AbstractArticle implements ArticleInterface
         return $this->status;
     }
 
-    public function setSubtitle(string $subtitle): void
+    public function setSubtitle(?string $subtitle): void
     {
         $this->subtitle = $subtitle;
     }
 
-    public function getSubtitle(): string
+    public function getSubtitle(): ?string
     {
         return $this->subtitle;
     }
@@ -267,7 +267,7 @@ abstract class AbstractArticle implements ArticleInterface
 
     public function getTitle(): string
     {
-        return $this->title;
+        return $this->title ?: '';
     }
 
     public function setUpdatedAt(\DateTimeInterface $updatedAt): void
