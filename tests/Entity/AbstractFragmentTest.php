@@ -25,7 +25,7 @@ class AbstractFragmentTest extends TestCase
     {
         $fragment = new MockFragment();
 
-        $this->assertInstanceOf(\Sonata\ArticleBundle\Model\AbstractFragment::class, $fragment);
+        $this->assertInstanceOf(AbstractFragment::class, $fragment);
     }
 
     public function testPrePersist(): void
@@ -37,8 +37,8 @@ class AbstractFragmentTest extends TestCase
 
         $fragment->prePersist();
 
-        $this->assertInstanceOf(\DateTime::class, $fragment->getCreatedAt());
-        $this->assertInstanceOf(\DateTime::class, $fragment->getUpdatedAt());
+        $this->assertInstanceOf(\DateTimeInterface::class, $fragment->getCreatedAt());
+        $this->assertInstanceOf(\DateTimeInterface::class, $fragment->getUpdatedAt());
     }
 
     public function testPreUpdate(): void
@@ -51,7 +51,7 @@ class AbstractFragmentTest extends TestCase
         $fragment->preUpdate();
 
         $this->assertSame($createdAt, $fragment->getCreatedAt());
-        $this->assertInstanceOf(\DateTime::class, $fragment->getUpdatedAt());
+        $this->assertInstanceOf(\DateTimeInterface::class, $fragment->getUpdatedAt());
         $this->assertNotSame($createdAt, $fragment->getUpdatedAt());
     }
 }
@@ -59,6 +59,10 @@ class AbstractFragmentTest extends TestCase
 class MockFragment extends AbstractFragment
 {
     public function getId(): void
+    {
+    }
+
+    public function setId($id): void
     {
     }
 }

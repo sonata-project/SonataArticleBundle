@@ -31,22 +31,22 @@ abstract class AbstractArticle implements ArticleInterface
     public const STATUS_ARCHIVED = 3;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $publicationStartsAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $publicationEndsAt;
 
@@ -71,7 +71,7 @@ abstract class AbstractArticle implements ArticleInterface
     protected $abstract;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $validatedAt;
 
@@ -102,22 +102,12 @@ abstract class AbstractArticle implements ArticleInterface
         $this->fragments = new ArrayCollection();
     }
 
-    /**
-     * Returns title of article.
-     *
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getTitle();
     }
 
-    /**
-     * Gets statuses choices.
-     *
-     * @return array
-     */
-    public static function getStatuses()
+    public static function getStatuses(): array
     {
         return [
             self::STATUS_DRAFT => 'Draft',
@@ -129,10 +119,8 @@ abstract class AbstractArticle implements ArticleInterface
 
     /**
      * Gets statuses choices without publish status.
-     *
-     * @return array
      */
-    public static function getContributorStatus()
+    public static function getContributorStatus(): array
     {
         return [
             self::STATUS_DRAFT => 'Draft',
@@ -143,291 +131,165 @@ abstract class AbstractArticle implements ArticleInterface
 
     /**
      * Returns keys of statuses (used for validation).
-     *
-     * @return array
      */
-    public static function getValidStatuses()
+    public static function getValidStatuses(): array
     {
         return array_keys(self::getStatuses());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAbstract($abstract)
+    public function setAbstract(string $abstract): void
     {
         $this->abstract = $abstract;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAbstract()
+    public function getAbstract(): string
     {
         return $this->abstract;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCategories(Collection $categories = null)
+    public function setCategories($categories = null): void
     {
         $this->categories = $categories;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCategories()
     {
         return $this->categories;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setMainImage(MediaInterface $mainImage = null)
+    public function setMainImage(MediaInterface $mainImage = null): void
     {
         $this->mainImage = $mainImage;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getMainImage()
+    public function getMainImage(): MediaInterface
     {
         return $this->mainImage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addFragment(FragmentInterface $fragment)
+    public function addFragment(FragmentInterface $fragment): void
     {
-        $fragment->setArticle($this);
+        if ($fragment instanceof ArticleFragmentInterface) {
+            $fragment->setArticle($this);
+        }
         $this->fragments->add($fragment);
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeFragment(FragmentInterface $fragment)
+    public function removeFragment(FragmentInterface $fragment): void
     {
         if ($this->fragments->contains($fragment)) {
             $this->fragments->removeElement($fragment);
         }
-        $fragment->setArticle(null);
 
-        return $this;
+        if ($fragment instanceof ArticleFragmentInterface) {
+            $fragment->setArticle(null);
+        }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setFragments($fragments = null)
+    public function setFragments($fragments = null): void
     {
         $this->fragments->clear();
 
         foreach ($fragments as $fragment) {
             $this->addFragment($fragment);
         }
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFragments()
     {
         return $this->fragments;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPublicationEndsAt(\DateTime $publicationEndsAt = null)
+    public function setPublicationEndsAt(\DateTimeInterface $publicationEndsAt = null): void
     {
         $this->publicationEndsAt = $publicationEndsAt;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPublicationEndsAt()
+    public function getPublicationEndsAt(): ?\DateTimeInterface
     {
         return $this->publicationEndsAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPublicationStartsAt(\DateTime $publicationStartsAt = null)
+    public function setPublicationStartsAt(\DateTimeInterface $publicationStartsAt = null): void
     {
         $this->publicationStartsAt = $publicationStartsAt;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPublicationStartsAt()
+    public function getPublicationStartsAt(): ?\DateTimeInterface
     {
         return $this->publicationStartsAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setStatus($status)
+    public function setStatus(int $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->status;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(string $subtitle): void
     {
         $this->subtitle = $subtitle;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubtitle()
+    public function getSubtitle(): string
     {
         return $this->subtitle;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setTags(array $tags = null)
+    public function setTags($tags = null): void
     {
         $this->tags = $tags;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTags()
     {
         return $this->tags;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setValidatedAt(\DateTime $validatedAt = null)
+    public function setValidatedAt(\DateTimeInterface $validatedAt = null): void
     {
         $this->validatedAt = $validatedAt;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidatedAt()
+    public function getValidatedAt(): \DateTimeInterface
     {
         return $this->validatedAt;
     }
 
-    /**
-     * Validation.
-     *
-     * @param ClassMetadata $metadata
-     */
     public static function loadValidatorMetadata(ClassMetadata $metadata): void
     {
         $metadata->addConstraint(new Assert\Callback([__NAMESPACE__.'\\AbstractArticle', 'validatorPublicationEnds']));
@@ -435,9 +297,6 @@ abstract class AbstractArticle implements ArticleInterface
 
     /**
      * Validation publication ends given by publication starts.
-     *
-     * @param ArticleInterface          $article
-     * @param ExecutionContextInterface $context
      */
     public static function validatorPublicationEnds(ArticleInterface $article, ExecutionContextInterface $context): void
     {

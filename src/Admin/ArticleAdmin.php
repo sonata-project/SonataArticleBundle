@@ -50,27 +50,20 @@ class ArticleAdmin extends AbstractAdmin
      */
     protected $maxLengthTitleForDisplay;
 
-    /**
-     * @param string $code
-     * @param string $class
-     * @param string $baseControllerName
-     * @param string $fragmentClass
-     * @param int    $maxLengthTitleForDisplay
-     */
-    public function __construct($code, $class, $baseControllerName, $fragmentClass, $maxLengthTitleForDisplay)
-    {
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        string $fragmentClass,
+        int $maxLengthTitleForDisplay
+    ) {
         parent::__construct($code, $class, $baseControllerName);
 
         $this->fragmentClass = $fragmentClass;
         $this->maxLengthTitleForDisplay = $maxLengthTitleForDisplay;
     }
 
-    /**
-     * Inspired from Twig_Extensions_Extension_Text.
-     *
-     * {@inheritdoc}
-     */
-    public function toString($object)
+    public function toString($object): string
     {
         $value = $object->getTitle();
         $length = $this->maxLengthTitleForDisplay;
@@ -90,10 +83,7 @@ class ArticleAdmin extends AbstractAdmin
         return $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTemplate($name)
+    public function getTemplate($name): ?string
     {
         if ('edit' === $name) {
             return '@SonataArticle/FragmentAdmin/edit_article.html.twig';
@@ -102,9 +92,6 @@ class ArticleAdmin extends AbstractAdmin
         return parent::getTemplate($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(ErrorElement $errorElement, $object): void
     {
         $errorElement
@@ -124,8 +111,6 @@ class ArticleAdmin extends AbstractAdmin
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param ArticleInterface $object
      */
     public function prePersist($object): void
@@ -138,9 +123,6 @@ class ArticleAdmin extends AbstractAdmin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $fragmentClass = $this->fragmentClass;
@@ -249,9 +231,6 @@ class ArticleAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
@@ -268,9 +247,6 @@ class ArticleAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
@@ -282,8 +258,6 @@ class ArticleAdmin extends AbstractAdmin
 
     /**
      * Sorting the fragments depending on position.
-     *
-     * @param ArticleInterface $article
      */
     private function sort(ArticleInterface $article): void
     {

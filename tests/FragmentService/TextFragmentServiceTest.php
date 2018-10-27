@@ -42,7 +42,7 @@ class TextFragmentServiceTest extends TestCase
 
         $fragment = $this->createMock(FragmentInterface::class);
         $fragment->expects($this->any())
-            ->method('getSetting')
+            ->method('getField')
             ->with('text')
             ->willReturn('');
 
@@ -62,7 +62,7 @@ class TextFragmentServiceTest extends TestCase
         $formMapper->expects($this->once())
             ->method('add')
             ->with(
-                'settings',
+                'fields',
                 ImmutableArrayType::class,
                 $this->callback(function ($settingsConfig) {
                     $this->assertCount(1, array_keys($settingsConfig['keys']));

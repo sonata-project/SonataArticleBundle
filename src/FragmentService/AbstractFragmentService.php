@@ -28,33 +28,21 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
      */
     protected $name;
 
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    final public function getName()
+    final public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     final public function buildCreateForm(FormMapper $form, FragmentInterface $fragment): void
     {
         $this->buildEditForm($form, $fragment);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $form, FragmentInterface $fragment): void
     {
         // Add BO title
@@ -62,65 +50,38 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
         $this->buildForm($form, $fragment);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormMapper $form, FragmentInterface $fragment): void
     {
     }
 
-    /**
-     * @param FragmentInterface $fragment
-     */
     public function prePersist(FragmentInterface $fragment): void
     {
     }
 
-    /**
-     * @param FragmentInterface $fragment
-     */
     public function postPersist(FragmentInterface $fragment): void
     {
     }
 
-    /**
-     * @param FragmentInterface $fragment
-     */
     public function preUpdate(FragmentInterface $fragment): void
     {
     }
 
-    /**
-     * @param FragmentInterface $fragment
-     */
     public function postUpdate(FragmentInterface $fragment): void
     {
     }
 
-    /**
-     * @param FragmentInterface $fragment
-     */
     public function preRemove(FragmentInterface $fragment): void
     {
     }
 
-    /**
-     * @param FragmentInterface $fragment
-     */
     public function postRemove(FragmentInterface $fragment): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(ErrorElement $errorElement, $object): void
     {
         if (empty($object->getBackofficeTitle())) {
@@ -130,16 +91,8 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEditTemplate()
+    public function getEditTemplate(): string
     {
         return '@SonataArticle/FragmentAdmin/form.html.twig';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function getTemplate();
 }

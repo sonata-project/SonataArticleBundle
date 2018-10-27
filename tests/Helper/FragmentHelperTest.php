@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\ArticleBundle\Tests\Helper;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sonata\ArticleBundle\FragmentService\ExtraContentProviderInterface;
+use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Sonata\ArticleBundle\Helper\FragmentHelper;
+use Sonata\ArticleBundle\Model\FragmentInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -23,7 +27,7 @@ use Symfony\Component\Templating\EngineInterface;
 class FragmentHelperTest extends TestCase
 {
     /**
-     * @var \Sonata\ArticleBundle\Helper\FragmentHelper
+     * @var FragmentHelper
      */
     protected $fragmentHelper;
 
@@ -34,7 +38,7 @@ class FragmentHelperTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->templating = $this->getMockBuilder('Symfony\Component\Templating\EngineInterface')
+        $this->templating = $this->getMockBuilder(EngineInterface::class)
             ->disableOriginalConstructor()
             ->setMethods(['render', 'exists', 'supports'])
             ->getMock();
@@ -44,7 +48,7 @@ class FragmentHelperTest extends TestCase
 
     public function testRenderWithoutService(): void
     {
-        $this->expectException('\RuntimeException');
+        $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Cannot render Fragment of type `foo.bar`. Service not found.');
 
         // templating render should not be called
@@ -61,10 +65,8 @@ class FragmentHelperTest extends TestCase
         // templating render must be called once
         $this->templating->expects($this->once())->method('render')->will($this->returnValue('foo'));
 
-        $fragmentService = $this->createMock([
-            'Sonata\ArticleBundle\FragmentService\FragmentServiceInterface',
-            'Sonata\ArticleBundle\FragmentService\ExtraContentProviderInterface',
-        ]);
+        $fragmentService = $this->createMock([FragmentServiceInterface::class, ExtraContentProviderInterface::class]);
+
         $fragmentService->expects($this->once())->method('getTemplate')->will($this->returnValue('template.html.twig'));
         $fragmentService->expects($this->once())->method('getExtraContent')->will($this->returnValue(['foo' => 'bar']));
 
@@ -72,18 +74,17 @@ class FragmentHelperTest extends TestCase
         $this->fragmentHelper->render($fragment);
 
         $this->assertArrayHasKey('foo.bar', $this->fragmentHelper->getFragmentServices());
-        $this->assertInstanceOf('Sonata\ArticleBundle\FragmentService\FragmentServiceInterface',
-            $this->fragmentHelper->getFragmentServices()['foo.bar']);
+        $this->assertInstanceOf(
+            FragmentServiceInterface::class,
+            $this->fragmentHelper->getFragmentServices()['foo.bar']
+        );
     }
 
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    private function getFragmentMock()
+    private function getFragmentMock(): MockObject
     {
-        $fragment = $this->createMock('Sonata\ArticleBundle\Model\FragmentInterface');
+        $fragment = $this->createMock(FragmentInterface::class);
         $fragment->expects($this->once())->method('getType')->will($this->returnValue('foo.bar'));
-        $fragment->expects($this->any())->method('getSettings')->will($this->returnValue([]));
+        $fragment->expects($this->any())->method('getFields')->will($this->returnValue([]));
 
         return $fragment;
     }

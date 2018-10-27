@@ -22,9 +22,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 final class SonataArticleBundle extends Bundle
 {
-    /**
-     * @param ContainerBuilder $container
-     */
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new FragmentsCompilerPass());

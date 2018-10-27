@@ -76,20 +76,19 @@ class AbstractArticleTest extends TestCase
         $categories = new ArrayCollection();
         $tags = [];
 
-        $article
-            ->setId(1)
-            ->setTitle('Title')
-            ->setAbstract('Abstract')
-            ->setSubtitle('Subtitle')
-            ->setStatus(1)
-            ->setCategories($categories)
-            ->setTags($tags)
-            ->setMainImage($media)
-            ->setValidatedAt($validatedAt)
-            ->setPublicationStartsAt($publicationStartsAt)
-            ->setPublicationEndsAt($publicationEndsAt)
-            ->setCreatedAt($createdAt)
-            ->setUpdatedAt($updatedAt);
+        $article->setId(1);
+        $article->setTitle('Title');
+        $article->setAbstract('Abstract');
+        $article->setSubtitle('Subtitle');
+        $article->setStatus(1);
+        $article->setCategories($categories);
+        $article->setTags($tags);
+        $article->setMainImage($media);
+        $article->setValidatedAt($validatedAt);
+        $article->setPublicationStartsAt($publicationStartsAt);
+        $article->setPublicationEndsAt($publicationEndsAt);
+        $article->setCreatedAt($createdAt);
+        $article->setUpdatedAt($updatedAt);
 
         $this->assertEquals(1, $article->getId());
         $this->assertEquals('Title', $article->getTitle());
@@ -178,7 +177,7 @@ class AbstractArticleTest extends TestCase
         AbstractArticle::validatorPublicationEnds($article, $executionContext);
     }
 
-    public function validatorPublicationProvider()
+    public function validatorPublicationProvider(): array
     {
         return [
             [null, null, 'never'],
@@ -193,8 +192,15 @@ class AbstractArticleTest extends TestCase
 
 class MockArticle extends AbstractArticle
 {
-    public function getId(): int
+    private $id;
+
+    public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 }

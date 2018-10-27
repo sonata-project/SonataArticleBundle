@@ -45,10 +45,7 @@ final class SonataArticleExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sonata.article.admin.article.max_length_title_for_display', 80);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [
             new SonataArticleExtension(),

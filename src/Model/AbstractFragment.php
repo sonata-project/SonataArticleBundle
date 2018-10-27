@@ -19,12 +19,12 @@ namespace Sonata\ArticleBundle\Model;
 abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInterface
 {
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
@@ -40,10 +40,8 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
 
     /**
      * @var array
-     *
-     * @todo rename settings property into fields
      */
-    protected $settings;
+    protected $fields = [];
 
     /**
      * @var int
@@ -60,189 +58,98 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
      */
     protected $article;
 
-    /**
-     * Returns Backoffice title of fragment.
-     *
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getBackofficeTitle();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @param ArticleInterface $article
-     *
-     * @return $this
-     */
-    public function setArticle(ArticleInterface $article = null)
+    public function setArticle(ArticleInterface $article = null): void
     {
         $this->article = $article;
-
-        return $this;
     }
 
-    /**
-     * @return ArticleInterface
-     */
-    public function getArticle()
+    public function getArticle(): ArticleInterface
     {
         return $this->article;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEnabled()
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPosition($position)
+    public function setPosition(int $position): void
     {
         $this->position = $position;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setSettings($settings)
+    public function setFields(array $fields): void
     {
-        $this->settings = $settings;
-
-        return $this;
+        $this->fields = $fields;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setSetting($name, $value)
+    public function setField(string $name, $value): void
     {
-        $this->settings[$name] = $value;
-
-        return $this;
+        $this->fields[$name] = $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSettings()
+    public function getFields(): array
     {
-        return $this->settings;
+        return $this->fields;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSetting($name, $default = null)
+    public function getField(string $name, $default = null)
     {
-        return isset($this->settings[$name]) ? $this->settings[$name] : $default;
+        return isset($this->fields[$name]) ? $this->fields[$name] : $default;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setType($type)
+    public function setType(string $type): void
     {
         $this->type = $type;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return string
-     */
-    public function getBackofficeTitle()
+    public function getBackofficeTitle(): string
     {
         return $this->backofficeTitle;
     }
 
-    /**
-     * @param string $backofficeTitle
-     *
-     * @return $this
-     */
-    public function setBackofficeTitle($backofficeTitle)
+    public function setBackofficeTitle(string $backofficeTitle): void
     {
         $this->backofficeTitle = $backofficeTitle;
-
-        return $this;
     }
 }

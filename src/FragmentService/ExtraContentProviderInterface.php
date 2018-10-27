@@ -22,10 +22,6 @@ interface ExtraContentProviderInterface
 {
     /**
      * Gets extra content (1 or multi dimensional array) to complete base fragment content.
-     *
-     * @param FragmentInterface $fragment
-     *
-     * @return array
      */
-    public function getExtraContent(FragmentInterface $fragment);
+    public function getExtraContent(FragmentInterface $fragment): array;
 }

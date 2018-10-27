@@ -25,7 +25,7 @@ class AbstractArticleTest extends TestCase
     {
         $article = new MockArticle();
 
-        $this->assertInstanceOf(\Sonata\ArticleBundle\Model\AbstractArticle::class, $article);
+        $this->assertInstanceOf(AbstractArticle::class, $article);
     }
 
     public function testPrePersist(): void
@@ -37,8 +37,8 @@ class AbstractArticleTest extends TestCase
 
         $article->prePersist();
 
-        $this->assertInstanceOf(\DateTime::class, $article->getCreatedAt());
-        $this->assertInstanceOf(\DateTime::class, $article->getUpdatedAt());
+        $this->assertInstanceOf(\DateTimeInterface::class, $article->getCreatedAt());
+        $this->assertInstanceOf(\DateTimeInterface::class, $article->getUpdatedAt());
     }
 
     public function testPreUpdate(): void
@@ -51,7 +51,7 @@ class AbstractArticleTest extends TestCase
         $article->preUpdate();
 
         $this->assertSame($createdAt, $article->getCreatedAt());
-        $this->assertInstanceOf(\DateTime::class, $article->getUpdatedAt());
+        $this->assertInstanceOf(\DateTimeInterface::class, $article->getUpdatedAt());
         $this->assertNotSame($createdAt, $article->getUpdatedAt());
     }
 }
@@ -59,6 +59,10 @@ class AbstractArticleTest extends TestCase
 class MockArticle extends AbstractArticle
 {
     public function getId(): void
+    {
+    }
+
+    public function setId($id): void
     {
     }
 }
