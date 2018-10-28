@@ -16,11 +16,13 @@ namespace Sonata\ArticleBundle\Twig;
 use Sonata\ArticleBundle\Helper\FragmentHelper;
 use Sonata\ArticleBundle\Model\ArticleInterface;
 use Sonata\ArticleBundle\Model\FragmentInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * @author Sylvain Rascar <rascar.sylvain@gmail.com>
  */
-class FragmentExtension extends \Twig_Extension
+class FragmentExtension extends AbstractExtension
 {
     /**
      * @var FragmentHelper
@@ -41,12 +43,12 @@ class FragmentExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction(
+            new TwigFunction(
                 'sonata_article_render_fragment',
                 [$this, 'renderFragment'],
                 ['is_safe' => ['html']]
             ),
-            new \Twig_SimpleFunction(
+            new TwigFunction(
                 'sonata_article_render_article_fragments',
                 [$this, 'renderArticleFragments'],
                 ['is_safe' => ['html']]

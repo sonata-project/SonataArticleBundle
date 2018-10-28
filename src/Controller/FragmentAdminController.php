@@ -14,10 +14,6 @@ declare(strict_types=1);
 namespace Sonata\ArticleBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Bridge\Twig\AppVariable;
-use Symfony\Bridge\Twig\Command\DebugCommand;
-use Symfony\Bridge\Twig\Extension\FormExtension;
-use Symfony\Bridge\Twig\Form\TwigRenderer;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
@@ -86,19 +82,6 @@ class FragmentAdminController extends CRUDController
     private function setFormTheme(FormView $formView, $theme): void
     {
         $twig = $this->get('twig');
-        // BC for Symfony < 3.2 where this runtime does not exist
-        if (!method_exists(AppVariable::class, 'getToken')) {
-            $twig->getExtension(FormExtension::class)
-                ->renderer->setTheme($formView, $theme);
-
-            return;
-        }
-        // BC for Symfony < 3.4 where runtime should be TwigRenderer
-        if (!method_exists(DebugCommand::class, 'getLoaderPaths')) {
-            $twig->getRuntime(TwigRenderer::class)->setTheme($formView, $theme);
-
-            return;
-        }
         $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
     }
 }
