@@ -18,15 +18,7 @@ namespace Sonata\ArticleBundle\Model;
  */
 interface ArticleFragmentInterface
 {
-    /**
-     * @return ArticleInterface
-     */
-    public function getArticle();
+    public function getArticle(): ArticleInterface;
 
-    /**
-     * @param ArticleInterface $article
-     *
-     * @return $this
-     */
-    public function setArticle(ArticleInterface $article = null);
+    public function setArticle(?ArticleInterface $article = null): void;
 }

@@ -82,7 +82,7 @@ class AbstractFragmentServiceTest extends TestCase
 
 class FragmentService extends AbstractFragmentService
 {
-    public function getTemplate(): void
+    public function getTemplate(): string
     {
     }
 }

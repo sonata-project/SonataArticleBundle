@@ -25,12 +25,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class TextFragmentService extends AbstractFragmentService
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormMapper $form, FragmentInterface $fragment): void
     {
-        $form->add('settings', ImmutableArrayType::class, [
+        $form->add('fields', ImmutableArrayType::class, [
             'keys' => [
                 ['text', TextareaType::class, [
                     'label' => 'Text',
@@ -44,21 +41,18 @@ class TextFragmentService extends AbstractFragmentService
     }
 
     /**
-     * {@inheritdoc}
+     * @param FragmentInterface $object
      */
     public function validate(ErrorElement $errorElement, $object): void
     {
-        if (empty($object->getSetting('text'))) {
+        if (empty($object->getField('text'))) {
             $errorElement
                 ->addViolation('Fragment Text - `Text` must not be empty')
             ;
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTemplate()
+    public function getTemplate(): string
     {
         return '@SonataArticle/Fragment/fragment_text.html.twig';
     }

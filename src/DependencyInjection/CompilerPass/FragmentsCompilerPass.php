@@ -22,9 +22,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 final class FragmentsCompilerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         $fragmentServiceIds = $container->findTaggedServiceIds('sonata.article.fragment');

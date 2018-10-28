@@ -33,11 +33,6 @@ class FragmentHelper
      */
     protected $fragmentServices = [];
 
-    /**
-     * FragmentHelper constructor.
-     *
-     * @param EngineInterface $templating
-     */
     public function __construct(EngineInterface $templating)
     {
         $this->templating = $templating;
@@ -54,17 +49,12 @@ class FragmentHelper
     /**
      * @return FragmentServiceInterface[]
      */
-    public function getFragmentServices()
+    public function getFragmentServices(): array
     {
         return $this->fragmentServices;
     }
 
-    /**
-     * @param FragmentInterface $fragment
-     *
-     * @return string
-     */
-    public function render(FragmentInterface $fragment)
+    public function render(FragmentInterface $fragment): string
     {
         $type = $fragment->getType();
 
@@ -74,7 +64,7 @@ class FragmentHelper
 
         $content = [
             'fragment' => $fragment,
-            'fields' => $fragment->getSettings(),
+            'fields' => $fragment->getFields(),
         ];
 
         if ($this->fragmentServices[$type] instanceof ExtraContentProviderInterface) {

@@ -25,61 +25,43 @@ interface FragmentServiceInterface
 {
     /**
      * Builds the edition form for the fragment.
-     *
-     * @param FormMapper        $form
-     * @param FragmentInterface $fragment
      */
-    public function buildEditForm(FormMapper $form, FragmentInterface $fragment);
+    public function buildEditForm(FormMapper $form, FragmentInterface $fragment): void;
 
     /**
      * Builds the creation form for the fragment.
-     *
-     * @param FormMapper        $form
-     * @param FragmentInterface $fragment
      */
-    public function buildCreateForm(FormMapper $form, FragmentInterface $fragment);
+    public function buildCreateForm(FormMapper $form, FragmentInterface $fragment): void;
 
     /**
      * Builds the common part of creation|edition form for the fragment.
-     *
-     * @param FormMapper        $form
-     * @param FragmentInterface $fragment
      */
-    public function buildForm(FormMapper $form, FragmentInterface $fragment);
+    public function buildForm(FormMapper $form, FragmentInterface $fragment): void;
 
     /**
      * Validates the fragment (you'll need to add your violations through $errorElement).
      *
-     * @param ErrorElement $errorElement
-     * @param object       $object
+     * @param object $object
      */
-    public function validate(ErrorElement $errorElement, $object);
+    public function validate(ErrorElement $errorElement, $object): void;
 
     /**
      * Returns the Fragment service readable name.
-     *
-     * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * Configure options for the fragment settings.
-     *
-     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver);
+    public function configureOptions(OptionsResolver $resolver): void;
 
     /**
      * Gets edit template to render form.
-     *
-     * @return string
      */
-    public function getEditTemplate();
+    public function getEditTemplate(): string;
 
     /**
      * Gets template to render fragment.
-     *
-     * @return string
      */
-    public function getTemplate();
+    public function getTemplate(): string;
 }

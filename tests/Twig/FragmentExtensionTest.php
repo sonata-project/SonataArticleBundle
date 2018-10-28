@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\ArticleBundle\Tests\Twig;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sonata\ArticleBundle\Helper\FragmentHelper;
+use Sonata\ArticleBundle\Model\ArticleInterface;
 use Sonata\ArticleBundle\Model\FragmentInterface;
 use Sonata\ArticleBundle\Twig\FragmentExtension;
 
@@ -23,18 +26,18 @@ use Sonata\ArticleBundle\Twig\FragmentExtension;
 class FragmentExtensionTest extends TestCase
 {
     /**
-     * @var \Sonata\ArticleBundle\Helper\FragmentHelper
+     * @var FragmentHelper
      */
     protected $fragmentHelper;
 
     /**
-     * @var \Sonata\ArticleBundle\Twig\FragmentExtension
+     * @var FragmentExtension
      */
     protected $fragmentExtension;
 
     protected function setUp(): void
     {
-        $this->fragmentHelper = $this->getMockBuilder('Sonata\ArticleBundle\Helper\FragmentHelper')
+        $this->fragmentHelper = $this->getMockBuilder(FragmentHelper::class)
             ->disableOriginalConstructor()
             ->setMethods(['render'])
             ->getMock();
@@ -75,7 +78,7 @@ class FragmentExtensionTest extends TestCase
             );
         }
 
-        $article = $this->createMock('Sonata\ArticleBundle\Model\ArticleInterface');
+        $article = $this->createMock(ArticleInterface::class);
         $article->expects($this->any())
             ->method('getFragments')
             ->will($this->returnValue($fragments));
@@ -96,22 +99,16 @@ class FragmentExtensionTest extends TestCase
 
     public function renderFragment(FragmentInterface $fragment)
     {
-        $fields = $fragment->getSettings();
+        $fields = $fragment->getFields();
 
         return sprintf('<h1>%s</h1><p>%s</p>', $fields['title'], $fields['body']);
     }
 
-    /**
-     * @param array $settings
-     * @param bool  $enabled
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getFragmentMock(array $settings, $enabled = true)
+    protected function getFragmentMock(array $settings, bool $enabled = true): MockObject
     {
-        $fragment = $this->createMock('Sonata\ArticleBundle\Model\FragmentInterface');
+        $fragment = $this->createMock(FragmentInterface::class);
         $fragment->expects($this->any())
-            ->method('getSettings')
+            ->method('getFields')
             ->will($this->returnValue($settings));
         $fragment->expects($this->any())
             ->method('getEnabled')

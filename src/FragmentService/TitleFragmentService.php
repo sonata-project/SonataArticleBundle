@@ -26,12 +26,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class TitleFragmentService extends AbstractFragmentService
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormMapper $form, FragmentInterface $fragment): void
     {
-        $form->add('settings', ImmutableArrayType::class, [
+        $form->add('fields', ImmutableArrayType::class, [
             'keys' => [
                 ['text', TextType::class, [
                     'label' => 'Title',
@@ -46,27 +43,24 @@ class TitleFragmentService extends AbstractFragmentService
     }
 
     /**
-     * {@inheritdoc}
+     * @param FragmentInterface $object
      */
     public function validate(ErrorElement $errorElement, $object): void
     {
-        if (empty($object->getSetting('text'))) {
+        if (empty($object->getField('text'))) {
             $errorElement
                 ->addViolation('Fragment Title - `Text` must not be empty')
             ;
         }
 
-        if (\strlen($object->getSetting('text')) > 255) {
+        if (\strlen($object->getField('text')) > 255) {
             $errorElement
                 ->addViolation('Fragment Text - `Text` must not be longer than 255 characters.')
             ;
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTemplate()
+    public function getTemplate(): string
     {
         return '@SonataArticle/Fragment/fragment_title.html.twig';
     }

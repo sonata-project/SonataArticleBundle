@@ -25,96 +25,46 @@ interface FragmentInterface
 
     /**
      * @param mixed $id
-     *
-     * @return $this
      */
     public function setId($id);
 
+    public function setCreatedAt(\DateTimeInterface $createdAt): void;
+
+    public function getCreatedAt(): ?\DateTimeInterface;
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): void;
+
+    public function getUpdatedAt(): ?\DateTimeInterface;
+
+    public function setEnabled(bool $enabled): void;
+
+    public function getEnabled(): bool;
+
+    public function setType(string $type): void;
+
+    public function getType(): string;
+
+    public function setFields(array $settings): void;
+
     /**
-     * @param \DateTime $createdAt
+     * @param mixed $value
+     */
+    public function setField(string $name, $value): void;
+
+    public function getFields(): array;
+
+    /**
+     * @param mixed $default
      *
-     * @return $this
+     * @return mixed
      */
-    public function setCreatedAt(\DateTime $createdAt);
+    public function getField(string $name, $default = null);
 
-    /**
-     * @return \DateTime $createdAt
-     */
-    public function getCreatedAt();
+    public function setPosition(int $position): void;
 
-    /**
-     * @param \DateTime $updatedAt
-     *
-     * @return $this
-     */
-    public function setUpdatedAt(\DateTime $updatedAt);
+    public function getPosition(): int;
 
-    /**
-     * @return \DateTime $updatedAt
-     */
-    public function getUpdatedAt();
+    public function getBackofficeTitle(): string;
 
-    /**
-     * @param $enabled
-     *
-     * @return $this
-     */
-    public function setEnabled($enabled);
-
-    /**
-     * @return bool $enabled
-     */
-    public function getEnabled();
-
-    /**
-     * @param $type
-     *
-     * @return $this
-     */
-    public function setType($type);
-
-    /**
-     * @return string $type
-     */
-    public function getType();
-
-    /**
-     * @param array $settings
-     *
-     * @return $this
-     */
-    public function setSettings($settings);
-
-    /**
-     * @param string $name
-     * @param mixed  $value
-     *
-     * @return $this
-     */
-    public function setSetting($name, $value);
-
-    /**
-     * @return string $type
-     */
-    public function getSettings();
-
-    /**
-     * @param string $name
-     * @param mixed  $default
-     *
-     * @return string $type
-     */
-    public function getSetting($name, $default = null);
-
-    /**
-     * @param $position
-     *
-     * @return $this
-     */
-    public function setPosition($position);
-
-    /**
-     * @return int $position
-     */
-    public function getPosition();
+    public function setBackofficeTitle(string $backofficeTitle): void;
 }

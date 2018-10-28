@@ -21,6 +21,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -38,9 +39,6 @@ final class FragmentAdmin extends AbstractAdmin
      */
     private $settings = [];
 
-    /**
-     * @param array $fragmentServices
-     */
     public function setFragmentServices(array $fragmentServices): void
     {
         $this->fragmentServices = $fragmentServices;
@@ -49,31 +47,22 @@ final class FragmentAdmin extends AbstractAdmin
     /**
      * @return FragmentServiceInterface[]
      */
-    public function getFragmentServices()
+    public function getFragmentServices(): array
     {
         return $this->fragmentServices;
     }
 
-    /**
-     * @param array $settings
-     */
     public function setSettings(array $settings): void
     {
         $this->settings = $settings;
     }
 
-    /**
-     * @return array
-     */
-    public function getSettings()
+    public function getSettings(): array
     {
         return $this->settings;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTemplate($name)
+    public function getTemplate($name): ?string
     {
         if ('edit' === $name) {
             if ($this->getRequest()->get('type')) {
@@ -86,10 +75,7 @@ final class FragmentAdmin extends AbstractAdmin
         return parent::getTemplate($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormBuilder()
+    public function getFormBuilder(): FormBuilderInterface
     {
         $this->formOptions['data_class'] = $this->getClass();
         $this->formOptions['csrf_protection'] = false;
@@ -105,10 +91,7 @@ final class FragmentAdmin extends AbstractAdmin
         return $formBuilder;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasRoute($name)
+    public function hasRoute($name): bool
     {
         if ('create' === $name) {
             return true;
@@ -117,17 +100,11 @@ final class FragmentAdmin extends AbstractAdmin
         return parent::hasRoute($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function toString($object)
+    public function toString($object): string
     {
         return $object->getId().' - '.$object->getType();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNewInstance()
     {
         $object = parent::getNewInstance();
@@ -139,58 +116,37 @@ final class FragmentAdmin extends AbstractAdmin
         return $object;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preUpdate($object): void
     {
         $this->getService($object->getType())->preUpdate($object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function postUpdate($object): void
     {
         $this->getService($object->getType())->postUpdate($object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prePersist($object): void
     {
         $this->getService($object->getType())->prePersist($object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function postPersist($object): void
     {
         $this->getService($object->getType())->postPersist($object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preRemove($object): void
     {
         $this->getService($object->getType())->preRemove($object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function postRemove($object): void
     {
         $this->getService($object->getType())->postRemove($object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPersistentParameters()
+    public function getPersistentParameters(): array
     {
         if (!$this->hasRequest()) {
             return [];
@@ -201,26 +157,17 @@ final class FragmentAdmin extends AbstractAdmin
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(ErrorElement $errorElement, $object): void
     {
         $this->fragmentServices[$object->getType()]->validate($errorElement, $object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureRoutes(RouteCollection $collection): void
     {
         $collection->add('view', $this->getRouterIdParameter().'/view');
         $collection->add('form', 'form');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
@@ -231,9 +178,6 @@ final class FragmentAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
@@ -243,9 +187,6 @@ final class FragmentAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper->add('id', HiddenType::class);
@@ -268,13 +209,9 @@ final class FragmentAdmin extends AbstractAdmin
     }
 
     /**
-     * @param string $type
-     *
      * @throws \RuntimeException
-     *
-     * @return FragmentServiceInterface
      */
-    protected function getService($type)
+    protected function getService(string $type): FragmentServiceInterface
     {
         if (!array_key_exists($type, $this->fragmentServices)) {
             throw new \RuntimeException(sprintf('Fragment service for type `%s` is not handled by this admin', $type));

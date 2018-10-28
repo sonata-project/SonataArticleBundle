@@ -41,23 +41,22 @@ class AbstractFragmentTest extends TestCase
         $createdAt = new \DateTime();
         $updatedAt = new \DateTime();
 
-        $fragment
-            ->setId(1)
-            ->setType('foo')
-            ->setBackofficeTitle('Foo Fragment')
-            ->setEnabled(false)
-            ->setPosition(1)
-            ->setArticle($article)
-            ->setSettings(['foo'])
-            ->setCreatedAt($createdAt)
-            ->setUpdatedAt($updatedAt);
+        $fragment->setId(1);
+        $fragment->setType('foo');
+        $fragment->setBackofficeTitle('Foo Fragment');
+        $fragment->setEnabled(false);
+        $fragment->setPosition(1);
+        $fragment->setArticle($article);
+        $fragment->setFields(['foo']);
+        $fragment->setCreatedAt($createdAt);
+        $fragment->setUpdatedAt($updatedAt);
 
         $this->assertEquals(1, $fragment->getId());
         $this->assertEquals('foo', $fragment->getType());
         $this->assertEquals('Foo Fragment', $fragment->getBackofficeTitle());
         $this->assertFalse($fragment->getEnabled());
         $this->assertEquals(1, $fragment->getPosition());
-        $this->assertEquals(['foo'], $fragment->getSettings());
+        $this->assertEquals(['foo'], $fragment->getFields());
         $this->assertSame($article, $fragment->getArticle());
         $this->assertSame($createdAt, $fragment->getCreatedAt());
         $this->assertSame($updatedAt, $fragment->getUpdatedAt());
@@ -68,19 +67,26 @@ class AbstractFragmentTest extends TestCase
     {
         $fragment = new MockFragment();
 
-        $fragment->setSetting('foo', 'bar');
+        $fragment->setField('foo', 'bar');
 
-        $this->assertEquals(['foo' => 'bar'], $fragment->getSettings());
-        $this->assertEquals('bar', $fragment->getSetting('foo'));
-        $this->assertNull($fragment->getSetting('undefined'));
-        $this->assertEquals('baz', $fragment->getSetting('undefined-with-default', 'baz'));
+        $this->assertEquals(['foo' => 'bar'], $fragment->getFields());
+        $this->assertEquals('bar', $fragment->getField('foo'));
+        $this->assertNull($fragment->getField('undefined'));
+        $this->assertEquals('baz', $fragment->getField('undefined-with-default', 'baz'));
     }
 }
 
 class MockFragment extends AbstractFragment
 {
+    private $id;
+
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 }

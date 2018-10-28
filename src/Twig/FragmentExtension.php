@@ -29,18 +29,12 @@ class FragmentExtension extends AbstractExtension
      */
     protected $fragmentHelper;
 
-    /**
-     * @param FragmentHelper $fragmentHelper
-     */
     public function __construct(FragmentHelper $fragmentHelper)
     {
         $this->fragmentHelper = $fragmentHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction(
@@ -56,32 +50,17 @@ class FragmentExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'fragment_extension';
     }
 
-    /**
-     * @param FragmentInterface $fragment
-     *
-     * @return string
-     */
-    public function renderFragment(FragmentInterface $fragment)
+    public function renderFragment(FragmentInterface $fragment): string
     {
         return $this->fragmentHelper->render($fragment);
     }
 
-    /**
-     * @param ArticleInterface $article
-     *
-     * @return string
-     */
-    public function renderArticleFragments(ArticleInterface $article)
+    public function renderArticleFragments(ArticleInterface $article): string
     {
         $output = '';
 

@@ -28,10 +28,8 @@ class FragmentAdminController extends CRUDController
     /**
      * @throws \RuntimeException
      * @throws AccessDeniedException
-     *
-     * @return Response
      */
-    public function formAction()
+    public function formAction(): Response
     {
         if (!$this->admin->isGranted('CREATE')) {
             throw new AccessDeniedException('Access Denied to the action create fragment');
@@ -41,8 +39,10 @@ class FragmentAdminController extends CRUDController
 
         $this->admin->setSubject($object);
 
-        /** @var $form Form */
         $form = $this->admin->getForm();
+
+        \assert($form instanceof Form);
+
         $form->setData($object);
 
         $view = $form->createView();

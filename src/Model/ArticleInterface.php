@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\ArticleBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sonata\ClassificationBundle\Model\Category;
+use Sonata\ClassificationBundle\Model\Tag;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 /**
@@ -24,179 +24,86 @@ use Sonata\MediaBundle\Model\MediaInterface;
 interface ArticleInterface
 {
     /**
-     * @return int
+     * @return mixed
      */
     public function getId();
 
     /**
-     * @param int $id
-     *
-     * @return $this
+     * @param mixed $id
      */
-    public function setId($id);
+    public function setId($id): void;
 
-    /**
-     * @param $abstract
-     *
-     * @return $this
-     */
-    public function setAbstract($abstract);
+    public function setAbstract(string $abstract): void;
 
-    /**
-     * @return string $abstract
-     */
-    public function getAbstract();
+    public function getAbstract(): string;
 
     /**
      * @param Category[]|Collection $categories
-     *
-     * @return $this
      */
-    public function setCategories(Collection $categories = null);
+    public function setCategories($categories = null): void;
 
     /**
-     * @return Category[]|Collection $categories
+     * @return Category[]|Collection
      */
     public function getCategories();
 
-    /**
-     * @param \DateTime $createdAt
-     *
-     * @return $this
-     */
-    public function setCreatedAt(\DateTime $createdAt);
+    public function setCreatedAt(\DateTimeInterface $createdAt): void;
+
+    public function getCreatedAt(): ?\DateTimeInterface;
+
+    public function setMainImage(MediaInterface $mainImage = null): void;
+
+    public function getMainImage(): MediaInterface;
+
+    public function addFragment(FragmentInterface $fragment): void;
 
     /**
-     * @return \DateTime $createdAt
-     */
-    public function getCreatedAt();
-
-    /**
-     * @param MediaInterface $mainImage
-     *
-     * @return $this
-     */
-    public function setMainImage(MediaInterface $mainImage = null);
-
-    /**
-     * @return MediaInterface $image
-     */
-    public function getMainImage();
-
-    /**
-     * @param FragmentInterface $fragment
-     *
-     * @return $this
-     */
-    public function addFragment(FragmentInterface $fragment);
-
-    /**
-     * @return FragmentInterface[]|Collection $fragments
+     * @return FragmentInterface[]|Collection
      */
     public function getFragments();
 
     /**
      * @param FragmentInterface[]|Collection|null $fragments
-     *
-     * @return $this
      */
-    public function setFragments($fragments = null);
+    public function setFragments($fragments = null): void;
+
+    public function removeFragment(FragmentInterface $fragment): void;
+
+    public function setPublicationEndsAt(\DateTimeInterface $publicationEndsAt = null): void;
+
+    public function getPublicationEndsAt(): ?\DateTimeInterface;
+
+    public function setPublicationStartsAt(\DateTimeInterface $publicationStartsAt = null): void;
+
+    public function getPublicationStartsAt(): ?\DateTimeInterface;
+
+    public function setStatus(int $status): void;
+
+    public function getStatus(): int;
+
+    public function setSubtitle(string $subtitle): void;
+
+    public function getSubtitle(): string;
 
     /**
-     * @param FragmentInterface $fragment
-     *
-     * @return $this
+     * @param Tag[]|Collection $tags
      */
-    public function removeFragment(FragmentInterface $fragment);
+    public function setTags($tags = null): void;
 
     /**
-     * @param \DateTime $publicationEndsAt
-     *
-     * @return $this
-     */
-    public function setPublicationEndsAt(\DateTime $publicationEndsAt = null);
-
-    /**
-     * @return \DateTime $publicationStartsAt
-     */
-    public function getPublicationEndsAt();
-
-    /**
-     * @param \DateTime $publicationStartsAt
-     *
-     * @return $this
-     */
-    public function setPublicationStartsAt(\DateTime $publicationStartsAt = null);
-
-    /**
-     * @return \DateTime $a$publicationStartsAt
-     */
-    public function getPublicationStartsAt();
-
-    /**
-     * @param $status
-     *
-     * @return $this
-     */
-    public function setStatus($status);
-
-    /**
-     * @return int $status
-     */
-    public function getStatus();
-
-    /**
-     * @param $subtitle
-     *
-     * @return $this
-     */
-    public function setSubtitle($subtitle);
-
-    /**
-     * @return string $subtitle
-     */
-    public function getSubtitle();
-
-    /**
-     * @param array $tags
-     *
-     * @return $this
-     */
-    public function setTags(array $tags = null);
-
-    /**
-     * @return ArrayCollection $tags
+     * @return Tag[]|Collection
      */
     public function getTags();
 
-    /**
-     * @param $title
-     *
-     * @return $this
-     */
-    public function setTitle($title);
+    public function setTitle(string $title): void;
 
-    /**
-     * @param \DateTime $updatedAt
-     *
-     * @return $this
-     */
-    public function setUpdatedAt(\DateTime $updatedAt);
+    public function getTitle(): string;
 
-    /**
-     * @return \DateTime $updatedAt
-     */
-    public function getUpdatedAt();
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): void;
 
-    /**
-     * @param \DateTime $validatedAt
-     *
-     * @return $this
-     */
-    public function setValidatedAt(\DateTime $validatedAt = null);
+    public function getUpdatedAt(): ?\DateTimeInterface;
 
-    /**
-     * @return \DateTime $validatedAt
-     */
-    public function getValidatedAt();
+    public function setValidatedAt(\DateTimeInterface $validatedAt = null): void;
+
+    public function getValidatedAt(): \DateTimeInterface;
 }

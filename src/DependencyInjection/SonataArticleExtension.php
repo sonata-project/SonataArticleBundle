@@ -25,9 +25,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 final class SonataArticleExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
@@ -83,8 +80,6 @@ final class SonataArticleExtension extends Extension
 
     /**
      * Registers doctrine mapping on concrete page entities.
-     *
-     * @param array $config
      */
     public function registerDoctrineMapping(array $config): void
     {
