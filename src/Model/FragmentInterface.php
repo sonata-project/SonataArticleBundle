@@ -60,9 +60,9 @@ interface FragmentInterface
      */
     public function getField(string $name, $default = null);
 
-    public function setPosition(int $position): void;
+    public function setPosition(?int $position): void;
 
-    public function getPosition(): int;
+    public function getPosition(): ?int;
 
     public function getBackofficeTitle(): string;
 

@@ -35,7 +35,7 @@ interface ArticleInterface
 
     public function setAbstract(string $abstract): void;
 
-    public function getAbstract(): string;
+    public function getAbstract(): ?string;
 
     /**
      * @param Category[]|Collection $categories
@@ -83,7 +83,7 @@ interface ArticleInterface
 
     public function setSubtitle(string $subtitle): void;
 
-    public function getSubtitle(): string;
+    public function getSubtitle(): ?string;
 
     /**
      * @param Tag[]|Collection $tags
