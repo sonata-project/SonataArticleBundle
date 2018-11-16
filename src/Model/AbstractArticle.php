@@ -285,9 +285,14 @@ abstract class AbstractArticle implements ArticleInterface
         $this->validatedAt = $validatedAt;
     }
 
-    public function getValidatedAt(): \DateTimeInterface
+    public function getValidatedAt(): ?\DateTimeInterface
     {
         return $this->validatedAt;
+    }
+
+    public function isValidated(): bool
+    {
+        return null !== $this->validatedAt;
     }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata): void
