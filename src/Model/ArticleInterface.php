@@ -105,5 +105,5 @@ interface ArticleInterface
 
     public function setValidatedAt(\DateTimeInterface $validatedAt = null): void;
 
-    public function getValidatedAt(): \DateTimeInterface;
+    public function getValidatedAt(): ?\DateTimeInterface;
 }

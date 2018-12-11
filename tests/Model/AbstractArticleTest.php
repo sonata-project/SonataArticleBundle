@@ -106,6 +106,15 @@ class AbstractArticleTest extends TestCase
         $this->assertEquals('Title', $article->__toString());
     }
 
+    public function testIsValidated(): void
+    {
+        $article = new MockArticle();
+        $this->assertFalse($article->isValidated());
+
+        $article->setValidatedAt(new \DateTime());
+        $this->assertTrue($article->isValidated());
+    }
+
     public function testFragments(): void
     {
         $article = new MockArticle();
