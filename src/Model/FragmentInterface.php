@@ -42,7 +42,7 @@ interface FragmentInterface
 
     public function setType(string $type): void;
 
-    public function getType(): string;
+    public function getType(): ?string;
 
     public function setFields(array $settings): void;
 
