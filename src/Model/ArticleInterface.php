@@ -53,7 +53,7 @@ interface ArticleInterface
 
     public function setMainImage(MediaInterface $mainImage = null): void;
 
-    public function getMainImage(): MediaInterface;
+    public function getMainImage(): ?MediaInterface;
 
     public function addFragment(FragmentInterface $fragment): void;
 

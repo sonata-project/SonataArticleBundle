@@ -54,7 +54,7 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
     protected $backofficeTitle;
 
     /**
-     * @var ArticleInterface
+     * @var ArticleInterface|null
      */
     protected $article;
 
@@ -68,7 +68,7 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
         $this->article = $article;
     }
 
-    public function getArticle(): ArticleInterface
+    public function getArticle(): ?ArticleInterface
     {
         return $this->article;
     }
@@ -128,7 +128,7 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
         $this->type = $type;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }

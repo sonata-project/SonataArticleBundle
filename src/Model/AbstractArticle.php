@@ -91,7 +91,7 @@ abstract class AbstractArticle implements ArticleInterface
     protected $tags;
 
     /**
-     * @var MediaInterface
+     * @var MediaInterface|null
      */
     protected $mainImage;
 
@@ -172,7 +172,7 @@ abstract class AbstractArticle implements ArticleInterface
         $this->mainImage = $mainImage;
     }
 
-    public function getMainImage(): MediaInterface
+    public function getMainImage(): ?MediaInterface
     {
         return $this->mainImage;
     }
