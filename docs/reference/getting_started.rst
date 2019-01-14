@@ -7,27 +7,20 @@ The bundle works on top of 2 simple models :
  * a ``Fragment``\ : A fragment contains information about a part of the full content.
    Each fragment has its own template.
 
-
 Rendering an article
 --------------------
 
-**This part is currently in development.**
-The goal is to provide a simple Controller and Dynamic route which will fetch an article, then if all checks succeed,
-display it for the user.
+.. caution::
 
-.. code-block:: php
+    **This part is currently in development.**
 
-    /**
-     * Article index action
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    public function indexAction(Request $request, int $id)
+The goal is to provide a simple Controller and Dynamic route which will fetch an article,
+then if all checks succeed, display it for the user::
+
+    public function indexAction(Request $request, int $id): Response
     {
         /** @var Page $page */
-        $page    = $this->getPage($request);
+        $page = $this->getPage($request);
         $article = $this->entityManager->find(Article::class, $id);
 
         if (!$article) {
@@ -52,10 +45,7 @@ display it for the user.
         ]);
     }
 
-    /**
-     * @return Response
-     */
-    public function renderResponse(PageInterface $page, array $settings = [])
+    public function renderResponse(PageInterface $page, array $settings = []): Response
     {
         $cms  = $this->cmsSelector->retrieve();
         $code = $page ? $cms->getCurrentPage()->getTemplateCode() : null;
@@ -66,14 +56,9 @@ display it for the user.
         ));
     }
 
-    /**
-     * Retrieves page associated with $request
-     *
-     * @return \Sonata\PageBundle\Model\PageInterface
-     */
-    public function getPage(Request $request)
+    public function getPage(Request $request): PageInterface
     {
-        $cms  = $this->cmsSelector->retrieve();
+        $cms = $this->cmsSelector->retrieve();
         $page = $cms->getCurrentPage();
         $slug = $request->get('slug');
 
@@ -90,38 +75,27 @@ display it for the user.
 Render article fragments
 ------------------------
 
-**This part is currently in development.**
+.. caution::
+
+    **This part is currently in development.**
+
 SonataArticleBundle now comes with a twig helper which allows you to render article fragments
 if they are enabled.
-
 
 .. code-block:: jinja
 
     {{ sonata_article_render_article_fragments(article) }}
 
-
 Or a specific fragment whether it is enabled or not.
-
 
 .. code-block:: jinja
 
     {{ sonata_article_render_fragment(article.fragments[0]) }}
 
-
 This extension is based on the FragmentHelper class so you can also render fragments directly
-in the controller.
+in the controller::
 
-
-.. code-block:: php
-
-    /**
-     * Article index action
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    public function indexAction(Request $request, int $id)
+    public function indexAction(Request $request, int $id): Response
     {
         $article = $this->entityManager->find(Article::class, $id);
 
