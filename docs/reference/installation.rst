@@ -4,40 +4,28 @@ Installation
 SonataArticleBundle can be installed at any moment during a project's lifecycle,
 whether it's a clean Symfony installation or an existing project.
 
-Downloading the code
---------------------
-
-Use composer to manage your dependencies and download SonataArticleBundle:
+Downloading the Bundle
+----------------------
 
 .. code-block:: bash
 
-    $ php composer.phar require sonata-project/article-bundle
+    composer require sonata-project/article-bundle
 
 Check `packagist <https://packagist.org/packages/sonata-project/article-bundle>`_
-for all versions.
+for existing versions.
 
+Enable the Bundle
+-----------------
 
-Enabling SonataArticleBundle
-----------------------------
+Then, enable the bundle and the bundles it relies on by adding the following
+line in `bundles.php` file of your project::
 
-You have to enable it in your ``AppKernel.php``, and configure it manually.
+    // config/bundles.php
 
-.. code-block:: php
-
-    <?php
-    // app/AppKernel.php
-
-    public function registerBundles()
-    {
-        return array(
-            // ...
-
-            // Add SonataArticleBundle
-            new Sonata\ArticleBundle\SonataArticleBundle(),
-
-            // ...
-        );
-    }
+    return [
+        // ...
+        Sonata\ArticleBundle\SonataArticleBundle::class => ['all' => true],
+    ];
 
 Configuring SonataArticleBundle dependencies
 --------------------------------------------
@@ -49,7 +37,7 @@ You can also configure the list of available fragments for your articles.
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_article.yaml
 
         sonata_article:
             class:
@@ -73,7 +61,7 @@ Usually, when installing new bundles, it is a good practice to delete your cache
 
 .. code-block:: bash
 
-    $ php bin/console cache:clear
+    bin/console cache:clear
 
 At this point, your Symfony installation should be fully functional, with no errors
 showing up from SonataArticleBundle. SonataArticleBundle is installed
@@ -97,4 +85,3 @@ All that is needed to quickly set up SonataArticleBundle is described in the :do
 .. _`Symfony Support`: http://symfony.com/support
 .. _`Stack Overflow`: https://stackoverflow.com/search?q=sonata-article-bundle
 .. _`open issues on GitHub`: https://github.com/sonata-project/SonataArticleBundle/issues
-

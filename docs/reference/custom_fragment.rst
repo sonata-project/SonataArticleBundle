@@ -5,12 +5,10 @@ Creating a Custom Fragment
 Defining a fragment Service
 ---------------------------
 
-First you need to create a class that extends ``Sonata\ArticleBundle\FragmentService\AbstractFragmentService``
+First you need to create a class that extends ``Sonata\ArticleBundle\FragmentService\AbstractFragmentService``::
 
 
-.. code-block:: php
-
-    namespace Acme\DummyBundle\FragmentService;
+    namespace App\FragmentService;
 
     use Sonata\AdminBundle\Form\FormMapper;
     use Sonata\ArticleBundle\FragmentService\ExtraContentProviderInterface;
@@ -35,7 +33,7 @@ First you need to create a class that extends ``Sonata\ArticleBundle\FragmentSer
 
         public function getTemplate()
         {
-            return '@AcmeDummy/Fragment/fragment_my_awesome.html.twig';
+            return '@App/Fragment/fragment_my_awesome.html.twig';
         }
 
         public function getExtraContent()
@@ -46,7 +44,6 @@ First you need to create a class that extends ``Sonata\ArticleBundle\FragmentSer
         }
     }
 
-
 Using ``settings`` field with ``keys`` option in ``buildEditForm`` method, you can define all elements that compose your fragment.
 Every key is a field that is displayed on the fragment edit form.
 The ``getTemplate`` method allows you to define which template should be used when rendering this fragment type.
@@ -54,21 +51,20 @@ If needed, your custom fragment can also implement ``ExtraContentProviderInterfa
 So you will be able to implement ``getExtraContent`` method to complete
 the content of the fragment before the templating engine renders it.
 
-
 Then you need to declare the service:
-
 
 .. code-block:: yaml
 
-    services:
-        acme.dummy.fragment.my_awsome:
-            class: Acme\DummyBundle\FragmentService\MyAwesomeFragmentService
-            arguments:
-                - My Awesome Fragment Name # Fragment name in admin interface
-            tags:
-                - { name: sonata.article.fragment, key: acme.dummy.fragment.my_awesome }
-                # Where key is your fragment type unique identifier
+    # config/services.yaml
 
+    services:
+        app.fragment.my_awesome:
+            class: App\FragmentService\MyAwesomeFragmentService
+            arguments:
+                - 'My Awesome Fragment Name' # Fragment name in admin interface
+            tags:
+                - { name: sonata.article.fragment, key: app.fragment.my_awesome }
+                # Where key is your fragment type unique identifier
 
 Defining a fragment template
 ----------------------------
@@ -80,7 +76,6 @@ Using the twig helper, you will be able to access the following variables inside
 * ``fields`` : The values that were set in fragment settings.
 * ``foo`` : Any keys you may have defined when implementing ``ExtraContentProviderInterface``.
 
-
 .. code-block:: jinja
 
     {# article_template.html.twig #}
@@ -91,6 +86,6 @@ Using the twig helper, you will be able to access the following variables inside
 
 .. code-block:: jinja
 
-    {# @AcmeDummy/Fragment/fragment_my_awesome.html.twig #}
+    {# @App/Fragment/fragment_my_awesome.html.twig #}
     <h2>{{ fields.text }}</h2>
     <p>{{ fields.text2 }}</p>
