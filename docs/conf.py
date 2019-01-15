@@ -18,6 +18,10 @@ import sys, os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
+# adding PhpLexer
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+
 # -- General configuration -----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -40,8 +44,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Sonata ~ ArticleBundle'
-copyright = u'2016, Sonata Community'
+project = u''
+copyright = u'2010-2019, Thomas Rabaix'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -83,9 +87,18 @@ exclude_patterns = ['_build']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
+# This will be used when using the shorthand notation
+highlight_language = 'php'
+
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
+# -- Settings for symfony doc extension ---------------------------------------------------
+
+# enable highlighting for PHP code not between ``<?php ... ?>`` by default
+lexers['php'] = PhpLexer(startinline=True)
+lexers['php-annotations'] = PhpLexer(startinline=True)
+lexers['php-standalone'] = PhpLexer(startinline=True)
 
 # -- Options for HTML output ---------------------------------------------------
 import sphinx_rtd_theme
@@ -185,7 +198,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 #latex_documents = [
 #  ('index', 'PythonElement.tex', u'Python Documentation',
-#   u'Sonata Community', 'manual'),
+#   u'Thomas Rabaix', 'manual'),
 #]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -215,7 +228,7 @@ latex_elements = {
 #(source start file, name, description, authors, manual section).
 #man_pages = [
 #    ('index', 'ioc', u'IoC Documentation',
-#     [u'Sonata Community'], 1)
+#     [u'Thomas Rabaix'], 1)
 #]
 
 # If true, show URL addresses after external links.
@@ -229,7 +242,7 @@ latex_elements = {
 #  dir menu entry, description, category)
 #texinfo_documents = [
 #  ('index', 'IoC', u'IoC Documentation',
-#   u'Sonata Community', 'IoC', 'One line description of project.',
+#   u'Thomas Rabaix', 'IoC', 'One line description of project.',
 #   'Miscellaneous'),
 #]
 
@@ -241,3 +254,6 @@ latex_elements = {
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+# Use PHP syntax highlighting in code examples by default
+highlight_language='php'
