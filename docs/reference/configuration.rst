@@ -9,7 +9,7 @@ Full configuration options:
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_article.yaml
 
         # Default configuration for extension with alias: "sonata_page"
         sonata_article:
@@ -27,7 +27,7 @@ Full configuration options:
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/doctrine.yaml
 
         # Enable Doctrine to map the provided entities
         doctrine:
