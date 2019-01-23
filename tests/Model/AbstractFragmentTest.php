@@ -51,16 +51,16 @@ class AbstractFragmentTest extends TestCase
         $fragment->setCreatedAt($createdAt);
         $fragment->setUpdatedAt($updatedAt);
 
-        $this->assertEquals(1, $fragment->getId());
-        $this->assertEquals('foo', $fragment->getType());
-        $this->assertEquals('Foo Fragment', $fragment->getBackofficeTitle());
+        $this->assertSame(1, $fragment->getId());
+        $this->assertSame('foo', $fragment->getType());
+        $this->assertSame('Foo Fragment', $fragment->getBackofficeTitle());
         $this->assertFalse($fragment->getEnabled());
-        $this->assertEquals(1, $fragment->getPosition());
-        $this->assertEquals(['foo'], $fragment->getFields());
+        $this->assertSame(1, $fragment->getPosition());
+        $this->assertSame(['foo'], $fragment->getFields());
         $this->assertSame($article, $fragment->getArticle());
         $this->assertSame($createdAt, $fragment->getCreatedAt());
         $this->assertSame($updatedAt, $fragment->getUpdatedAt());
-        $this->assertEquals('Foo Fragment', $fragment->__toString());
+        $this->assertSame('Foo Fragment', $fragment->__toString());
     }
 
     public function testSettings(): void
@@ -69,10 +69,10 @@ class AbstractFragmentTest extends TestCase
 
         $fragment->setField('foo', 'bar');
 
-        $this->assertEquals(['foo' => 'bar'], $fragment->getFields());
-        $this->assertEquals('bar', $fragment->getField('foo'));
+        $this->assertSame(['foo' => 'bar'], $fragment->getFields());
+        $this->assertSame('bar', $fragment->getField('foo'));
         $this->assertNull($fragment->getField('undefined'));
-        $this->assertEquals('baz', $fragment->getField('undefined-with-default', 'baz'));
+        $this->assertSame('baz', $fragment->getField('undefined-with-default', 'baz'));
     }
 }
 

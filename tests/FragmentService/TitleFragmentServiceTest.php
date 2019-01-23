@@ -33,7 +33,7 @@ class TitleFragmentServiceTest extends TestCase
     {
         $fragmentService = $this->getFragmentService();
 
-        $this->assertEquals('@SonataArticle/Fragment/fragment_title.html.twig', $fragmentService->getTemplate());
+        $this->assertSame('@SonataArticle/Fragment/fragment_title.html.twig', $fragmentService->getTemplate());
         $this->assertInstanceOf(AbstractFragmentService::class, $fragmentService);
     }
 
@@ -87,11 +87,11 @@ class TitleFragmentServiceTest extends TestCase
                     $this->assertCount(1, array_keys($settingsConfig['keys']));
 
                     $fieldConfig = $settingsConfig['keys'][0];
-                    $this->assertEquals('text', $fieldConfig[0]);
-                    $this->assertEquals(TextType::class, $fieldConfig[1]);
+                    $this->assertSame('text', $fieldConfig[0]);
+                    $this->assertSame(TextType::class, $fieldConfig[1]);
 
                     $fieldOptions = $fieldConfig[2];
-                    $this->assertEquals('Title', $fieldOptions['label']);
+                    $this->assertSame('Title', $fieldOptions['label']);
                     $this->assertCount(2, $fieldOptions['constraints']);
                     $this->assertInstanceOf(NotBlank::class, $fieldOptions['constraints'][0]);
                     $this->assertInstanceOf(Length::class, $fieldOptions['constraints'][1]);
