@@ -33,7 +33,7 @@ final class FragmentsCompilerPass implements CompilerPassInterface
                 throw new \RuntimeException('You need to specify the `key` argument to your tag.');
             }
 
-            if (\in_array($id, $requiredFragmentsServices['simple_array_provider'])) {
+            if (\in_array($id, $requiredFragmentsServices['simple_array_provider'], true)) {
                 $fragmentServices[$attributes[0]['key']] = new Reference($id);
             }
         }

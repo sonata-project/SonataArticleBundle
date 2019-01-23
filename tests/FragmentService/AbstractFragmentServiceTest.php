@@ -30,8 +30,8 @@ class AbstractFragmentServiceTest extends TestCase
     {
         $fragmentService = $this->getFragmentService();
 
-        $this->assertEquals('fragmentService', $fragmentService->getName());
-        $this->assertEquals('@SonataArticle/FragmentAdmin/form.html.twig', $fragmentService->getEditTemplate());
+        $this->assertSame('fragmentService', $fragmentService->getName());
+        $this->assertSame('@SonataArticle/FragmentAdmin/form.html.twig', $fragmentService->getEditTemplate());
         $this->assertInstanceOf(FragmentServiceInterface::class, $fragmentService);
     }
 

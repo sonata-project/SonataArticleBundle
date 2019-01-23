@@ -39,8 +39,8 @@ class AbstractArticleTest extends TestCase
             MockArticle::STATUS_ARCHIVED => 'Archived',
         ];
 
-        $this->assertEquals($allStatuses, MockArticle::getStatuses());
-        $this->assertEquals(array_keys($allStatuses), MockArticle::getValidStatuses());
+        $this->assertSame($allStatuses, MockArticle::getStatuses());
+        $this->assertSame(array_keys($allStatuses), MockArticle::getValidStatuses());
 
         $contributorStatuses = [
             MockArticle::STATUS_DRAFT => 'Draft',
@@ -48,7 +48,7 @@ class AbstractArticleTest extends TestCase
             MockArticle::STATUS_ARCHIVED => 'Archived',
         ];
 
-        $this->assertEquals($contributorStatuses, MockArticle::getContributorStatus());
+        $this->assertSame($contributorStatuses, MockArticle::getContributorStatus());
     }
 
     public function testAbstractArticle(): void
@@ -59,7 +59,7 @@ class AbstractArticleTest extends TestCase
         $this->assertInstanceOf(Collection::class, $article->getTags());
         $this->assertInstanceOf(Collection::class, $article->getFragments());
         $this->assertInstanceOf(Collection::class, $article->getCategories());
-        $this->assertEquals(AbstractArticle::STATUS_DRAFT, $article->getStatus());
+        $this->assertSame(AbstractArticle::STATUS_DRAFT, $article->getStatus());
     }
 
     public function testProperties(): void
@@ -90,12 +90,12 @@ class AbstractArticleTest extends TestCase
         $article->setCreatedAt($createdAt);
         $article->setUpdatedAt($updatedAt);
 
-        $this->assertEquals(1, $article->getId());
-        $this->assertEquals('Title', $article->getTitle());
-        $this->assertEquals('Abstract', $article->getAbstract());
-        $this->assertEquals('Subtitle', $article->getSubtitle());
-        $this->assertEquals(1, $article->getStatus());
-        $this->assertEquals($tags, $article->getTags());
+        $this->assertSame(1, $article->getId());
+        $this->assertSame('Title', $article->getTitle());
+        $this->assertSame('Abstract', $article->getAbstract());
+        $this->assertSame('Subtitle', $article->getSubtitle());
+        $this->assertSame(1, $article->getStatus());
+        $this->assertSame($tags, $article->getTags());
         $this->assertSame($categories, $article->getCategories());
         $this->assertSame($media, $article->getMainImage());
         $this->assertSame($validatedAt, $article->getValidatedAt());
@@ -103,7 +103,7 @@ class AbstractArticleTest extends TestCase
         $this->assertSame($publicationEndsAt, $article->getPublicationEndsAt());
         $this->assertSame($createdAt, $article->getCreatedAt());
         $this->assertSame($updatedAt, $article->getUpdatedAt());
-        $this->assertEquals('Title', $article->__toString());
+        $this->assertSame('Title', $article->__toString());
     }
 
     public function testIsValidated(): void
@@ -127,7 +127,7 @@ class AbstractArticleTest extends TestCase
         $article->setFragments($newCollection);
 
         $this->assertSame($collection, $article->getFragments());
-        $this->assertEquals(2, $collection->count());
+        $this->assertSame(2, $collection->count());
     }
 
     public function testFragmentAddRemove(): void
@@ -142,11 +142,11 @@ class AbstractArticleTest extends TestCase
 
         $article->addFragment($fragment);
 
-        $this->assertEquals(1, $collection->count());
+        $this->assertSame(1, $collection->count());
 
         $article->removeFragment($fragment);
 
-        $this->assertEquals(0, $collection->count());
+        $this->assertSame(0, $collection->count());
     }
 
     public function testValidatorMetadata(): void
@@ -156,7 +156,7 @@ class AbstractArticleTest extends TestCase
             ->method('addConstraint')
             ->with($this->callback(function ($parameter) {
                 $this->assertInstanceOf(Callback::class, $parameter);
-                $this->assertEquals([AbstractArticle::class, 'validatorPublicationEnds'], $parameter->callback);
+                $this->assertSame([AbstractArticle::class, 'validatorPublicationEnds'], $parameter->callback);
 
                 return true;
             }));
