@@ -186,8 +186,6 @@
                 $form = this.getFormByFragmentId(id),
                 $cb = $form.find(this.options.formRemoveName);
 
-            //console.log(id);
-
             // Remove a persisted fragment (just check delete checkbox)
             if (!$frag.hasClass('is-tmp')) {
                 // Hide form block
