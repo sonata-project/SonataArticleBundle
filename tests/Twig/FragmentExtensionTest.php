@@ -57,7 +57,7 @@ class FragmentExtensionTest extends TestCase
             ->method('render')
             ->willReturnCallback([$this, 'renderFragment']);
 
-        $this->assertEquals(
+        $this->assertSame(
             '<h1>foo</h1><p>bar</p>',
             $this->fragmentExtension->renderFragment($fragment)
         );
@@ -91,7 +91,7 @@ class FragmentExtensionTest extends TestCase
             ->method('render')
             ->willReturnCallback([$this, 'renderFragment']);
 
-        $this->assertEquals(
+        $this->assertSame(
             '<h1>foo0</h1><p>bar0</p><h1>foo2</h1><p>bar2</p>',
             $this->fragmentExtension->renderArticleFragments($article)
         );
