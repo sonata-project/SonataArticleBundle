@@ -229,9 +229,9 @@
             var resetRemovedElement = $('<span>');
             var fragmentTitle = fragmentElement.find('.fragment__title').text();
 
-            var cancelIcon = $('<i>')
+            var cancelIcon = $('<i>');
             cancelIcon.attr('class', 'fa fa-repeat');
-            cancelIcon.on('click', this.cancelFragmentdeletion);
+            cancelIcon.on('click', this.cancelFragmentDeletion);
 
             resetRemovedElement.append(cancelIcon);
             resetRemovedElement.append(' <i>' +  fragmentTitle + '</i>');
@@ -249,7 +249,7 @@
          *
          * @param e
          */
-        cancelFragmentdeletion: function (e) {
+        cancelFragmentDeletion: function (e) {
             e.preventDefault();
             e.stopPropagation();
 
