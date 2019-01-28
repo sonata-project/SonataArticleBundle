@@ -63,12 +63,12 @@ class FragmentHelperTest extends TestCase
         $fragment = $this->getFragmentMock();
 
         // templating render must be called once
-        $this->templating->expects($this->once())->method('render')->will($this->returnValue('foo'));
+        $this->templating->expects($this->once())->method('render')->willReturn('foo');
 
         $fragmentService = $this->createMock([FragmentServiceInterface::class, ExtraContentProviderInterface::class]);
 
-        $fragmentService->expects($this->once())->method('getTemplate')->will($this->returnValue('template.html.twig'));
-        $fragmentService->expects($this->once())->method('getExtraContent')->will($this->returnValue(['foo' => 'bar']));
+        $fragmentService->expects($this->once())->method('getTemplate')->willReturn('template.html.twig');
+        $fragmentService->expects($this->once())->method('getExtraContent')->willReturn(['foo' => 'bar']);
 
         $this->fragmentHelper->setFragmentServices(['foo.bar' => $fragmentService]);
         $this->fragmentHelper->render($fragment);
@@ -83,8 +83,8 @@ class FragmentHelperTest extends TestCase
     private function getFragmentMock(): MockObject
     {
         $fragment = $this->createMock(FragmentInterface::class);
-        $fragment->expects($this->once())->method('getType')->will($this->returnValue('foo.bar'));
-        $fragment->expects($this->any())->method('getFields')->will($this->returnValue([]));
+        $fragment->expects($this->once())->method('getType')->willReturn('foo.bar');
+        $fragment->expects($this->any())->method('getFields')->willReturn([]);
 
         return $fragment;
     }

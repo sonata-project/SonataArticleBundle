@@ -12,4 +12,5 @@ Article Bundle
    reference/getting_started
    reference/configuration
    reference/custom_fragment
+   reference/delete_fragment
    reference/todo

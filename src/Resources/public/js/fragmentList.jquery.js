@@ -37,6 +37,10 @@
             this.build();
             this.setEvents();
             this.setDraggableElements();
+            var divElement = $('<div>');
+            divElement.attr('id', 'deleted-fragments');
+            divElement.attr('style', 'display:none;');
+            $('body')[0].appendChild(divElement[0]);
         },
 
         /**
@@ -184,31 +188,90 @@
 
             // Remove a persisted fragment (just check delete checkbox)
             if (!$frag.hasClass('is-tmp')) {
-                // Check the delete checkbox
-                $cb.prop('checked', true).attr('checked', true);
-
                 // Hide form block
                 $form.hide();
-                // Remove a new fragment (not already saved)
+                this.moveSelectedFragmentOutsideOfForm(id, $frag, $form);
+
+            // Remove a new fragment (not already saved)
             } else {
+                $frag.remove();
                 $form.remove();
                 this.setFormListElement();
             }
 
-            // Remove list element
-            $frag.remove();
-
-            // Removed the last element ?
+            //Removed the last element ?
             if(!this.$list.children().length) {
-                this.$activeFragment = null;
-                // Removed the current visible item ?
+               this.$activeFragment = null;
+
+            // Removed the current visible item ?
             } else if(id === this.$activeFragment.data('fragId')) {
-                this.setActive(this.$list.children(':first-child'));
+               this.setActive(this.$list.children(':first-child'));
             }
 
             // Reorder
             this.resetOrder();
+        },
 
+        /**
+         * This method moves the selected fragment and form elements in div#deleted-fragments
+         *
+         * @param {string} id
+         * @param {object} fragmentElement
+         * @param {object} formElement
+         */
+        moveSelectedFragmentOutsideOfForm: function (id, fragmentElement, formElement) {
+            var divElement = $('<div>')[0];
+            divElement.setAttribute('id', id);
+            fragmentElement.clone().appendTo(divElement);
+            divElement.append(formElement[0]);
+
+            // Generate the elements who contains the fragment title and the cancel button.
+            var resetRemovedElement = $('<span>');
+            var fragmentTitle = fragmentElement.find('.fragment__title').text();
+
+            var cancelIcon = $('<i>');
+            cancelIcon.attr('class', 'fa fa-repeat');
+            cancelIcon.on('click', this.cancelFragmentDeletion);
+
+            resetRemovedElement.append(cancelIcon);
+            resetRemovedElement.append(' <i>' +  fragmentTitle + '</i>');
+
+            // Insert the fragment's title and the reset button in the place of removed fragment.
+            fragmentElement.empty();
+            fragmentElement.append(resetRemovedElement);
+
+            // Insert the selected fragment and form into #deleted-fragments.
+            $('#deleted-fragments').append(divElement);
+        },
+
+        /**
+         * This method cancels the fragment deletion.
+         *
+         * @param e
+         */
+        cancelFragmentDeletion: function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $target = $(e.currentTarget),
+                $frag = $target.closest('[data-fragment]'),
+                id = $frag.data('fragId');
+
+            // Get the deleted fragment by id.
+            var canceledFragment = $('div#deleted-fragments');
+
+            // Get the fragment list.
+            var fragment = $('ul.fragmentList').find('[data-frag-id="' + id + '"]');
+
+            // Get forms.
+            var forms = $("[id~=field_widget_" + id.slice(0, -2) + "]");
+
+            // Reset clear and append the fragments list element.
+            fragment.empty();
+            fragment.append(canceledFragment.find('[data-frag-id="' + id + '"]').children());
+
+            // Move the deleted form to the original place.
+            forms.append(canceledFragment.find('[data-fragment-form="' + id + '"]'));
         },
 
         /**
@@ -259,7 +322,6 @@
          */
         build: function() {
             var self = this;
-
             this.$formsList.each(function() {
                 var $this = $(this),
                     formdata = $this.data('formdata'),
