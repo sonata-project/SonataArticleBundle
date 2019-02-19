@@ -58,7 +58,7 @@ class FragmentHelper
     {
         $type = $fragment->getType();
 
-        if (!array_key_exists($type, $this->fragmentServices)) {
+        if (!\array_key_exists($type, $this->fragmentServices)) {
             throw new \RuntimeException(sprintf('Cannot render Fragment of type `%s`. Service not found.', $type));
         }
 
