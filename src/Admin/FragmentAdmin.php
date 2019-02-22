@@ -213,7 +213,7 @@ final class FragmentAdmin extends AbstractAdmin
      */
     protected function getService(string $type): FragmentServiceInterface
     {
-        if (!array_key_exists($type, $this->fragmentServices)) {
+        if (!\array_key_exists($type, $this->fragmentServices)) {
             throw new \RuntimeException(sprintf('Fragment service for type `%s` is not handled by this admin', $type));
         }
 
