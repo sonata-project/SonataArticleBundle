@@ -175,7 +175,7 @@ class ArticleAdmin extends AbstractAdmin
                     'multiple' => true,
                     'label' => false,
                     'attr' => ['class' => 'show'],
-                    'callback' => function (AdminInterface $admin, $property, $searchText): void {
+                    'callback' => static function (AdminInterface $admin, $property, $searchText): void {
                         $datagrid = $admin->getDatagrid();
                         $datagrid->setValue($property, null, $searchText);
                         $datagrid->setValue('enabled', null, true);
@@ -190,7 +190,7 @@ class ArticleAdmin extends AbstractAdmin
                     'multiple' => true,
                     'label' => false,
                     'attr' => ['class' => 'show'],
-                    'callback' => function (AdminInterface $admin, $property, $searchText): void {
+                    'callback' => static function (AdminInterface $admin, $property, $searchText): void {
                         $datagrid = $admin->getDatagrid();
                         $datagrid->setValue($property, null, $searchText);
                         $datagrid->setValue('enabled', null, true);
@@ -204,7 +204,7 @@ class ArticleAdmin extends AbstractAdmin
                     'by_reference' => false,
                     'label' => false,
                     // callback of mapping fragment with the one selected on the list
-                    'pre_bind_data_callback' => function ($value) use ($fragmentClass, $subject) {
+                    'pre_bind_data_callback' => static function ($value) use ($fragmentClass, $subject) {
                         $fragment = null;
                         // existing fragment case
                         foreach ($subject->getFragments() as $existingFragment) {
@@ -267,7 +267,7 @@ class ArticleAdmin extends AbstractAdmin
     {
         $fragments = $article->getFragments()->toArray();
 
-        usort($fragments, function (FragmentInterface $a, FragmentInterface $b) {
+        usort($fragments, static function (FragmentInterface $a, FragmentInterface $b) {
             return $a->getPosition() - $b->getPosition();
         });
 
