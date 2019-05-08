@@ -81,7 +81,7 @@ class FragmentExtensionTest extends TestCase
         $article = $this->createMock(ArticleInterface::class);
         $article->expects($this->any())
             ->method('getFragments')
-            ->will($this->returnValue($fragments));
+            ->willReturn($fragments);
 
         // we expect only two calls
         $this->fragmentHelper->expects($this->at(0))
@@ -109,10 +109,10 @@ class FragmentExtensionTest extends TestCase
         $fragment = $this->createMock(FragmentInterface::class);
         $fragment->expects($this->any())
             ->method('getFields')
-            ->will($this->returnValue($settings));
+            ->willReturn($settings);
         $fragment->expects($this->any())
             ->method('getEnabled')
-            ->will($this->returnValue($enabled));
+            ->willReturn($enabled);
 
         return $fragment;
     }
