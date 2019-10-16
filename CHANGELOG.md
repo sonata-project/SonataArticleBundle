@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.1](https://github.com/sonata-project/SonataArticleBundle/compare/1.2.0...1.2.1) - 2019-10-14
+### Fixed
+- Syntax error in template
 
 ## [1.2.0](https://github.com/sonata-project/SonataArticleBundle/compare/1.1.0...1.2.0) - 2019-05-28
 
