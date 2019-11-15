@@ -3,7 +3,10 @@
     {% set fragmentLabel = 'fragment'|trans({}, 'SonataArticleBundle') %}
     <div data-fragment-form="{{ form.vars.id }}"
          data-form-tmp="true"
-         data-formdata='{ "name": "{{ fragmentLabel }} {{ fragmentName|escape }}", "type": "{{ form.vars.data.backofficeTitle|trans({}, 'SonataArticleBundle') }}" }'
+         data-formdata="{{ {
+             'name': fragmentLabel ~ ' ' ~ fragmentName|escape, 
+             'type' : form.vars.data.backofficeTitle|trans({}, 'SonataArticleBundle') 
+         }|json_encode() }}"
          data-errors="{{ form.vars.errors|length }}">
         <div class="col-md-12">
             <div class="box box-primary">
