@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.2](https://github.com/sonata-project/SonataArticleBundle/compare/1.2.1...1.2.2) - 2019-11-14
+### Fixed
+- special chars handling in the "type" field
+
 ## [1.2.1](https://github.com/sonata-project/SonataArticleBundle/compare/1.2.0...1.2.1) - 2019-10-14
 ### Fixed
 - Syntax error in template
