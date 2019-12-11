@@ -13,3 +13,4 @@ Article Bundle
    reference/configuration
    reference/custom_fragment
    reference/todo
+   reference/delete_fragment
