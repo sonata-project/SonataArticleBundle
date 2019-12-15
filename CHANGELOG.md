@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.0](https://github.com/sonata-project/SonataArticleBundle/compare/1.2.2...1.3.0) - 2019-12-14
+### Added
+- Added to fragmentList.jquery.js `moveSelectedFragmentOutsideOfForm()` to move selected fragment in tmp dom
+- Added to fragmentList.jquery.js `cancelFragmentDeletion()`  to cancel the fragment deletion
+
+### Changed
+The 'removed' fragments are not removed completely just moved in another dom,
+which allows the cancellation.
+
 ## [1.2.2](https://github.com/sonata-project/SonataArticleBundle/compare/1.2.1...1.2.2) - 2019-11-14
 ### Fixed
 - special chars handling in the "type" field
