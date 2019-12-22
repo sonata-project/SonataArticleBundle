@@ -1,8 +1,6 @@
 {% extends '@SonataAdmin/Form/form_admin_fields.html.twig' %}
 
-{% block sonata_admin_collection_fragment %}
-    {% include '@SonataArticle/FragmentAdmin/edit_collection_fragment.html.twig' %}
-{% endblock %}
+{% use '@SonataArticle/FragmentAdmin/edit_collection_fragment.html.twig' %}
 
 {% block sonata_type_collection_widget %}
     {% if sonata_admin.field_description.mappingtype == 4 %}
