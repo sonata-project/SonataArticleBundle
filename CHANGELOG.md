@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.4.0](https://github.com/sonata-project/SonataArticleBundle/compare/1.3.0...1.4.0) - 2020-01-06
+### Added
+- new Twig blocks in `edit_collection_fragment.html.twig`
+
 ## [1.3.0](https://github.com/sonata-project/SonataArticleBundle/compare/1.2.2...1.3.0) - 2019-12-14
 ### Added
 - Added to fragmentList.jquery.js `moveSelectedFragmentOutsideOfForm()` to move selected fragment in tmp dom
