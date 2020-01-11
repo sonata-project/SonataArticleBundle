@@ -67,4 +67,8 @@ interface FragmentInterface
     public function getBackofficeTitle(): string;
 
     public function setBackofficeTitle(string $backofficeTitle): void;
+
+    public function setArticle(ArticleInterface $article = null): void;
+
+    public function getArticle(): ?ArticleInterface;
 }
