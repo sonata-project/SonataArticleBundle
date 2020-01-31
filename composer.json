@@ -39,9 +39,9 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "sonata-project/block-bundle": "^3.11",
-        "symfony/phpunit-bridge": "^4.1"
+        "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+        "sonata-project/block-bundle": "^3.18.3",
+        "symfony/phpunit-bridge": "^5.0"
     },
     "config": {
         "sort-packages": true
