@@ -63,8 +63,7 @@ Then you need to declare the service:
             arguments:
                 - 'My Awesome Fragment Name' # Fragment name in admin interface
             tags:
-                - { name: sonata.article.fragment, key: app.fragment.my_awesome }
-                # Where key is your fragment type unique identifier
+                - { name: sonata.article.fragment, key: app.fragment.my_awesome } # key is your fragment type unique identifier
 
 Defining a fragment template
 ----------------------------
@@ -76,16 +75,18 @@ Using the twig helper, you will be able to access the following variables inside
 * ``fields`` : The values that were set in fragment settings.
 * ``foo`` : Any keys you may have defined when implementing ``ExtraContentProviderInterface``.
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {# article_template.html.twig #}
+
     {# ... #}
     {{ sonata_article_render_article_fragments(article) }}
     {# ... #}
 
 
-.. code-block:: jinja
+.. code-block:: html+twig
 
     {# @App/Fragment/fragment_my_awesome.html.twig #}
+
     <h2>{{ fields.text }}</h2>
     <p>{{ fields.text2 }}</p>
