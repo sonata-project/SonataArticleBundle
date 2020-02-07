@@ -82,13 +82,13 @@ Render article fragments
 SonataArticleBundle now comes with a twig helper which allows you to render article fragments
 if they are enabled.
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ sonata_article_render_article_fragments(article) }}
 
 Or a specific fragment whether it is enabled or not.
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ sonata_article_render_fragment(article.fragments[0]) }}
 
