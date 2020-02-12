@@ -62,8 +62,10 @@ final class SonataArticleExtension extends Extension
 
         foreach ($modelNames as $modelName) {
             $container->setParameter(sprintf('sonata.article.%s.class', $modelName), $config['class'][$modelName]);
-            $container->setParameter(sprintf('sonata.article.admin.%s.entity', $modelName),
-                $config['class'][$modelName]);
+            $container->setParameter(
+                sprintf('sonata.article.admin.%s.entity', $modelName),
+                $config['class'][$modelName]
+            );
         }
 
         $container->setParameter('sonata.article.admin.fragments.services', $config['fragment_whitelist_provider']);
