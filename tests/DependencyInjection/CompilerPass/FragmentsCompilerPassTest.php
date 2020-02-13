@@ -47,7 +47,8 @@ final class FragmentsCompilerPassTest extends TestCase
             ->willReturn(['foo' => [['key' => 'bar']]]);
         $container->expects($this->exactly(2))->method('hasDefinition')
             ->withConsecutive(
-                ['sonata.article.admin.fragment'], ['sonata.article.helper.fragment']
+                ['sonata.article.admin.fragment'],
+                ['sonata.article.helper.fragment']
             )
             ->willReturn(true);
 
