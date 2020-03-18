@@ -308,10 +308,12 @@
 
             this.$list.children('li').each(function(index) {
                 var $this = $(this),
-                    $form = self.getFormByFragmentId($this.data('fragId')),
-                    $positionField = $form.find(self.options.formPositionName);
+                    $form = self.getFormByFragmentId($this.data('fragId'));
 
-                $positionField.val(index);
+                if ($form) {
+                    var $positionField = $form.find(self.options.formPositionName);
+                    $positionField.val(index);
+                }
             });
         },
 
