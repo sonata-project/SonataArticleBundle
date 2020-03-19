@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.4.1](https://github.com/sonata-project/SonataArticleBundle/compare/1.4.0...1.4.1) - 2020-03-19
+### Fixed
+- article fragments reset order bug
+
 ## [1.4.0](https://github.com/sonata-project/SonataArticleBundle/compare/1.3.0...1.4.0) - 2020-01-06
 ### Added
 - new Twig blocks in `edit_collection_fragment.html.twig`
