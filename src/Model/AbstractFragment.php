@@ -63,7 +63,7 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
         return $this->getBackofficeTitle();
     }
 
-    public function setArticle(ArticleInterface $article = null): void
+    public function setArticle(?ArticleInterface $article = null): void
     {
         $this->article = $article;
     }
