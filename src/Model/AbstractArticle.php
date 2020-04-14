@@ -167,7 +167,7 @@ abstract class AbstractArticle implements ArticleInterface
         return $this->createdAt;
     }
 
-    public function setMainImage(MediaInterface $mainImage = null): void
+    public function setMainImage(?MediaInterface $mainImage = null): void
     {
         $this->mainImage = $mainImage;
     }
@@ -210,7 +210,7 @@ abstract class AbstractArticle implements ArticleInterface
         return $this->fragments;
     }
 
-    public function setPublicationEndsAt(\DateTimeInterface $publicationEndsAt = null): void
+    public function setPublicationEndsAt(?\DateTimeInterface $publicationEndsAt = null): void
     {
         $this->publicationEndsAt = $publicationEndsAt;
     }
@@ -220,7 +220,7 @@ abstract class AbstractArticle implements ArticleInterface
         return $this->publicationEndsAt;
     }
 
-    public function setPublicationStartsAt(\DateTimeInterface $publicationStartsAt = null): void
+    public function setPublicationStartsAt(?\DateTimeInterface $publicationStartsAt = null): void
     {
         $this->publicationStartsAt = $publicationStartsAt;
     }
@@ -280,7 +280,7 @@ abstract class AbstractArticle implements ArticleInterface
         return $this->updatedAt;
     }
 
-    public function setValidatedAt(\DateTimeInterface $validatedAt = null): void
+    public function setValidatedAt(?\DateTimeInterface $validatedAt = null): void
     {
         $this->validatedAt = $validatedAt;
     }
