@@ -51,7 +51,7 @@ interface ArticleInterface
 
     public function getCreatedAt(): ?\DateTimeInterface;
 
-    public function setMainImage(MediaInterface $mainImage = null): void;
+    public function setMainImage(?MediaInterface $mainImage = null): void;
 
     public function getMainImage(): ?MediaInterface;
 
@@ -69,11 +69,11 @@ interface ArticleInterface
 
     public function removeFragment(FragmentInterface $fragment): void;
 
-    public function setPublicationEndsAt(\DateTimeInterface $publicationEndsAt = null): void;
+    public function setPublicationEndsAt(?\DateTimeInterface $publicationEndsAt = null): void;
 
     public function getPublicationEndsAt(): ?\DateTimeInterface;
 
-    public function setPublicationStartsAt(\DateTimeInterface $publicationStartsAt = null): void;
+    public function setPublicationStartsAt(?\DateTimeInterface $publicationStartsAt = null): void;
 
     public function getPublicationStartsAt(): ?\DateTimeInterface;
 
@@ -103,7 +103,7 @@ interface ArticleInterface
 
     public function getUpdatedAt(): ?\DateTimeInterface;
 
-    public function setValidatedAt(\DateTimeInterface $validatedAt = null): void;
+    public function setValidatedAt(?\DateTimeInterface $validatedAt = null): void;
 
     public function getValidatedAt(): ?\DateTimeInterface;
 }
