@@ -14,11 +14,11 @@ Full configuration options:
         # Default configuration for extension with alias: "sonata_page"
         sonata_article:
             class:
-                article:  Application\Sonata\ArticleBundle\Entity\Article
-                fragment: Application\Sonata\ArticleBundle\Entity\Fragment
-                category: Application\Sonata\ArticleBundle\Entity\Category
-                tag:      Application\Sonata\ArticleBundle\Entity\Tag
-                media:    Application\Sonata\ArticleBundle\Entity\Media
+                article: App\Entity\SonataArticleArticle
+                fragment: App\Entity\SonataArticleFragment
+                category: App\Entity\SonataArticleCategory
+                tag: App\Entity\SonataArticleTag
+                media: App\Entity\SonataArticleMedia
 
             fragment_whitelist_provider:
                 simple_array_provider:

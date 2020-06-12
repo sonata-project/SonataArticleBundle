@@ -14,18 +14,28 @@ declare(strict_types=1);
 namespace Sonata\ArticleBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Sonata\ArticleBundle\Admin\ArticleAdmin;
+use Sonata\ArticleBundle\Admin\FragmentAdmin;
 use Sonata\ArticleBundle\DependencyInjection\SonataArticleExtension;
+use Sonata\ArticleBundle\FragmentService\TextFragmentService;
+use Sonata\ArticleBundle\FragmentService\TitleFragmentService;
 
 final class SonataArticleExtensionTest extends AbstractExtensionTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->container->setParameter('kernel.bundles', ['SonataDoctrineBundle' => true]);
+    }
+
     public function testLoadDefault(): void
     {
         $this->load();
 
-        $this->assertContainerBuilderHasService('sonata.article.admin.article', 'Sonata\ArticleBundle\Admin\ArticleAdmin');
-        $this->assertContainerBuilderHasService('sonata.article.admin.fragment', 'Sonata\ArticleBundle\Admin\FragmentAdmin');
-        $this->assertContainerBuilderHasService('sonata.article.fragment.title', 'Sonata\ArticleBundle\FragmentService\TitleFragmentService');
-        $this->assertContainerBuilderHasService('sonata.article.fragment.text', 'Sonata\ArticleBundle\FragmentService\TextFragmentService');
+        $this->assertContainerBuilderHasService('sonata.article.admin.article', ArticleAdmin::class);
+        $this->assertContainerBuilderHasService('sonata.article.admin.fragment', FragmentAdmin::class);
+        $this->assertContainerBuilderHasService('sonata.article.fragment.title', TitleFragmentService::class);
+        $this->assertContainerBuilderHasService('sonata.article.fragment.text', TextFragmentService::class);
 
         $this->assertContainerBuilderHasParameter('sonata.article.article.class', 'Application\Sonata\ArticleBundle\Entity\Article');
         $this->assertContainerBuilderHasParameter('sonata.article.fragment.class', 'Application\Sonata\ArticleBundle\Entity\Fragment');
@@ -38,7 +48,7 @@ final class SonataArticleExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sonata.article.admin.tag.entity', 'Application\Sonata\ClassificationBundle\Entity\Tag');
         $this->assertContainerBuilderHasParameter('sonata.article.admin.media.entity', 'Application\Sonata\MediaBundle\Entity\Media');
         $this->assertContainerBuilderHasParameter('sonata.article.admin.fragments.services', ['simple_array_provider' => []]);
-        $this->assertContainerBuilderHasParameter('sonata.article.admin.article.class', 'Sonata\ArticleBundle\Admin\ArticleAdmin');
+        $this->assertContainerBuilderHasParameter('sonata.article.admin.article.class', ArticleAdmin::class);
         $this->assertContainerBuilderHasParameter('sonata.article.admin.article.controller', 'SonataAdminBundle:CRUD');
         $this->assertContainerBuilderHasParameter('sonata.article.admin.fragment.controller', 'SonataArticleBundle:FragmentAdmin');
         $this->assertContainerBuilderHasParameter('sonata.article.admin.article.translation_domain', 'SonataArticleBundle');

@@ -13,24 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\ArticleBundle\Tests\DependencyInjection;
 
-use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
-use PHPUnit\Framework\TestCase;
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
+use Sonata\ArticleBundle\Admin\ArticleAdmin;
 use Sonata\ArticleBundle\DependencyInjection\Configuration;
+use Sonata\ArticleBundle\DependencyInjection\SonataArticleExtension;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-final class ConfigurationTest extends TestCase
+final class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
-    use ConfigurationTestCaseTrait;
-
-    public function getConfiguration(): Configuration
-    {
-        return new Configuration();
-    }
-
     public function testDefault(): void
     {
         $this->assertProcessedConfigurationEquals([
-            [],
-        ], [
             'class' => [
                 'article' => 'Application\Sonata\ArticleBundle\Entity\Article',
                 'fragment' => 'Application\Sonata\ArticleBundle\Entity\Fragment',
@@ -39,16 +33,28 @@ final class ConfigurationTest extends TestCase
                 'media' => 'Application\Sonata\MediaBundle\Entity\Media',
             ],
             'admin' => [
-                'article' => 'Sonata\ArticleBundle\Admin\ArticleAdmin',
+                'article' => ArticleAdmin::class,
             ],
             'admin_controller' => [
                 'article' => 'SonataAdminBundle:CRUD',
                 'fragment' => 'SonataArticleBundle:FragmentAdmin',
             ],
-             'translation_domain' => 'SonataArticleBundle',
-             'enable_fragments_rendering' => true,
-             'max_length_title_for_display' => 80,
-             'fragment_whitelist_provider' => ['simple_array_provider' => []],
+            'translation_domain' => 'SonataArticleBundle',
+            'enable_fragments_rendering' => true,
+            'max_length_title_for_display' => 80,
+            'fragment_whitelist_provider' => ['simple_array_provider' => []],
+        ], [
+            __DIR__.'/../Fixtures/configuration.yaml',
         ]);
+    }
+
+    protected function getContainerExtension(): ExtensionInterface
+    {
+        return new SonataArticleExtension();
+    }
+
+    protected function getConfiguration(): ConfigurationInterface
+    {
+        return new Configuration();
     }
 }

@@ -1,24 +1,43 @@
+.. index::
+    single: Installation
+    single: Configuration
+
 Installation
 ============
 
-SonataArticleBundle can be installed at any moment during a project's lifecycle,
-whether it's a clean Symfony installation or an existing project.
+Prerequisites
+-------------
 
-Downloading the Bundle
-----------------------
+PHP ^7.2 and Symfony ^4.4 are needed to make this bundle work, there are
+also some Sonata dependencies that need to be installed and configured beforehand.
 
-.. code-block:: bash
+Required dependencies:
 
-    composer require sonata-project/article-bundle
+* `SonataAdminBundle <https://sonata-project.org/bundles/admin>`_
+* `SonataClassificationBundle <https://sonata-project.org/bundles/classification>`_
+* `SonataMediaBundle <https://sonata-project.org/bundles/media>`_
 
-Check `packagist <https://packagist.org/packages/sonata-project/article-bundle>`_
-for existing versions.
+And the persistence bundle:
+
+* `SonataDoctrineOrmAdminBundle <https://sonata-project.org/bundles/doctrine-orm-admin>`_
+
+Follow also their configuration step; you will find everything you need in
+their own installation chapter.
+
+.. note::
+
+    If a dependency is already installed somewhere in your project or in
+    another dependency, you won't need to install it again.
 
 Enable the Bundle
 -----------------
 
-Then, enable the bundle and the bundles it relies on by adding the following
-line in `bundles.php` file of your project::
+Add ``SonataArticleBundle`` via composer::
+
+    composer require sonata-project/article-bundle
+
+Next, be sure to enable the bundles in your ``config/bundles.php`` file if they
+are not already enabled::
 
     // config/bundles.php
 
@@ -27,61 +46,105 @@ line in `bundles.php` file of your project::
         Sonata\ArticleBundle\SonataArticleBundle::class => ['all' => true],
     ];
 
-Configuring SonataArticleBundle dependencies
---------------------------------------------
+Configuration
+=============
 
-You will need to configure SonataArticleBundle's entities, if you plan to use them.
-You can also configure the list of available fragments for your articles.
+SonataArticleBundle Configuration
+---------------------------------
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # config/packages/sonata_article.yaml
 
-        # config/packages/sonata_article.yaml
+    sonata_article:
+        class:
+            article: App\Entity\SonataArticleArticle
+            fragment: App\Entity\SonataArticleFragment
 
-        sonata_article:
-            class:
-                article:  Application\Sonata\ArticleBundle\Entity\Article
-                fragment: Application\Sonata\ArticleBundle\Entity\Fragment
-
-            fragment_whitelist_provider:
-                simple_array_provider:
-                    - sonata.article.fragment.title
-                    - sonata.article.fragment.text
+        fragment_whitelist_provider:
+            simple_array_provider:
+                - sonata.article.fragment.title
+                - sonata.article.fragment.text
 
 .. note::
 
     We plan to improve the fragments available to allow a configuration for each article type.
     For example, you will want the fragment 'Comments' only on articles of type 'Blog'.
 
-Cleaning up
------------
+Doctrine ORM Configuration
+--------------------------
 
-Usually, when installing new bundles, it is a good practice to delete your cache:
+Add the bundle in the config mapping definition (or enable `auto_mapping`_)::
 
-.. code-block:: bash
+    # config/packages/doctrine.yaml
 
-    bin/console cache:clear
+    doctrine:
+        orm:
+            entity_managers:
+                default:
+                    mappings:
+                        SonataArticleBundle: ~
 
-At this point, your Symfony installation should be fully functional, with no errors
-showing up from SonataArticleBundle. SonataArticleBundle is installed
-but not yet configured (more on that in the next section), so you won't be able to
-use it yet.
+And then create the corresponding entities, ``src/Entity/SonataArticleArticle``::
 
-If, at this point or during the installation, you come across any errors, don't panic:
+    // src/Entity/SonataArticleArticle.php
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Sonata\ArticleBundle\Entity\AbstractArticle;
+
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="article__article")
+     */
+    class SonataArticleArticle extends AbstractArticle
+    {
+        /**
+         * @ORM\Id
+         * @ORM\GeneratedValue
+         * @ORM\Column(type="integer")
+         */
+        protected $id;
+    }
+
+and ``src/Entity/SonataArticleFragment``::
+
+    // src/Entity/SonataArticleFragment.php
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Sonata\ArticleBundle\Entity\AbstractFragment;
+
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="article__fragment")
+     */
+    class SonataArticleFragment extends AbstractFragment
+    {
+        /**
+         * @ORM\Id
+         * @ORM\GeneratedValue
+         * @ORM\Column(type="integer")
+         */
+        protected $id;
+    }
+
+The only thing left is to update your schema::
+
+    bin/console doctrine:schema:update --force
+
+Next Steps
+----------
+
+At this point, your Symfony installation should be fully functional, without errors
+showing up from SonataArticleBundle. If, at this point or during the installation,
+you come across any errors, don't panic:
 
     - Read the error message carefully. Try to find out exactly which bundle is causing the error.
       Is it SonataArticleBundle or one of the dependencies?
     - Make sure you followed all the instructions correctly, for both SonataArticleBundle and its dependencies.
-    - Odds are that someone already had the same problem, and it's documented somewhere.
-      Check Google_, `Sonata Users Group`_, `Stack Overflow`_ or `Symfony Support`_ to see if you can find a solution.
     - Still no luck? Try checking the project's `open issues on GitHub`_.
 
 After you have successfully installed the above bundles you need to configure SonataArticleBundle.
 All that is needed to quickly set up SonataArticleBundle is described in the :doc:`getting_started` chapter.
 
-.. _Google: http://www.google.com
-.. _`Sonata Users Group`: https://groups.google.com/group/sonata-users
-.. _`Symfony Support`: http://symfony.com/support
-.. _`Stack Overflow`: https://stackoverflow.com/search?q=sonata-article-bundle
 .. _`open issues on GitHub`: https://github.com/sonata-project/SonataArticleBundle/issues
+.. _`auto_mapping`: http://symfony.com/doc/4.4/reference/configuration/doctrine.html#configuration-overviews
