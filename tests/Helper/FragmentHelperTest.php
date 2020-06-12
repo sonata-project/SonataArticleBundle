@@ -65,7 +65,7 @@ class FragmentHelperTest extends TestCase
         // templating render must be called once
         $this->templating->expects($this->once())->method('render')->willReturn('foo');
 
-        $fragmentService = $this->createMock([FragmentServiceInterface::class, ExtraContentProviderInterface::class]);
+        $fragmentService = $this->createMock(MockFragmentServiceInterface::class);
 
         $fragmentService->expects($this->once())->method('getTemplate')->willReturn('template.html.twig');
         $fragmentService->expects($this->once())->method('getExtraContent')->willReturn(['foo' => 'bar']);
@@ -88,4 +88,8 @@ class FragmentHelperTest extends TestCase
 
         return $fragment;
     }
+}
+
+interface MockFragmentServiceInterface extends FragmentServiceInterface, ExtraContentProviderInterface
+{
 }
