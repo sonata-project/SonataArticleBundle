@@ -19,7 +19,7 @@ use Sonata\ArticleBundle\FragmentService\AbstractFragmentService;
 use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Sonata\ArticleBundle\Model\AbstractFragment;
 use Sonata\ArticleBundle\Model\FragmentInterface;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 
 /**
  * @author Romain Mouillard <romain.mouillard@gmail.com>

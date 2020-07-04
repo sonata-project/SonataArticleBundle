@@ -15,7 +15,7 @@ namespace Sonata\ArticleBundle\FragmentService;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\ArticleBundle\Model\FragmentInterface;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
