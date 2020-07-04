@@ -19,6 +19,7 @@
         "sonata-project/classification-bundle": "^3.0",
         "sonata-project/doctrine-orm-admin-bundle": "^3.0",
         "sonata-project/easy-extends-bundle": "^2.2",
+        "sonata-project/form-extensions": "^0.1.1 || ^1.4",
         "sonata-project/media-bundle": "^3.0",
         "symfony/config": "^3.4 || ^4.0",
         "symfony/dependency-injection": "^3.4 || ^4.0",
@@ -35,7 +36,8 @@
         "twig/twig": "^2.0"
     },
     "conflict": {
-        "sonata-project/block-bundle": "<3.11"
+        "sonata-project/block-bundle": "<3.11",
+        "sonata-project/core-bundle": "<3.20"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
