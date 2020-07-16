@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.0](https://github.com/sonata-project/SonataArticleBundle/compare/1.4.1...1.5.0) - 2020-07-16
+### Removed
+- [[#173](https://github.com/sonata-project/SonataArticleBundle/pull/173)] SonataCoreBundle dependencies ([@jordisala1991](https://github.com/jordisala1991))
+- [[#173](https://github.com/sonata-project/SonataArticleBundle/pull/173)] Support for Symfony < 4.4 ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [1.4.1](https://github.com/sonata-project/SonataArticleBundle/compare/1.4.0...1.4.1) - 2020-03-19
 ### Fixed
 - article fragments reset order bug
