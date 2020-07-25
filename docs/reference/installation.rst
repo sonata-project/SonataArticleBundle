@@ -17,7 +17,7 @@ Required dependencies:
 * `SonataClassificationBundle <https://sonata-project.org/bundles/classification>`_
 * `SonataMediaBundle <https://sonata-project.org/bundles/media>`_
 
-And the persistence bundle:
+And the persistence bundle (currently, not all the implementations of the Sonata persistence bundles are available):
 
 * `SonataDoctrineOrmAdminBundle <https://sonata-project.org/bundles/doctrine-orm-admin>`_
 
