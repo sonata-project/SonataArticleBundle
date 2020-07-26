@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\ArticleBundle\DependencyInjection;
 
-use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Sonata\Doctrine\Mapper\Builder\OptionsBuilder;
+use Sonata\Doctrine\Mapper\DoctrineCollector;
+use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector as DeprecatedDoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -30,6 +32,7 @@ final class SonataArticleExtension extends Extension
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
+        $bundles = $container->getParameter('kernel.bundles');
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('admin.xml');
@@ -41,7 +44,13 @@ final class SonataArticleExtension extends Extension
         }
 
         $this->registerParameters($container, $config);
-        $this->registerDoctrineMapping($config);
+
+        if (isset($bundles['SonataDoctrineBundle'])) {
+            $this->registerSonataDoctrineMapping($config);
+        } else {
+            // NEXT MAJOR: Remove next line and throw error when not registering SonataDoctrineBundle
+            $this->registerDoctrineMapping($config);
+        }
     }
 
     /**
@@ -81,15 +90,22 @@ final class SonataArticleExtension extends Extension
     }
 
     /**
+     * NEXT MAJOR: Remove this method.
+     *
      * Registers doctrine mapping on concrete page entities.
      */
     public function registerDoctrineMapping(array $config): void
     {
+        @trigger_error(
+            'Using SonataEasyExtendsBundle is deprecated since sonata-project/article-bundle 1.x. Please register SonataDoctrineBundle as a bundle instead.',
+            E_USER_DEPRECATED
+        );
+
         if (!class_exists($config['class']['article']) || !class_exists($config['class']['fragment'])) {
             return;
         }
 
-        $collector = DoctrineCollector::getInstance();
+        $collector = DeprecatedDoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['article'], 'mapOneToMany', [
             'fieldName' => 'fragments',
@@ -190,5 +206,84 @@ final class SonataArticleExtension extends Extension
             ],
             'orphanRemoval' => false,
         ]);
+    }
+
+    private function registerSonataDoctrineMapping(array $config): void
+    {
+        if (!class_exists($config['class']['article']) || !class_exists($config['class']['fragment'])) {
+            return;
+        }
+
+        $collector = DoctrineCollector::getInstance();
+
+        $collector->addAssociation(
+            $config['class']['article'],
+            'mapOneToMany',
+            OptionsBuilder::createOneToMany('fragments', $config['class']['fragment'])
+                ->cascade(['remove', 'persist'])
+                ->mappedBy('article')
+                ->orphanRemoval()
+                ->addOrder('position', 'ASC')
+        );
+
+        $collector->addAssociation(
+            $config['class']['fragment'],
+            'mapManyToOne',
+            OptionsBuilder::createManyToOne('article', $config['class']['article'])
+                ->cascade(['persist'])
+                ->inversedBy('fragments')
+                ->addJoin([
+                    'name' => 'article_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
+                ])
+        );
+
+        if (class_exists($config['class']['category'])) {
+            $collector->addAssociation(
+                $config['class']['article'],
+                'mapManyToMany',
+                OptionsBuilder::createManyToMany('categories', $config['class']['category'])
+                    ->addJoinTable('article__article_categories', [[
+                        'name' => 'article_id',
+                        'referencedColumnName' => 'id',
+                        'onDelete' => 'CASCADE',
+                    ]], [[
+                        'name' => 'category_id',
+                        'referencedColumnName' => 'id',
+                        'onDelete' => 'CASCADE',
+                    ]])
+            );
+        }
+
+        if (class_exists($config['class']['tag'])) {
+            $collector->addAssociation(
+                $config['class']['article'],
+                'mapManyToMany',
+                OptionsBuilder::createManyToMany('tags', $config['class']['tag'])
+                    ->addJoinTable('article__article_tags', [[
+                        'name' => 'article_id',
+                        'referencedColumnName' => 'id',
+                        'onDelete' => 'CASCADE',
+                    ]], [[
+                        'name' => 'tag_id',
+                        'referencedColumnName' => 'id',
+                        'onDelete' => 'CASCADE',
+                    ]])
+            );
+        }
+
+        if (class_exists($config['class']['media'])) {
+            $collector->addAssociation(
+                $config['class']['article'],
+                'mapManyToOne',
+                OptionsBuilder::createManyToOne('mainImage', $config['class']['media'])
+                    ->cascade(['persist'])
+                    ->addJoin([
+                        'name' => 'main_image_id',
+                        'referencedColumnName' => 'id',
+                    ])
+            );
+        }
     }
 }
