@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ArticleBundle\Tests\FragmentService;
 
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\ArticleBundle\FragmentService\AbstractFragmentService;
@@ -20,6 +21,9 @@ use Sonata\ArticleBundle\FragmentService\FragmentServiceInterface;
 use Sonata\ArticleBundle\Model\AbstractFragment;
 use Sonata\ArticleBundle\Model\FragmentInterface;
 use Sonata\Form\Validator\ErrorElement;
+use Symfony\Component\Validator\ConstraintValidatorFactoryInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 /**
  * @author Romain Mouillard <romain.mouillard@gmail.com>
@@ -40,14 +44,17 @@ class AbstractFragmentServiceTest extends TestCase
         $fragmentService = $this->getFragmentService();
 
         $fragment = $this->createMock(AbstractFragment::class);
-        $fragment->expects($this->any())
+        $fragment
             ->method('getBackofficeTitle')
             ->willReturn('');
 
-        $errorElement = $this->createMock(ErrorElement::class);
-        $errorElement->expects($this->once())
-            ->method('addViolation')
-            ->with('Fragment fragmentService - `Backoffice Title` must not be empty');
+        $executionContext = $this->createMock(ExecutionContextInterface::class);
+        $errorElement = $this->createErrorElement($executionContext);
+        $executionContext
+            ->expects($this->once())
+            ->method('buildViolation')
+            ->with('Fragment fragmentService - `Backoffice Title` must not be empty')
+            ->willReturn($this->createConstraintBuilder());
 
         $fragmentService->validate($errorElement, $fragment);
     }
@@ -62,7 +69,7 @@ class AbstractFragmentServiceTest extends TestCase
         $this->assertBuildForm('buildCreateForm');
     }
 
-    private function assertBuildForm($method): void
+    private function assertBuildForm(string $method): void
     {
         $fragmentService = $this->getFragmentService();
 
@@ -77,6 +84,38 @@ class AbstractFragmentServiceTest extends TestCase
     private function getFragmentService(): FragmentService
     {
         return new FragmentService('fragmentService');
+    }
+
+    private function createErrorElement(ExecutionContextInterface $executionContext): ErrorElement
+    {
+        return new ErrorElement(
+            '',
+            $this->createStub(ConstraintValidatorFactoryInterface::class),
+            $executionContext,
+            'group'
+        );
+    }
+
+    /**
+     * @return Stub&ConstraintViolationBuilderInterface
+     */
+    private function createConstraintBuilder(): object
+    {
+        $constraintBuilder = $this->createStub(ConstraintViolationBuilderInterface::class);
+        $constraintBuilder
+            ->method('atPath')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setParameters')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setTranslationDomain')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setInvalidValue')
+            ->willReturn($constraintBuilder);
+
+        return $constraintBuilder;
     }
 }
 
