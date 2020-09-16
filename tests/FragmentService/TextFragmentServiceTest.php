@@ -22,6 +22,9 @@ use Sonata\Form\Type\ImmutableArrayType;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\ConstraintValidatorFactoryInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 /**
  * @author Romain Mouillard <romain.mouillard@gmail.com>
@@ -41,15 +44,18 @@ class TextFragmentServiceTest extends TestCase
         $fragmentService = $this->getFragmentService();
 
         $fragment = $this->createMock(FragmentInterface::class);
-        $fragment->expects($this->any())
+        $fragment
             ->method('getField')
             ->with('text')
             ->willReturn('');
 
-        $errorElement = $this->createMock(ErrorElement::class);
-        $errorElement->expects($this->once())
-            ->method('addViolation')
-            ->with('Fragment Text - `Text` must not be empty');
+        $executionContext = $this->createMock(ExecutionContextInterface::class);
+        $errorElement = $this->createErrorElement($executionContext);
+        $executionContext
+            ->expects($this->once())
+            ->method('buildViolation')
+            ->with('Fragment Text - `Text` must not be empty')
+            ->willReturn($this->createConstraintBuilder());
 
         $fragmentService->validate($errorElement, $fragment);
     }
@@ -81,6 +87,38 @@ class TextFragmentServiceTest extends TestCase
             );
 
         $fragmentService->buildForm($formMapper, $this->createMock(FragmentInterface::class));
+    }
+
+    private function createErrorElement(ExecutionContextInterface $executionContext): ErrorElement
+    {
+        return new ErrorElement(
+            '',
+            $this->createStub(ConstraintValidatorFactoryInterface::class),
+            $executionContext,
+            'group'
+        );
+    }
+
+    /**
+     * @return Stub&ConstraintViolationBuilderInterface
+     */
+    private function createConstraintBuilder(): object
+    {
+        $constraintBuilder = $this->createStub(ConstraintViolationBuilderInterface::class);
+        $constraintBuilder
+            ->method('atPath')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setParameters')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setTranslationDomain')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setInvalidValue')
+            ->willReturn($constraintBuilder);
+
+        return $constraintBuilder;
     }
 
     private function getFragmentService(): TextFragmentService
