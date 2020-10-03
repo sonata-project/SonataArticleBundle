@@ -16,8 +16,8 @@ Advanced article management
 [![Monthly Downloads](https://poser.pugx.org/sonata-project/article-bundle/d/monthly)](https://packagist.org/packages/sonata-project/article-bundle)
 [![Daily Downloads](https://poser.pugx.org/sonata-project/article-bundle/d/daily)](https://packagist.org/packages/sonata-project/article-bundle)
 
-Branch | Github Actions | Coverage |
------- | -------------- | -------- |
+Branch | Github Actions | Code Coverage |
+------ | -------------- | ------------- |
 1.x    | [![Test][test_stable_badge]][test_stable_link]     | [![Coverage Status][coverage_stable_badge]][coverage_stable_link]     |
 master | [![Test][test_unstable_badge]][test_unstable_link] | [![Coverage Status][coverage_unstable_badge]][coverage_unstable_link] |
 
