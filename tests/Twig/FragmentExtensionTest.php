@@ -37,10 +37,7 @@ class FragmentExtensionTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fragmentHelper = $this->getMockBuilder(FragmentHelper::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['render'])
-            ->getMock();
+        $this->fragmentHelper = $this->createMock(FragmentHelper::class);
 
         $this->fragmentExtension = new FragmentExtension($this->fragmentHelper);
     }
@@ -83,11 +80,7 @@ class FragmentExtensionTest extends TestCase
             ->method('getFragments')
             ->willReturn($fragments);
 
-        // we expect only two calls
-        $this->fragmentHelper->expects($this->at(0))
-            ->method('render')
-            ->willReturnCallback([$this, 'renderFragment']);
-        $this->fragmentHelper->expects($this->at(1))
+        $this->fragmentHelper->expects($this->exactly(2))
             ->method('render')
             ->willReturnCallback([$this, 'renderFragment']);
 
