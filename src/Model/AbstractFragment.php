@@ -120,7 +120,7 @@ abstract class AbstractFragment implements FragmentInterface, ArticleFragmentInt
 
     public function getField(string $name, $default = null)
     {
-        return isset($this->fields[$name]) ? $this->fields[$name] : $default;
+        return $this->fields[$name] ?? $default;
     }
 
     public function setType(string $type): void
