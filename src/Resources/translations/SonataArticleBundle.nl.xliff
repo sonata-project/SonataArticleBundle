@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="nl" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="article">
+                <source>article</source>
+                <target>Artikel</target>
+            </trans-unit>
+            <trans-unit id="fragment">
+                <source>fragment</source>
+                <target>Fragment</target>
+            </trans-unit>
+            <trans-unit id="close">
+                <source>close</source>
+                <target>Sluiten</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>delete</source>
+                <target>Verwijderen</target>
+            </trans-unit>
+            <trans-unit id="status">
+                <source>status</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="actions">
+                <source>actions</source>
+                <target>Acties</target>
+            </trans-unit>
+            <trans-unit id="new.fragment">
+                <source>new.fragment</source>
+                <target>Nieuw fragment</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_article_list">
+                <source>breadcrumb.link_article_list</source>
+                <target>Artikelen</target>
+            </trans-unit>
+            <trans-unit id="list.label_title">
+                <source>list.label_title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="list.label_updated_at">
+                <source>list.label_updated_at</source>
+                <target>Bijgewerkt om</target>
+            </trans-unit>
+            <trans-unit id="list.label_status">
+                <source>list.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="form.label_subtitle">
+                <source>form.label_subtitle</source>
+                <target>Subtitel</target>
+            </trans-unit>
+            <trans-unit id="form.label_abstract">
+                <source>form.label_abstract</source>
+                <target>Korte inhoud</target>
+            </trans-unit>
+            <trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="form.label_publication_starts_at">
+                <source>form.label_publication_starts_at</source>
+                <target>Publicatie start datum</target>
+            </trans-unit>
+            <trans-unit id="form.label_publication_ends_at">
+                <source>form.label_publication_ends_at</source>
+                <target>Publicatie eind datum</target>
+            </trans-unit>
+            <trans-unit id="form.label_backoffice_title">
+                <source>form.label_backoffice_title</source>
+                <target>Backoffice titel</target>
+            </trans-unit>
+            <trans-unit id="remove_confirm">
+                <source>remove_confirm</source>
+                <target>Het fragment wordt verwijderd na het bijwerken. Weet u het zeker?</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
