@@ -17,7 +17,7 @@
         "php": "^7.3",
         "sonata-project/admin-bundle": "^3.75",
         "sonata-project/classification-bundle": "^3.13.2",
-        "sonata-project/doctrine-extensions": "^1.8",
+        "sonata-project/doctrine-extensions": "^1.10.1",
         "sonata-project/doctrine-orm-admin-bundle": "^3.23",
         "sonata-project/form-extensions": "^0.1.1 || ^1.4",
         "sonata-project/media-bundle": "^3.27",
@@ -40,10 +40,10 @@
         "sonata-project/core-bundle": "<3.20"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^4.0",
+        "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "sonata-project/block-bundle": "^3.18.3",
-        "symfony/phpunit-bridge": "^5.1.1"
+        "symfony/phpunit-bridge": "^5.1.8"
     },
     "config": {
         "sort-packages": true
