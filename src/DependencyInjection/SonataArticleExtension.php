@@ -97,7 +97,7 @@ final class SonataArticleExtension extends Extension
     public function registerDoctrineMapping(array $config): void
     {
         @trigger_error(
-            'Using SonataEasyExtendsBundle is deprecated since sonata-project/article-bundle 1.x. Please register SonataDoctrineBundle as a bundle instead.',
+            'Using SonataEasyExtendsBundle is deprecated since sonata-project/article-bundle 1.6. Please register SonataDoctrineBundle as a bundle instead.',
             \E_USER_DEPRECATED
         );
 

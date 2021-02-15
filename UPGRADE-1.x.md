@@ -1,7 +1,7 @@
 UPGRADE 1.x
 ===========
 
-UPGRADE FROM 1.x to 1.x
+UPGRADE FROM 1.5 to 1.6
 =======================
 
 ### SonataEasyExtends is deprecated
