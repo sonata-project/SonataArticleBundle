@@ -49,14 +49,12 @@ class TitleFragmentService extends AbstractFragmentService
     {
         if (empty($object->getField('text'))) {
             $errorElement
-                ->addViolation('Fragment Title - `Text` must not be empty')
-            ;
+                ->addViolation('Fragment Title - `Text` must not be empty');
         }
 
         if (\strlen($object->getField('text')) > 255) {
             $errorElement
-                ->addViolation('Fragment Text - `Text` must not be longer than 255 characters.')
-            ;
+                ->addViolation('Fragment Text - `Text` must not be longer than 255 characters.');
         }
     }
 

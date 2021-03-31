@@ -174,8 +174,7 @@ final class FragmentAdmin extends AbstractAdmin
             ->addIdentifier('type')
             ->add('enabled')
             ->add('updatedAt')
-            ->add('position')
-        ;
+            ->add('position');
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
@@ -183,8 +182,7 @@ final class FragmentAdmin extends AbstractAdmin
         $showMapper
             ->add('enabled')
             ->add('updatedAt')
-            ->add('position')
-        ;
+            ->add('position');
     }
 
     protected function configureFormFields(FormMapper $formMapper): void

@@ -47,8 +47,7 @@ class TextFragmentService extends AbstractFragmentService
     {
         if (empty($object->getField('text'))) {
             $errorElement
-                ->addViolation('Fragment Text - `Text` must not be empty')
-            ;
+                ->addViolation('Fragment Text - `Text` must not be empty');
         }
     }
 
