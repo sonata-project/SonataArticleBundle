@@ -86,8 +86,7 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
     {
         if (empty($object->getBackofficeTitle())) {
             $errorElement
-                ->addViolation(sprintf('Fragment %s - `Backoffice Title` must not be empty', $this->getName()))
-            ;
+                ->addViolation(sprintf('Fragment %s - `Backoffice Title` must not be empty', $this->getName()));
         }
     }
 

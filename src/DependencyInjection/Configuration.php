@@ -95,8 +95,7 @@ final class Configuration implements ConfigurationInterface
 
             ->scalarNode('max_length_title_for_display')
                 ->defaultValue(80)
-            ->end()
-        ;
+            ->end();
 
         return $treeBuilder;
     }

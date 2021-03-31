@@ -103,8 +103,7 @@ class ArticleAdmin extends AbstractAdmin
             ->with('status')
                 ->assertChoice(array_keys($this->isGranted('ROLE_ARTICLE_PUBLISH') ?
                     AbstractArticle::getStatuses() : AbstractArticle::getContributorStatus()))
-            ->end()
-        ;
+            ->end();
 
         $fragmentAdmin = $this->getChild('sonata.article.admin.fragment');
         foreach ($object->getFragments() as $fragment) {
@@ -231,8 +230,7 @@ class ArticleAdmin extends AbstractAdmin
                 ], [
                     'sortable' => 'position',
                 ])
-            ->end()
-        ;
+            ->end();
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -247,8 +245,7 @@ class ArticleAdmin extends AbstractAdmin
             ->add('status', 'choice', [
                 'sortable' => true,
                 'choices' => AbstractArticle::getStatuses(),
-            ])
-        ;
+            ]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
@@ -256,8 +253,7 @@ class ArticleAdmin extends AbstractAdmin
         $showMapper
             ->add('title', 'text')
             ->add('subtitle', 'text')
-            ->add('abstract', 'textarea')
-        ;
+            ->add('abstract', 'textarea');
     }
 
     /**
