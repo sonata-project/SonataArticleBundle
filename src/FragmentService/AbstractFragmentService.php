@@ -16,6 +16,7 @@ namespace Sonata\ArticleBundle\FragmentService;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\ArticleBundle\Model\FragmentInterface;
 use Sonata\Form\Validator\ErrorElement;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -46,7 +47,7 @@ abstract class AbstractFragmentService implements FragmentServiceInterface
     public function buildEditForm(FormMapper $form, FragmentInterface $fragment): void
     {
         // Add BO title
-        $form->add('backofficeTitle');
+        $form->add('backofficeTitle', TextType::class, ['empty_data' => '']);
         $this->buildForm($form, $fragment);
     }
 
