@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.6.1](https://github.com/sonata-project/SonataArticleBundle/compare/1.6.0...1.6.1) - 2021-07-17
 ### Changed
-- [[#280](https://github.com/sonata-project/SonataArticleBundle/pull/280)] JS will now use the delete field to mark a fragment as deleted instead of not sending the value. ([@srascar](https://github.com/srascar))
+- [[#280](https://github.com/sonata-project/SonataArticleBundle/pull/280)] JS will now use the delete field to mark a fragment as deleted instead of not sending the value ([@srascar](https://github.com/srascar))
 
 ### Fixed
 - [[#284](https://github.com/sonata-project/SonataArticleBundle/pull/284)] Back Office Title is correctly submitted as empty string when empty in form request ([@srascar](https://github.com/srascar))
