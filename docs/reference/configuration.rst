@@ -38,4 +38,4 @@ Full configuration options:
                             ApplicationSonataArticleBundle: ~
                             SonataArticleBundle: ~
 
-.. _`here`: https://sonata-project.org/bundles/article
+.. _`here`: https://docs.sonata-project.org/projects/SonataArticleBundle/en/1.x/

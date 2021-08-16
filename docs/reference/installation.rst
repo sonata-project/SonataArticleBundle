@@ -13,13 +13,13 @@ also some Sonata dependencies that need to be installed and configured beforehan
 
 Required dependencies:
 
-* `SonataAdminBundle <https://sonata-project.org/bundles/admin>`_
-* `SonataClassificationBundle <https://sonata-project.org/bundles/classification>`_
-* `SonataMediaBundle <https://sonata-project.org/bundles/media>`_
+* `SonataAdminBundle <https://docs.sonata-project.org/projects/SonataAdminBundle/en/3.x/>`_
+* `SonataClassificationBundle <https://docs.sonata-project.org/projects/SonataClassificationBundle/en/3.x/>`_
+* `SonataMediaBundle <https://docs.sonata-project.org/projects/SonataMediaBundle/en/3.x/>`_
 
 And the persistence bundle (currently, not all the implementations of the Sonata persistence bundles are available):
 
-* `SonataDoctrineOrmAdminBundle <https://sonata-project.org/bundles/doctrine-orm-admin>`_
+* `SonataDoctrineOrmAdminBundle <https://docs.sonata-project.org/projects/SonataDoctrineORMAdminBundle/en/3.x/>`_
 
 Follow also their configuration step; you will find everything you need in
 their own installation chapter.
