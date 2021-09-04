@@ -25,20 +25,20 @@ class AbstractFragmentTest extends TestCase
     {
         $fragment = new MockFragment();
 
-        $this->assertInstanceOf(AbstractFragment::class, $fragment);
+        static::assertInstanceOf(AbstractFragment::class, $fragment);
     }
 
     public function testPrePersist(): void
     {
         $fragment = new MockFragment();
 
-        $this->assertNull($fragment->getCreatedAt());
-        $this->assertNull($fragment->getUpdatedAt());
+        static::assertNull($fragment->getCreatedAt());
+        static::assertNull($fragment->getUpdatedAt());
 
         $fragment->prePersist();
 
-        $this->assertInstanceOf(\DateTimeInterface::class, $fragment->getCreatedAt());
-        $this->assertInstanceOf(\DateTimeInterface::class, $fragment->getUpdatedAt());
+        static::assertInstanceOf(\DateTimeInterface::class, $fragment->getCreatedAt());
+        static::assertInstanceOf(\DateTimeInterface::class, $fragment->getUpdatedAt());
     }
 
     public function testPreUpdate(): void
@@ -50,9 +50,9 @@ class AbstractFragmentTest extends TestCase
 
         $fragment->preUpdate();
 
-        $this->assertSame($createdAt, $fragment->getCreatedAt());
-        $this->assertInstanceOf(\DateTimeInterface::class, $fragment->getUpdatedAt());
-        $this->assertNotSame($createdAt, $fragment->getUpdatedAt());
+        static::assertSame($createdAt, $fragment->getCreatedAt());
+        static::assertInstanceOf(\DateTimeInterface::class, $fragment->getUpdatedAt());
+        static::assertNotSame($createdAt, $fragment->getUpdatedAt());
     }
 }
 

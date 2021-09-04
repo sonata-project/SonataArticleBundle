@@ -52,7 +52,7 @@ class FragmentHelperTest extends TestCase
         $this->expectExceptionMessage('Cannot render Fragment of type `foo.bar`. Service not found.');
 
         // templating render should not be called
-        $this->templating->expects($this->never())->method('render');
+        $this->templating->expects(static::never())->method('render');
 
         $fragment = $this->getFragmentMock();
         $this->fragmentHelper->render($fragment);
@@ -63,18 +63,18 @@ class FragmentHelperTest extends TestCase
         $fragment = $this->getFragmentMock();
 
         // templating render must be called once
-        $this->templating->expects($this->once())->method('render')->willReturn('foo');
+        $this->templating->expects(static::once())->method('render')->willReturn('foo');
 
         $fragmentService = $this->createMock(MockFragmentServiceInterface::class);
 
-        $fragmentService->expects($this->once())->method('getTemplate')->willReturn('template.html.twig');
-        $fragmentService->expects($this->once())->method('getExtraContent')->willReturn(['foo' => 'bar']);
+        $fragmentService->expects(static::once())->method('getTemplate')->willReturn('template.html.twig');
+        $fragmentService->expects(static::once())->method('getExtraContent')->willReturn(['foo' => 'bar']);
 
         $this->fragmentHelper->setFragmentServices(['foo.bar' => $fragmentService]);
         $this->fragmentHelper->render($fragment);
 
-        $this->assertArrayHasKey('foo.bar', $this->fragmentHelper->getFragmentServices());
-        $this->assertInstanceOf(
+        static::assertArrayHasKey('foo.bar', $this->fragmentHelper->getFragmentServices());
+        static::assertInstanceOf(
             FragmentServiceInterface::class,
             $this->fragmentHelper->getFragmentServices()['foo.bar']
         );
@@ -83,8 +83,8 @@ class FragmentHelperTest extends TestCase
     private function getFragmentMock(): MockObject
     {
         $fragment = $this->createMock(FragmentInterface::class);
-        $fragment->expects($this->once())->method('getType')->willReturn('foo.bar');
-        $fragment->expects($this->any())->method('getFields')->willReturn([]);
+        $fragment->expects(static::once())->method('getType')->willReturn('foo.bar');
+        $fragment->expects(static::any())->method('getFields')->willReturn([]);
 
         return $fragment;
     }

@@ -39,8 +39,8 @@ class AbstractArticleTest extends TestCase
             MockArticle::STATUS_ARCHIVED => 'Archived',
         ];
 
-        $this->assertSame($allStatuses, MockArticle::getStatuses());
-        $this->assertSame(array_keys($allStatuses), MockArticle::getValidStatuses());
+        static::assertSame($allStatuses, MockArticle::getStatuses());
+        static::assertSame(array_keys($allStatuses), MockArticle::getValidStatuses());
 
         $contributorStatuses = [
             MockArticle::STATUS_DRAFT => 'Draft',
@@ -48,18 +48,18 @@ class AbstractArticleTest extends TestCase
             MockArticle::STATUS_ARCHIVED => 'Archived',
         ];
 
-        $this->assertSame($contributorStatuses, MockArticle::getContributorStatus());
+        static::assertSame($contributorStatuses, MockArticle::getContributorStatus());
     }
 
     public function testAbstractArticle(): void
     {
         $article = new MockArticle();
 
-        $this->assertInstanceOf(ArticleInterface::class, $article);
-        $this->assertInstanceOf(Collection::class, $article->getTags());
-        $this->assertInstanceOf(Collection::class, $article->getFragments());
-        $this->assertInstanceOf(Collection::class, $article->getCategories());
-        $this->assertSame(AbstractArticle::STATUS_DRAFT, $article->getStatus());
+        static::assertInstanceOf(ArticleInterface::class, $article);
+        static::assertInstanceOf(Collection::class, $article->getTags());
+        static::assertInstanceOf(Collection::class, $article->getFragments());
+        static::assertInstanceOf(Collection::class, $article->getCategories());
+        static::assertSame(AbstractArticle::STATUS_DRAFT, $article->getStatus());
     }
 
     public function testProperties(): void
@@ -90,29 +90,29 @@ class AbstractArticleTest extends TestCase
         $article->setCreatedAt($createdAt);
         $article->setUpdatedAt($updatedAt);
 
-        $this->assertSame(1, $article->getId());
-        $this->assertSame('Title', $article->getTitle());
-        $this->assertSame('Abstract', $article->getAbstract());
-        $this->assertSame('Subtitle', $article->getSubtitle());
-        $this->assertSame(1, $article->getStatus());
-        $this->assertSame($tags, $article->getTags());
-        $this->assertSame($categories, $article->getCategories());
-        $this->assertSame($media, $article->getMainImage());
-        $this->assertSame($validatedAt, $article->getValidatedAt());
-        $this->assertSame($publicationStartsAt, $article->getPublicationStartsAt());
-        $this->assertSame($publicationEndsAt, $article->getPublicationEndsAt());
-        $this->assertSame($createdAt, $article->getCreatedAt());
-        $this->assertSame($updatedAt, $article->getUpdatedAt());
-        $this->assertSame('Title', $article->__toString());
+        static::assertSame(1, $article->getId());
+        static::assertSame('Title', $article->getTitle());
+        static::assertSame('Abstract', $article->getAbstract());
+        static::assertSame('Subtitle', $article->getSubtitle());
+        static::assertSame(1, $article->getStatus());
+        static::assertSame($tags, $article->getTags());
+        static::assertSame($categories, $article->getCategories());
+        static::assertSame($media, $article->getMainImage());
+        static::assertSame($validatedAt, $article->getValidatedAt());
+        static::assertSame($publicationStartsAt, $article->getPublicationStartsAt());
+        static::assertSame($publicationEndsAt, $article->getPublicationEndsAt());
+        static::assertSame($createdAt, $article->getCreatedAt());
+        static::assertSame($updatedAt, $article->getUpdatedAt());
+        static::assertSame('Title', $article->__toString());
     }
 
     public function testIsValidated(): void
     {
         $article = new MockArticle();
-        $this->assertFalse($article->isValidated());
+        static::assertFalse($article->isValidated());
 
         $article->setValidatedAt(new \DateTime());
-        $this->assertTrue($article->isValidated());
+        static::assertTrue($article->isValidated());
     }
 
     public function testFragments(): void
@@ -126,8 +126,8 @@ class AbstractArticleTest extends TestCase
         $newCollection = new ArrayCollection([$fragmentFoo, $fragmentBar]);
         $article->setFragments($newCollection);
 
-        $this->assertSame($collection, $article->getFragments());
-        $this->assertSame(2, $collection->count());
+        static::assertSame($collection, $article->getFragments());
+        static::assertSame(2, $collection->count());
     }
 
     public function testFragmentAddRemove(): void
@@ -136,25 +136,25 @@ class AbstractArticleTest extends TestCase
         $collection = $article->getFragments();
 
         $fragment = $this->createMock(AbstractFragment::class);
-        $fragment->expects($this->exactly(2))
+        $fragment->expects(static::exactly(2))
             ->method('setArticle')
             ->withConsecutive([$article], [null]);
 
         $article->addFragment($fragment);
 
-        $this->assertSame(1, $collection->count());
+        static::assertSame(1, $collection->count());
 
         $article->removeFragment($fragment);
 
-        $this->assertSame(0, $collection->count());
+        static::assertSame(0, $collection->count());
     }
 
     public function testValidatorMetadata(): void
     {
         $classMetadata = $this->createMock(ClassMetadata::class);
-        $classMetadata->expects($this->once())
+        $classMetadata->expects(static::once())
             ->method('addConstraint')
-            ->with($this->callback(function ($parameter) {
+            ->with(static::callback(function ($parameter) {
                 $this->assertInstanceOf(Callback::class, $parameter);
                 $this->assertSame([AbstractArticle::class, 'validatorPublicationEnds'], $parameter->callback);
 

@@ -34,12 +34,12 @@ class ArticleAdminTest extends TestCase
         $article = $this->getMockForAbstractClass(AbstractArticle::class);
 
         $article->setTitle('short title');
-        $this->assertSame('short title', $articleAdmin->toString($article));
+        static::assertSame('short title', $articleAdmin->toString($article));
 
         $article->setTitle('longer than 20 chars with breakpoint');
-        $this->assertSame('longer than 20 chars...', $articleAdmin->toString($article));
+        static::assertSame('longer than 20 chars...', $articleAdmin->toString($article));
 
         $article->setTitle('longer than 20 charnobreakpoint');
-        $this->assertSame('longer than 20 charnobreakpoint', $articleAdmin->toString($article));
+        static::assertSame('longer than 20 charnobreakpoint', $articleAdmin->toString($article));
     }
 }
