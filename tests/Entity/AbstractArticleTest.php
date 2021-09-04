@@ -25,20 +25,20 @@ class AbstractArticleTest extends TestCase
     {
         $article = new MockArticle();
 
-        $this->assertInstanceOf(AbstractArticle::class, $article);
+        static::assertInstanceOf(AbstractArticle::class, $article);
     }
 
     public function testPrePersist(): void
     {
         $article = new MockArticle();
 
-        $this->assertNull($article->getCreatedAt());
-        $this->assertNull($article->getUpdatedAt());
+        static::assertNull($article->getCreatedAt());
+        static::assertNull($article->getUpdatedAt());
 
         $article->prePersist();
 
-        $this->assertInstanceOf(\DateTimeInterface::class, $article->getCreatedAt());
-        $this->assertInstanceOf(\DateTimeInterface::class, $article->getUpdatedAt());
+        static::assertInstanceOf(\DateTimeInterface::class, $article->getCreatedAt());
+        static::assertInstanceOf(\DateTimeInterface::class, $article->getUpdatedAt());
     }
 
     public function testPreUpdate(): void
@@ -50,9 +50,9 @@ class AbstractArticleTest extends TestCase
 
         $article->preUpdate();
 
-        $this->assertSame($createdAt, $article->getCreatedAt());
-        $this->assertInstanceOf(\DateTimeInterface::class, $article->getUpdatedAt());
-        $this->assertNotSame($createdAt, $article->getUpdatedAt());
+        static::assertSame($createdAt, $article->getCreatedAt());
+        static::assertInstanceOf(\DateTimeInterface::class, $article->getUpdatedAt());
+        static::assertNotSame($createdAt, $article->getUpdatedAt());
     }
 }
 

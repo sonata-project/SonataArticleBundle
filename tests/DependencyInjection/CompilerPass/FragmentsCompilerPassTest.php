@@ -26,7 +26,7 @@ final class FragmentsCompilerPassTest extends TestCase
         $this->expectExceptionMessage('You need to specify the `key` argument to your tag.');
 
         $container = $this->createMock(ContainerBuilder::class);
-        $container->expects($this->once())->method('findTaggedServiceIds')
+        $container->expects(static::once())->method('findTaggedServiceIds')
             ->with('sonata.article.fragment')
             ->willReturn(['foo']);
 
@@ -37,15 +37,15 @@ final class FragmentsCompilerPassTest extends TestCase
     public function testProcess(): void
     {
         $container = $this->createMock(ContainerBuilder::class);
-        $container->expects($this->once())
+        $container->expects(static::once())
             ->method('getParameter')
             ->with('sonata.article.admin.fragments.services')
             ->willReturn(['simple_array_provider' => []]);
-        $container->expects($this->once())
+        $container->expects(static::once())
             ->method('findTaggedServiceIds')
             ->with('sonata.article.fragment')
             ->willReturn(['foo' => [['key' => 'bar']]]);
-        $container->expects($this->exactly(2))->method('hasDefinition')
+        $container->expects(static::exactly(2))->method('hasDefinition')
             ->withConsecutive(
                 ['sonata.article.admin.fragment'],
                 ['sonata.article.helper.fragment']
@@ -53,8 +53,8 @@ final class FragmentsCompilerPassTest extends TestCase
             ->willReturn(true);
 
         $definition = $this->createMock(Definition::class);
-        $definition->expects($this->exactly(2))->method('addMethodCall')->with('setFragmentServices', [[]]);
-        $container->expects($this->any())->method('getDefinition')->willReturn($definition);
+        $definition->expects(static::exactly(2))->method('addMethodCall')->with('setFragmentServices', [[]]);
+        $container->expects(static::any())->method('getDefinition')->willReturn($definition);
 
         $compilerPass = new FragmentsCompilerPass();
         $compilerPass->process($container);

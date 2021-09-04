@@ -28,9 +28,9 @@ class AbstractFragmentTest extends TestCase
     {
         $fragment = new MockFragment();
 
-        $this->assertInstanceOf(FragmentInterface::class, $fragment);
-        $this->assertInstanceOf(ArticleFragmentInterface::class, $fragment);
-        $this->assertTrue($fragment->getEnabled());
+        static::assertInstanceOf(FragmentInterface::class, $fragment);
+        static::assertInstanceOf(ArticleFragmentInterface::class, $fragment);
+        static::assertTrue($fragment->getEnabled());
     }
 
     public function testProperties(): void
@@ -51,16 +51,16 @@ class AbstractFragmentTest extends TestCase
         $fragment->setCreatedAt($createdAt);
         $fragment->setUpdatedAt($updatedAt);
 
-        $this->assertSame(1, $fragment->getId());
-        $this->assertSame('foo', $fragment->getType());
-        $this->assertSame('Foo Fragment', $fragment->getBackofficeTitle());
-        $this->assertFalse($fragment->getEnabled());
-        $this->assertSame(1, $fragment->getPosition());
-        $this->assertSame(['foo'], $fragment->getFields());
-        $this->assertSame($article, $fragment->getArticle());
-        $this->assertSame($createdAt, $fragment->getCreatedAt());
-        $this->assertSame($updatedAt, $fragment->getUpdatedAt());
-        $this->assertSame('Foo Fragment', $fragment->__toString());
+        static::assertSame(1, $fragment->getId());
+        static::assertSame('foo', $fragment->getType());
+        static::assertSame('Foo Fragment', $fragment->getBackofficeTitle());
+        static::assertFalse($fragment->getEnabled());
+        static::assertSame(1, $fragment->getPosition());
+        static::assertSame(['foo'], $fragment->getFields());
+        static::assertSame($article, $fragment->getArticle());
+        static::assertSame($createdAt, $fragment->getCreatedAt());
+        static::assertSame($updatedAt, $fragment->getUpdatedAt());
+        static::assertSame('Foo Fragment', $fragment->__toString());
     }
 
     public function testSettings(): void
@@ -69,10 +69,10 @@ class AbstractFragmentTest extends TestCase
 
         $fragment->setField('foo', 'bar');
 
-        $this->assertSame(['foo' => 'bar'], $fragment->getFields());
-        $this->assertSame('bar', $fragment->getField('foo'));
-        $this->assertNull($fragment->getField('undefined'));
-        $this->assertSame('baz', $fragment->getField('undefined-with-default', 'baz'));
+        static::assertSame(['foo' => 'bar'], $fragment->getFields());
+        static::assertSame('bar', $fragment->getField('foo'));
+        static::assertNull($fragment->getField('undefined'));
+        static::assertSame('baz', $fragment->getField('undefined-with-default', 'baz'));
     }
 }
 
