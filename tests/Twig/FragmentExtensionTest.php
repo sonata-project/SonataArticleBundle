@@ -50,11 +50,11 @@ class FragmentExtensionTest extends TestCase
             'body' => 'bar',
         ]);
 
-        $this->fragmentHelper->expects($this->once())
+        $this->fragmentHelper->expects(static::once())
             ->method('render')
             ->willReturnCallback([$this, 'renderFragment']);
 
-        $this->assertSame(
+        static::assertSame(
             '<h1>foo</h1><p>bar</p>',
             $this->fragmentExtension->renderFragment($fragment)
         );
@@ -76,15 +76,15 @@ class FragmentExtensionTest extends TestCase
         }
 
         $article = $this->createMock(ArticleInterface::class);
-        $article->expects($this->any())
+        $article->expects(static::any())
             ->method('getFragments')
             ->willReturn($fragments);
 
-        $this->fragmentHelper->expects($this->exactly(2))
+        $this->fragmentHelper->expects(static::exactly(2))
             ->method('render')
             ->willReturnCallback([$this, 'renderFragment']);
 
-        $this->assertSame(
+        static::assertSame(
             '<h1>foo0</h1><p>bar0</p><h1>foo2</h1><p>bar2</p>',
             $this->fragmentExtension->renderArticleFragments($article)
         );
@@ -100,10 +100,10 @@ class FragmentExtensionTest extends TestCase
     protected function getFragmentMock(array $settings, bool $enabled = true): MockObject
     {
         $fragment = $this->createMock(FragmentInterface::class);
-        $fragment->expects($this->any())
+        $fragment->expects(static::any())
             ->method('getFields')
             ->willReturn($settings);
-        $fragment->expects($this->any())
+        $fragment->expects(static::any())
             ->method('getEnabled')
             ->willReturn($enabled);
 

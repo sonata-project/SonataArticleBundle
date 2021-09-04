@@ -34,9 +34,9 @@ class AbstractFragmentServiceTest extends TestCase
     {
         $fragmentService = $this->getFragmentService();
 
-        $this->assertSame('fragmentService', $fragmentService->getName());
-        $this->assertSame('@SonataArticle/FragmentAdmin/form.html.twig', $fragmentService->getEditTemplate());
-        $this->assertInstanceOf(FragmentServiceInterface::class, $fragmentService);
+        static::assertSame('fragmentService', $fragmentService->getName());
+        static::assertSame('@SonataArticle/FragmentAdmin/form.html.twig', $fragmentService->getEditTemplate());
+        static::assertInstanceOf(FragmentServiceInterface::class, $fragmentService);
     }
 
     public function testValidateBackofficeTitleNotEmpty(): void
@@ -51,7 +51,7 @@ class AbstractFragmentServiceTest extends TestCase
         $executionContext = $this->createMock(ExecutionContextInterface::class);
         $errorElement = $this->createErrorElement($executionContext);
         $executionContext
-            ->expects($this->once())
+            ->expects(static::once())
             ->method('buildViolation')
             ->with('Fragment fragmentService - `Backoffice Title` must not be empty')
             ->willReturn($this->createConstraintBuilder());
@@ -74,7 +74,7 @@ class AbstractFragmentServiceTest extends TestCase
         $fragmentService = $this->getFragmentService();
 
         $formMapper = $this->createMock(FormMapper::class);
-        $formMapper->expects($this->once())
+        $formMapper->expects(static::once())
             ->method('add')
             ->with('backofficeTitle');
 

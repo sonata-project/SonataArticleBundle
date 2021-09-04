@@ -37,8 +37,8 @@ class TitleFragmentServiceTest extends TestCase
     {
         $fragmentService = $this->getFragmentService();
 
-        $this->assertSame('@SonataArticle/Fragment/fragment_title.html.twig', $fragmentService->getTemplate());
-        $this->assertInstanceOf(AbstractFragmentService::class, $fragmentService);
+        static::assertSame('@SonataArticle/Fragment/fragment_title.html.twig', $fragmentService->getTemplate());
+        static::assertInstanceOf(AbstractFragmentService::class, $fragmentService);
     }
 
     public function testValidateTextNotEmpty(): void
@@ -46,7 +46,7 @@ class TitleFragmentServiceTest extends TestCase
         $fragmentService = $this->getFragmentService();
 
         $fragment = $this->createMock(FragmentInterface::class);
-        $fragment->expects($this->any())
+        $fragment->expects(static::any())
             ->method('getField')
             ->with('text')
             ->willReturn('');
@@ -54,7 +54,7 @@ class TitleFragmentServiceTest extends TestCase
         $executionContext = $this->createMock(ExecutionContextInterface::class);
         $errorElement = $this->createErrorElement($executionContext);
         $executionContext
-            ->expects($this->once())
+            ->expects(static::once())
             ->method('buildViolation')
             ->with('Fragment Title - `Text` must not be empty')
             ->willReturn($this->createConstraintBuilder());
@@ -75,7 +75,7 @@ class TitleFragmentServiceTest extends TestCase
         $executionContext = $this->createMock(ExecutionContextInterface::class);
         $errorElement = $this->createErrorElement($executionContext);
         $executionContext
-            ->expects($this->once())
+            ->expects(static::once())
             ->method('buildViolation')
             ->with('Fragment Text - `Text` must not be longer than 255 characters.')
             ->willReturn($this->createConstraintBuilder());
@@ -88,12 +88,12 @@ class TitleFragmentServiceTest extends TestCase
         $fragmentService = $this->getFragmentService();
 
         $formMapper = $this->createMock(FormMapper::class);
-        $formMapper->expects($this->once())
+        $formMapper->expects(static::once())
             ->method('add')
             ->with(
                 'fields',
                 ImmutableArrayType::class,
-                $this->callback(function ($settingsConfig) {
+                static::callback(function ($settingsConfig) {
                     $this->assertCount(1, array_keys($settingsConfig['keys']));
 
                     $fieldConfig = $settingsConfig['keys'][0];
