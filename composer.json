@@ -62,5 +62,6 @@
         "psr-4": {
             "Sonata\\ArticleBundle\\Tests\\": "tests/"
         }
-    }
+    },
+    "abandoned": true
 }
