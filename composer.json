@@ -48,11 +48,6 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.x-dev"
-        }
-    },
     "autoload": {
         "psr-4": {
             "Sonata\\ArticleBundle\\": "src/"
