@@ -2,6 +2,7 @@
     "name": "sonata-project/article-bundle",
     "type": "symfony-bundle",
     "description": "Advanced article management",
+    "homepage": "https://docs.sonata-project.org/projects/SonataArticleBundle",
     "license": "MIT",
     "authors": [
         {
